@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
 Route::post('auth/signout', \App\Http\Controllers\Auth\Signout::class);
+
+Route::post('auth/sanctum/session/signin', \App\Http\Controllers\Auth\SanctumSessionSignin::class);
+Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
+Route::post('auth/sanctum/token/signin', \App\Http\Controllers\Auth\SanctumTokenSignin::class);
+Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
 Route::group(['middleware' => [
     'auth:sanctum',

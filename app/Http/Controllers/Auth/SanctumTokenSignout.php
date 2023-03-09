@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Signout extends BaseController
+class SanctumTokenSignout extends BaseController
 {
     /**
      * Handle the incoming request.

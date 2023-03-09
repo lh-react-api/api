@@ -24,8 +24,10 @@ class Signin extends BaseController
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return ResponseUtils::success();
+            $user = Auth::user();
+            $user->tokens()->where('name', 'api_token')->delete();
+            $token = $request->user()->createToken('api_token');
+            return ResponseUtils::success(['token' => $token->plainTextToken]);
         }
 
         return response()->json([], 401);

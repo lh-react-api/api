@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SanctumSignin extends BaseController
+class SanctumTokenSignin extends BaseController
 {
     /**
      * Handle the incoming request.
@@ -24,8 +24,12 @@ class SanctumSignin extends BaseController
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return ResponseUtils::success();
+
+            $user = Auth::user();
+            $user->tokens()->where('name', 'token-name')->delete();
+            $token = $user->createToken('token-name')->plainTextToken;
+
+            return ResponseUtils::success($user);
         }
 
         return response()->json([], 401);
