@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('maker_id')->comment('メーカーID');
             $table->string('name', 255)->comment('商品名');
             $table->text('information')->nullable()->comment('商品情報');
+            $table->text('caution_text')->nullable()->comment('注意文言');
             $table->string('size', 255)->nullable()->comment('商品サイズ');
             $table->string('weight', 255)->nullable()->comment('商品重量');
             $table->date('release_date')->nullable()->comment('発売日');

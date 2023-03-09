@@ -22,11 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger('product_origin_id')->comment('商品原本ID');
             $table->unsignedBigInteger('product_type_id')->comment('商品種別ID');
             $table->unsignedBigInteger('product_rank_id')->comment('商品ランクID');
-            $table->boolean('product_type_is_default')->comment('商品種別デフォルトフラグ: 商品詳細画面表示に初回選択状態になる種別に１を設定');
-            $table->unsignedInteger('product_rank_priority')->comment('商品ランク優先度: 商品選択時に初回選択状態にする優先度（数値が大きいほど優先度高）');
             $table->string('name', 255)->comment('商品名');
             $table->unsignedInteger('price')->comment('月額料金');
-            $table->text('caution_text')->nullable()->comment('注意文言');
             $table->string('stripe_plan_id', 255)->comment('stripeプランID');
             $table->enum('status', ProductsStatus::toArray())->comment('ステータス');
 
