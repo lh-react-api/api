@@ -18,20 +18,21 @@ class Signin extends BaseController
      */
     public function __invoke(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        $credentials = $request->only('email', 'password');
-
-
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+//            $user->tokens()->where('name', $user->email.'_Token')->delete();
+//            $token = $user->createToken($user->email.'_Token')->plainTextToken;
 
-            return ResponseUtils::success(Auth::user());
+//            $user->tokens()->where('name', 'token-name')->delete();
+//            $token = $user->createToken('token-name')->plainTextToken;
+
+            return ResponseUtils::success();
         }
 
         return response()->json([], 401);

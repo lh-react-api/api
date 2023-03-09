@@ -71,9 +71,9 @@ class Handler extends ExceptionHandler
         if ($exception instanceof UpdateResourceException) {
             return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
         }
-        if ($exception instanceof AuthenticationException) {
-            return ResponseUtils::error(['認証エラーですぞ'], 401);
-        }
+//        if ($exception instanceof AuthenticationException) {
+//            return ResponseUtils::error(['認証エラーですぞ'], 401);
+//        }
 
 
         return $this->PHPError($exception);

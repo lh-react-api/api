@@ -28,5 +28,3 @@ Route::group(['middleware' => [
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
 });
-
-Route::get('login', \App\Http\Controllers\Users\index::class);
