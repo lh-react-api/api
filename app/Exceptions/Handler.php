@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Utilities\ResponseUtils;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +48,45 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            return $exception->response;
+        }
+
+        if ($exception instanceof BadRequestException) {
+            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
+        }
+
+        if ($exception instanceof PolicyException) {
+            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
+        }
+
+        if ($exception instanceof DatabaseErrorException) {
+            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
+        }
+
+        if ($exception instanceof UpdateResourceException) {
+            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
+        }
+
+        return $this->PHPError($exception);
+    }
+
+
+    private function PHPError($exception) {
+        $request = request();
+
+        $msg = [
+            'method' => $request->method(),
+            'url' => url()->full(),
+            'request' => $request->input(),
+            'error' => $exception->getMessage() . $exception->getLine() . PHP_EOL . $exception->getTraceAsString()
+        ];
+
+        logs('error')->error(var_export($msg, true));
+
+        return ResponseUtils::internalError($msg);
     }
 }
