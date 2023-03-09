@@ -14,20 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
+Route::post('auth/signout', \App\Http\Controllers\Auth\Signout::class);
 
 Route::group(['middleware' => [
-//TODO: 認証設定したら入れる、今回はSanctum使いたい
-//     'auth:api',
+    'auth:sanctum',
     'transaction',
     'formatRequestParam'
 ]], function () {
-    Route::get('users', \App\Http\Controllers\Users\Index::class);
+    Route::get('users', \App\Http\Controllers\Users\index::class);
     Route::get('users/{user_id}', \App\Http\Controllers\Users\Show::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
-
 });
+
+Route::get('login', \App\Http\Controllers\Users\index::class);
