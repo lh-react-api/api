@@ -20,9 +20,8 @@ class Signout extends BaseController
     {
         Auth::logout();
 
-//        $request->session()->invalidate();
-//
-//        $request->session()->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return ResponseUtils::success();
     }

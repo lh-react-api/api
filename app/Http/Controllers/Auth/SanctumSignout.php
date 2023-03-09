@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Signin extends BaseController
+class SanctumSignout extends BaseController
 {
     /**
      * Handle the incoming request.
@@ -18,16 +18,11 @@ class Signin extends BaseController
      */
     public function __invoke(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        Auth::logout();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return ResponseUtils::success();
-        }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return response()->json([], 401);
+        return ResponseUtils::success();
     }
 }
