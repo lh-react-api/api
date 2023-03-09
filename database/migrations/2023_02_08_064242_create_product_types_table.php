@@ -20,7 +20,6 @@ return new class extends Migration
             $table->id()->comment('商品種別ID');
             $table->unsignedBigInteger('product_origin_id')->comment('商品原本ID');
             $table->string('name', 255)->comment('種別名');
-            $table->boolean('is_default')->default(false)->comment('デフォルトフラグ:商品詳細画面表示に初回選択状態になる種別にtrueを設定');
 
             MigrateUtils::timestamps($table);
 
