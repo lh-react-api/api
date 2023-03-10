@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\domains\Users\Credential;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends BaseModel implements
@@ -29,7 +31,6 @@ class User extends BaseModel implements
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'social',
@@ -55,7 +56,8 @@ class User extends BaseModel implements
     ];
 
     protected $searches = [
-        'name' => 'like',
+        'email' => 'like',
+        'social' => 'in',
     ];
 
     public function scopeSearchIndex(Builder $query, Request $request): Builder
@@ -71,7 +73,14 @@ class User extends BaseModel implements
         ])->find($id);
     }
 
-    public static function create() {
+    public static function create(Credential $credential) {
+
+        $entity = (new User)->fill([
+            'email' => $credential->getEmail(),
+            'password' => Hash::make($credential->getPassword()),
+        ]);
+
+        $entity->save();
 
     }
 }

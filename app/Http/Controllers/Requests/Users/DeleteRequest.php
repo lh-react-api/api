@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Requests\Users;
 
 
 use App\Http\Controllers\Requests\BaseFormRequest;
-use App\Models\StaffSkill;
 use App\Models\User;
-use App\Rules\NotExist;
-use Illuminate\Validation\Rule;
 
 
 /**
  * Class MemberLoginRequest
  * @package App\Http\Controllers\Requests
  */
-class DeleteRequest extends BaseFormRequest
+class DeleteRequest extends BaseFormRquest
 {
     const DEFAULT_NAME = 'ユーザ';
     const ROUTE_KEY = 'user_id';
