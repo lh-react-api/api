@@ -17,17 +17,15 @@ return new class extends Migration
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->comment('商品レビュー');
 
-            $table->id()->comment('商品レビューID');
-            $table->unsignedBigInteger('product_origin_id')->comment('商品原本ID');
-            $table->unsignedBigInteger('product_id')->comment('商品原本ID');
-
-            $table->unsignedBigInteger('product_type_id')->comment('商品種別ID');
-            $table->unsignedBigInteger('product_rank_id')->comment('商品ランクID');
-            $table->unsignedBigInteger('user_id')->comment('ユーザID');
-
-            $table->string('title', 128)->comment('タイトル');
-            $table->text('text')->comment('レビュー内容');
-            $table->unsignedInteger('evaluation')->comment('評価');
+            $table->id()->comment(__('db.product_reviews.id'));
+            $table->unsignedBigInteger('product_origin_id')->comment(__('db.product_reviews.product_origin_id'));
+            $table->unsignedBigInteger('product_id')->comment(__('db.product_reviews.product_id'));
+            $table->unsignedBigInteger('product_type_id')->comment(__('db.product_reviews.product_type_id'));
+            $table->unsignedBigInteger('product_rank_id')->comment(__('db.product_reviews.product_rank_id'));
+            $table->unsignedBigInteger('user_id')->comment(__('db.product_reviews.user_id'));
+            $table->string('title', 128)->comment(__('db.product_reviews.title'));
+            $table->text('text')->comment(__('db.product_reviews.text'));
+            $table->unsignedInteger('evaluation')->comment(__('db.product_reviews.evaluation'));
 
             MigrateUtils::timestamps($table);
 

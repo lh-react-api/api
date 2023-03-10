@@ -17,12 +17,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->comment('ユーザテーブル');
-            $table->id()->comment('ユーザID');;
-            $table->string('email')->comment('メールアドレス')->unique();
-            $table->timestamp('email_verified_at')->nullable()->comment('Laravelのメール認証日時');
-            $table->string('password')->nullable()->comment('パスワード');
-            $table->enum('social', UsersSocial::toArray())->nullable()->comment('ソーシャル認証');
-            $table->rememberToken()->comment('Laravel用の認証トークン');
+            $table->id()->comment(__('db.users.id'));;
+            $table->string('email')->comment(__('db.users.email'))->unique();
+            $table->timestamp('email_verified_at')->nullable()->comment(__('db.users.email_verified_at'));
+            $table->string('password')->nullable()->comment(__('db.users.password'));
+            $table->enum('social', UsersSocial::toArray())->nullable()->comment(__('db.users.social'));
+            $table->rememberToken()->comment(__('db.users.remember_token'));
             MigrateUtils::timestamps($table);
         });
     }

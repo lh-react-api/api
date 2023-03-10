@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('product_types', function (Blueprint $table) {
             $table->comment('商品種別');
 
-            $table->id()->comment('商品種別ID');
-            $table->unsignedBigInteger('product_origin_id')->comment('商品原本ID');
-            $table->string('name', 255)->comment('種別名');
+            $table->id()->comment(__('db.product_types.id'));
+            $table->unsignedBigInteger('product_origin_id')->comment(__('db.product_types.product_origin_id'));
+            $table->string('name', 255)->comment(__('db.product_types.name'));
 
             MigrateUtils::timestamps($table);
 

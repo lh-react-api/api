@@ -17,17 +17,17 @@ return new class extends Migration
         Schema::create('demands', function (Blueprint $table) {
             $table->comment('請求情報');
 
-            $table->id()->comment('請求情報ID');
-            $table->unsignedBigInteger('order_id')->comment('注文ID');
-            $table->string('name', 128)->comment('氏名');
-            $table->string('name_kana', 128)->comment('氏名カナ');
-            $table->string('post_number', 7)->comment('郵便番号');
-            $table->string('prefecture_name', 8)->comment('都道府県');
-            $table->string('city', 24)->comment('市区町村');
-            $table->string('block', 32)->comment('番地');
-            $table->string('building', 128)->nullable()->comment('建物名・部屋番号');
-            $table->string('phone_number', 32)->comment('電話番号');
-            $table->string('email', 256)->comment('連絡用メールアドレス');
+            $table->id()->comment(__('db.demands.id'));
+            $table->unsignedBigInteger('order_id')->comment(__('db.demands.order_id'));
+            $table->string('name', 128)->comment(__('db.demands.name'));
+            $table->string('name_kana', 128)->comment(__('db.demands.name_kana'));
+            $table->string('post_number', 7)->comment(__('db.demands.post_number'));
+            $table->string('prefecture_name', 8)->comment(__('db.demands.prefecture_name'));
+            $table->string('city', 24)->comment(__('db.demands.city'));
+            $table->string('block', 32)->comment(__('db.demands.block'));
+            $table->string('building', 128)->nullable()->comment(__('db.demands.building'));
+            $table->string('phone_number', 32)->comment(__('db.demands.phone_number'));
+            $table->string('email', 256)->comment(__('db.demands.email'));
 
             MigrateUtils::timestamps($table);
 

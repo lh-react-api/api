@@ -17,18 +17,18 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->comment('住所');
 
-            $table->id()->comment('住所ID');
-            $table->unsignedBigInteger('user_id')->comment('ユーザID');
-            $table->string('last_name', 128)->comment('姓');
-            $table->string('last_name_kana', 128)->comment('姓かな');
-            $table->string('first_name', 128)->comment('名');
-            $table->string('first_name_kana', 128)->comment('名かな');
-            $table->string('post_number', 7)->comment('郵便番号');
-            $table->string('prefecture_name', 8)->comment('都道府県');
-            $table->string('city', 24)->comment('市区町村');
-            $table->string('block', 32)->comment('番地');
-            $table->string('building', 128)->nullable()->comment('建物名・部屋番号');
-            $table->boolean('is_default')->default(false)->comment('デフォルトフラグ');
+            $table->id()->comment(__('db.addresses.id'));
+            $table->unsignedBigInteger('user_id')->comment(__('db.addresses.user_id'));
+            $table->string('last_name', 128)->comment(__('db.addresses.last_name'));
+            $table->string('last_name_kana', 128)->comment(__('db.addresses.last_name_kana'));
+            $table->string('first_name', 128)->comment(__('db.addresses.first_name'));
+            $table->string('first_name_kana', 128)->comment(__('db.addresses.first_name_kana'));
+            $table->string('post_number', 7)->comment(__('db.addresses.post_number'));
+            $table->string('prefecture_name', 8)->comment(__('db.addresses.prefecture_name'));
+            $table->string('city', 24)->comment(__('db.addresses.city'));
+            $table->string('block', 32)->comment(__('db.addresses.block'));
+            $table->string('building', 128)->nullable()->comment(__('db.addresses.building'));
+            $table->boolean('is_default')->default(false)->comment(__('db.addresses.is_default'));
 
             MigrateUtils::timestamps($table);
 

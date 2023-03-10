@@ -17,11 +17,11 @@ return new class extends Migration
         Schema::create('product_ranks', function (Blueprint $table) {
             $table->comment('商品ランク');
 
-            $table->id()->comment('商品ランクID');
-            $table->string('rank', 128)->comment('種別名');
-            $table->text('information')->nullable()->comment('商品ランク情報');
-            $table->float('discount_rate')->comment('割引率: 商品選択時に初回選択状態にする優先度（数値が大きいほど優先度高）');
-            $table->unsignedInteger('priority')->comment('優先度');
+            $table->id()->comment(__('db.product_ranks.id'));
+            $table->string('rank', 128)->comment(__('db.product_ranks.rank'));
+            $table->text('information')->nullable()->comment(__('db.product_ranks.information'));
+            $table->float('discount_rate')->comment(__('db.product_ranks.discount_rate'));
+            $table->unsignedInteger('priority')->comment(__('db.product_ranks.priority'));
 
             MigrateUtils::timestamps($table);
         });

@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create('genres', function (Blueprint $table) {
             $table->comment('ジャンルマスタ');
 
-            $table->id()->comment('ジャンルID');
-            $table->string('name', 255)->comment('ジャンル名');
-            $table->unsignedBigInteger('upper_id')->nullable()->comment('上位階層ジャンルID');
-            $table->unsignedInteger('level')->default(1)->comment('階層レベル');
-            $table->text('information')->nullable()->comment('ジャンル情報');
-            $table->string('image', 512)->nullable()->comment('ジャンルサムネイル画像');
+            $table->id()->comment(__('db.genres.id'));
+            $table->string('name', 255)->comment(__('db.genres.name'));
+            $table->unsignedBigInteger('upper_id')->nullable()->comment(__('db.genres.upper_id'));
+            $table->unsignedInteger('level')->default(1)->comment(__('db.genres.level'));
+            $table->text('information')->nullable()->comment(__('db.genres.information'));
+            $table->string('image', 512)->nullable()->comment(__('db.genres.image'));
 
             MigrateUtils::timestamps($table, false);
 

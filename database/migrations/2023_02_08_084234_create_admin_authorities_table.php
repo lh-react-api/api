@@ -17,10 +17,10 @@ return new class extends Migration
         Schema::create('admin_authorities', function (Blueprint $table) {
             $table->comment('管理権限');
 
-            $table->id()->comment('管理権限ID');
-            $table->unsignedBigInteger('admin_user_id')->comment('管理ユーザーID');
-            $table->unsignedBigInteger('role_id')->comment('管理権限マスタID');
-            $table->unsignedInteger('action')->comment('アクション: "２進数で左からCRUDにする。0101みたいに"');
+            $table->id()->comment(__('db.admin_authorities.id'));
+            $table->unsignedBigInteger('admin_user_id')->comment(__('db.admin_authorities.admin_user_id'));
+            $table->unsignedBigInteger('role_id')->comment(__('db.admin_authorities.role_id'));
+            $table->unsignedInteger('action')->comment(__('db.admin_authorities.action'));
             
             MigrateUtils::timestamps($table);
 

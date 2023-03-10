@@ -16,18 +16,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inqueries', function (Blueprint $table) {
+        Schema::create('inquiries', function (Blueprint $table) {
             $table->comment('お問い合わせ');
 
-            $table->id()->comment('お問い合わせID');
-            $table->unsignedBigInteger('inquery_type_id')->comment('お問合せ種別ID');
-            $table->string('email', 256)->comment('連絡用メールアドレス');
-            $table->text('text')->comment('お問い合わせ内容');
-            $table->enum('status', InquiriesStatus::toArray())->comment('状態');
+            $table->id()->comment(__('db.inquiries.id'));
+            $table->unsignedBigInteger('inquiry_type_id')->comment(__('db.inquiries.inquiry_type_id'));
+            $table->string('email', 256)->comment(__('db.inquiries.email'));
+            $table->text('text')->comment(__('db.inquiries.text'));
+            $table->enum('status', InquiriesStatus::toArray())->comment(__('db.inquiries.status'));
 
             MigrateUtils::timestamps($table);
 
-            $table->foreign('inquery_type_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('inquery_types');
+            $table->foreign('inquiry_type_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('inquiry_types');
 
         });
     }

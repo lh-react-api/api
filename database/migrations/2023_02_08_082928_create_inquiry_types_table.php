@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\Inquiries\InquiriesDivision;
-use App\Enums\Inquiries\InquiriesStatus;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,11 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inquery_types', function (Blueprint $table) {
+        Schema::create('inquiry_types', function (Blueprint $table) {
             $table->comment('お問い合わせ種別');
 
-            $table->id()->comment('お問い合わせ種別ID');
-            $table->text('text')->comment('お問い合わせ種別名');
+            $table->id()->comment(__('db.inquiry_types.id'));
+            $table->string('text', 128)->comment(__('db.inquiry_types.text'));
 
             MigrateUtils::timestamps($table);
         });

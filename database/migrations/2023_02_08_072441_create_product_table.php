@@ -18,14 +18,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->comment('商品');
 
-            $table->id()->comment('商品ID');
-            $table->unsignedBigInteger('product_origin_id')->comment('商品原本ID');
-            $table->unsignedBigInteger('product_type_id')->comment('商品種別ID');
-            $table->unsignedBigInteger('product_rank_id')->comment('商品ランクID');
-            $table->string('name', 255)->comment('商品名');
-            $table->unsignedInteger('price')->comment('月額料金');
-            $table->string('stripe_plan_id', 255)->comment('stripeプランID');
-            $table->enum('status', ProductsStatus::toArray())->comment('ステータス');
+            $table->id()->comment(__('db.products.id'));
+            $table->unsignedBigInteger('product_origin_id')->comment(__('db.products.product_origin_id'));
+            $table->unsignedBigInteger('product_type_id')->comment(__('db.products.product_type_id'));
+            $table->unsignedBigInteger('product_rank_id')->comment(__('db.products.product_rank_id'));
+            $table->string('name', 255)->comment(__('db.products.name'));
+            $table->unsignedInteger('price')->comment(__('db.products.price'));
+            $table->string('stripe_plan_id', 255)->comment(__('db.products.stripe_plan_id'));
+            $table->enum('status', ProductsStatus::toArray())->comment(__('db.products.status'));
 
             MigrateUtils::timestamps($table);
 

@@ -26,8 +26,8 @@ class SignupRequest extends BaseFormRequest
     public function attributes()
     {
         return [
-            'email' => __('databases.users.email'),
-            'password' => __('databases.users.password'),
+            'email' => __('db.users.email'),
+            'password' => __('db.users.password'),
         ];
     }
 }

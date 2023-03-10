@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->comment('管理権限マスタ');
 
-            $table->id()->comment('管理権限マスタID');
-            $table->string('name')->comment('管理権限名');
+            $table->id()->comment(__('db.roles.id'));
+            $table->string('name')->comment(__('db.roles.name'));
 
             MigrateUtils::timestamps($table);
         });

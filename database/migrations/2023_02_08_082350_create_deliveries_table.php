@@ -17,19 +17,19 @@ return new class extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->comment('配達情報');
 
-            $table->id()->comment('配達情報ID');
-            $table->unsignedBigInteger('order_id')->comment('注文ID');
-            $table->unsignedBigInteger('deliver_time_id')->comment('注文ID');
+            $table->id()->comment(__('db.deliveries.id'));
+            $table->unsignedBigInteger('order_id')->comment(__('db.deliveries.order_id'));
+            $table->unsignedBigInteger('deliver_time_id')->comment(__('db.deliveries.deliver_time_id'));
 
-            $table->string('name', 128)->comment('氏名');
-            $table->string('name_kana', 128)->comment('氏名カナ');
-            $table->string('post_number', 7)->comment('郵便番号');
-            $table->string('prefecture_name', 8)->comment('都道府県');
-            $table->string('city', 24)->comment('市区町村');
-            $table->string('block', 32)->comment('番地');
-            $table->string('building', 128)->nullable()->comment('建物名・部屋番号');
-            $table->string('phone_number', 32)->comment('電話番号');
-            $table->string('email', 256)->comment('連絡用メールアドレス');
+            $table->string('name', 128)->comment(__('db.deliveries.name'));
+            $table->string('name_kana', 128)->comment(__('db.deliveries.name_kana'));
+            $table->string('post_number', 7)->comment(__('db.deliveries.post_number'));
+            $table->string('prefecture_name', 8)->comment(__('db.deliveries.prefecture_name'));
+            $table->string('city', 24)->comment(__('db.deliveries.city'));
+            $table->string('block', 32)->comment(__('db.deliveries.block'));
+            $table->string('building', 128)->nullable()->comment(__('db.deliveries.building'));
+            $table->string('phone_number', 32)->comment(__('db.deliveries.phone_number'));
+            $table->string('email', 256)->comment(__('db.deliveries.email'));
 
 
             MigrateUtils::timestamps($table);

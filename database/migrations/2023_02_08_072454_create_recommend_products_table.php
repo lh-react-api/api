@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('recommend_products', function (Blueprint $table) {
             $table->comment('おすすめ商品');
 
-            $table->id()->comment('おすすめ商品ID');
-            $table->unsignedBigInteger('products_id')->comment('商品ID');
-            $table->unsignedBigInteger('product_image_id')->comment('商品画像ID');
+            $table->id()->comment(__('db.recommend_products.id'));
+            $table->unsignedBigInteger('products_id')->comment(__('db.recommend_products.products_id'));
+            $table->unsignedBigInteger('product_image_id')->comment(__('db.recommend_products.product_image_id'));
 
             MigrateUtils::timestamps($table);
 
