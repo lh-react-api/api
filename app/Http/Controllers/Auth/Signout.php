@@ -19,9 +19,9 @@ class Signout extends BaseController
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        dd($user);
+//        dd($user);
         $user->tokens()->where('name', 'api_token')->delete();
-        Auth::logout();
+//        Auth::logout();
         return ResponseUtils::success();
     }
 }
