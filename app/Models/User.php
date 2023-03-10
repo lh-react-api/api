@@ -32,6 +32,7 @@ class User extends BaseModel implements
         'name',
         'email',
         'password',
+        'social',
     ];
 
     /**
@@ -57,7 +58,6 @@ class User extends BaseModel implements
         'name' => 'like',
     ];
 
-
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
@@ -69,5 +69,9 @@ class User extends BaseModel implements
         return self::with([
             //これから入れる
         ])->find($id);
+    }
+
+    public static function create() {
+
     }
 }
