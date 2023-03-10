@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\BaseController;
 use App\Utilities\ResponseUtils;
@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Signout extends BaseController
+class Authed extends BaseController
 {
     /**
      * Handle the incoming request.
@@ -18,10 +18,9 @@ class Signout extends BaseController
      */
     public function __invoke(Request $request)
     {
-        $user = Auth::user();
-        dd($user);
-        $user->tokens()->where('name', 'api_token')->delete();
-        Auth::logout();
-        return ResponseUtils::success();
+        return ResponseUtils::success(
+            Auth::user()
+        );
+
     }
 }
