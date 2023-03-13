@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Users\UsersSocial;
+use App\Enums\Users\UsersStatus;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->enum('social', UsersSocial::toArray())->nullable()->comment(__('db.users.social'));
             $table->rememberToken()->comment(__('db.users.remember_token'));
             $table->boolean('is_admin')->default(false)->comment(__('db.users.is_admin'));
+            $table->enum('status', UsersStatus::toArray())->comment(__('db.users.status'));
 
             MigrateUtils::timestamps($table);
         });

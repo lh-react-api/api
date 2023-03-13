@@ -9,6 +9,8 @@ return [
         'social' => 'ソーシャル認証',
         'is_admin' => '管理者フラグ',
         'remember_token' => 'Laravel用の認証トークン',
+        'status' => 'ステータス',
+
     ],
     'genres' => [
         'id' => 'ジャンルID',
