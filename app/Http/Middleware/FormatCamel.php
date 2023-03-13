@@ -16,17 +16,21 @@ class FormatCamel {
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        $request->replace(
+            $this->format($request->input(), 'snake')
+        );
+
         $response = $next($request);
 
-        return $response->setData($this->format($response->getData()));
+        return $response->setData($this->format($response->getData(), 'camel'));
     }
 
-    public function format(stdClass|array $target):array {
+    public function format(stdClass|array $target, $type):array {
 
         $tmp = [];
         foreach ($target as $key => $value) {
-            $tmp[Str::camel($key)] =
-                (is_array($value) || is_object($value)) ? $this->format($value) : $value
+            $tmp[Str::$type($key)] =
+                (is_array($value) || is_object($value)) ? $this->format($value, $type) : $value
             ;
         }
         return $tmp;
