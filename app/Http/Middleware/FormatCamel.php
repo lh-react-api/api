@@ -20,8 +20,12 @@ class FormatCamel {
             $this->format($request->input(), 'snake')
         );
 
+
         $response = $next($request);
 
+        if (is_string($response->getData())) {
+            return $response;
+        }
         return $response->setData($this->format($response->getData(), 'camel'));
     }
 

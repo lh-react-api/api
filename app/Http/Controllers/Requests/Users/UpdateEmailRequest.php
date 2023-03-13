@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Requests\Users;
 
-
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 
 
 /**
  * Class MemberLoginRequest
  * @package App\Http\Controllers\Requests
  */
-class DeleteRequest extends BaseFormRequest
+class UpdateEmailRequest extends BaseFormRequest
 {
     const DEFAULT_NAME = 'ユーザ';
     const ROUTE_KEY = 'user_id';
@@ -31,11 +31,13 @@ class DeleteRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            self::ROUTE_KEY => [
-                //TODO: 他のリレーションがあって削除できない時のバリデーション
-//                new NotExist((new Users)->getTable(), (int)$this->route(self::ROUTE_KEY)),
-            ]
+            'email' => ['required', 'max:255', 'email', Rule::unique((new User)->getTable())->ignore((int)$this->route(self::ROUTE_KEY))],
         ];
+    }
+
+    public function attributes()
+    {
+        return [];
     }
 
     public function validationData()

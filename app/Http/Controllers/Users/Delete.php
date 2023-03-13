@@ -21,7 +21,10 @@ class Delete extends BaseController
      */
     public function __invoke(DeleteRequest $request, int $id)
     {
-        User::find($id)->delete();
+        $user = User::find($id)->delete();
+
+        $this->authorize('delete', $user);
+
         return ResponseUtils::success();
     }
 }

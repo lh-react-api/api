@@ -109,6 +109,19 @@ class User extends BaseModel implements
         ]);
 
         $entity->save();
+    }
+
+    // TODO: 引数をdomainにしても良いかも
+    public function updateColumn(string $email, string $targetName) {
+        $this->$targetName = $email;
+        $this->save();
+    }
+
+    public function updatePassword($password) {
+
+        $this->password = Hash::make($password);
+        $this->save();
 
     }
+
 }

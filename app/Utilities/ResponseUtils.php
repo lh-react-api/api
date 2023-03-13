@@ -209,7 +209,7 @@ class ResponseUtils
         if(empty($code)){
             $code = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
-        return self::toErrorResponse($code, $description);
+        return self::toErrorResponse($code, ['errors' => $description]);
     }
 
     /**

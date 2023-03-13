@@ -29,6 +29,9 @@ Route::group(['middleware' => [
     Route::get('users/{user_id}', \App\Http\Controllers\Users\Show::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
+    Route::patch('users/{user_id}/email', \App\Http\Controllers\Users\UpdateEmail::class);
+    Route::patch('users/{user_id}/password', \App\Http\Controllers\Users\UpdatePassword::class);
+
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
 
     Route::post('auth/signout', \App\Http\Controllers\Auth\Signout::class);
