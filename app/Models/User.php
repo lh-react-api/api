@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Orders\OrdersProgress;
 use App\Models\domains\Users\Credential;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +46,6 @@ class User extends BaseModel implements
         'social' => 'in',
     ];
 
-
     public function addresses()
     {
         return $this->hasMany(Address::class);
@@ -55,6 +55,38 @@ class User extends BaseModel implements
     {
         return $this->hasOne(Address::class)->where('is_default', true);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function productReviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function activeOrders()
+    {
+        return $this->hasMany(Order::class)
+            ->where('orders.progress', '!=', OrdersProgress::CLOSE);
+    }
+
+    public function credits()
+    {
+        return $this->hasMany(Credit::class);
+    }
+
+    public function adminAuthorities()
+    {
+        return $this->hasMany(AdminAuthority::class);
+    }
+
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
