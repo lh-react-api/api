@@ -25,34 +25,19 @@ class User extends BaseModel implements
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
     use HasFactory, Notifiable, HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'email',
         'password',
         'social',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 
     protected $searches = [
@@ -60,6 +45,16 @@ class User extends BaseModel implements
         'social' => 'in',
     ];
 
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function defaultAddresses()
+    {
+        return $this->hasOne(Address::class)->where('is_default', true);
+    }
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
@@ -69,7 +64,8 @@ class User extends BaseModel implements
 
     public static function findForShow(int $id){
         return self::with([
-            //これから入れる
+            'addresses',
+            'defaultAddresses',
         ])->find($id);
     }
 

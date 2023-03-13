@@ -24,6 +24,7 @@ class UsersSeeder extends Seeder
                     'password' => Hash::make('pass'),//pass
                     'social' => null,
                     'remember_token' => null,
+                    'is_admin' => true,
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -35,6 +36,7 @@ class UsersSeeder extends Seeder
                     'password' => Hash::make('pass'),//pass
                     'social' => null,
                     'remember_token' => null,
+                    'is_admin' => false,
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),

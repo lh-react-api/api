@@ -7,6 +7,7 @@ return [
         'email_verified_at' => 'Laravelのメール認証日時',
         'password' => 'パスワード',
         'social' => 'ソーシャル認証',
+        'is_admin' => '管理者フラグ',
         'remember_token' => 'Laravel用の認証トークン',
     ],
     'genres' => [
@@ -48,6 +49,7 @@ return [
     ],
     'products' => [
         'id' => '商品ID',
+        'user_id' => 'ユーザID',
         'product_origin_id' => '商品原本ID',
         'product_type_id' => '商品種別ID',
         'product_rank_id' => '商品ランクID',
@@ -88,7 +90,7 @@ return [
         'id' => '注文情報ID',
         'product_id' => '商品ID',
         'user_id' => 'ユーザID',
-        'status' => '状態',
+        'progress' => '進捗',
         'sent_tracking_number' => '発送追跡番号',
         'return_tracking_number' => '返送追跡番号',
     ],
@@ -168,7 +170,7 @@ return [
     ],
     'admin_authorities' => [
         'id' => '管理権限ID',
-        'admin_user_id' => '管理ユーザーID',
+        'user_id' => 'ユーザーID',
         'role_id' => '管理権限マスタID',
         'action' => 'アクション: ２進数で左からCRUDにする。0101みたいに',
 

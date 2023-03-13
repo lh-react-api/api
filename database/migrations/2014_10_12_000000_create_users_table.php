@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('password')->nullable()->comment(__('db.users.password'));
             $table->enum('social', UsersSocial::toArray())->nullable()->comment(__('db.users.social'));
             $table->rememberToken()->comment(__('db.users.remember_token'));
+            $table->boolean('is_admin')->default(false)->comment(__('db.users.is_admin'));
+
             MigrateUtils::timestamps($table);
         });
     }

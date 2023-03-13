@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\FormatCamel::class,
         ],
     ];
 
@@ -66,6 +67,5 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'transaction' => \App\Http\Middleware\Transaction::class,
         'formatRequestParam' => \App\Http\Middleware\FormatRequestParam::class,
-
     ];
 }

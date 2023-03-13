@@ -19,6 +19,8 @@ return new class extends Migration
             $table->comment('商品');
 
             $table->id()->comment(__('db.products.id'));
+            $table->unsignedBigInteger('user_id')->comment(__('db.products.user_id'));
+
             $table->unsignedBigInteger('product_origin_id')->comment(__('db.products.product_origin_id'));
             $table->unsignedBigInteger('product_type_id')->comment(__('db.products.product_type_id'));
             $table->unsignedBigInteger('product_rank_id')->comment(__('db.products.product_rank_id'));
@@ -29,6 +31,7 @@ return new class extends Migration
 
             MigrateUtils::timestamps($table);
 
+            $table->foreign('user_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('users');
             $table->foreign('product_origin_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('product_origins');
             $table->foreign('product_type_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('product_types');
             $table->foreign('product_rank_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('product_ranks');
