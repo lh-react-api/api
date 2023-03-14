@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Requests\Users;
 
+use App\Exceptions\BadRequestException;
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\User;
 
@@ -19,8 +20,15 @@ class UpdateByReissuePasswordRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        $this->existsRecordById((new User), (int)$this->route(self::ROUTE_KEY));
+        $entity = User::findByEmailReissueToken($this->email_reissue_token);
 
+        if (!isset($entity)) {//Response::HTTP_BAD_REQUEST
+            $exception = new BadRequestException('', 403, ['errors' => [
+                'レコードの存在しないtokenです。'
+            ]]);
+
+            throw $exception;
+        }
         return true;
     }
 
@@ -30,7 +38,9 @@ class UpdateByReissuePasswordRequest extends BaseFormRequest
     public function rules()
     {
         return [
+            'email_reissue_token' => ['required', 'min:64', 'max:64'],
             'password' => ['required', 'max:255'],
+
         ];
     }
 
@@ -41,8 +51,9 @@ class UpdateByReissuePasswordRequest extends BaseFormRequest
 
     public function validationData()
     {
+
         return array_merge($this->request->all(), [
-            self::ROUTE_KEY => (int)$this->route(self::ROUTE_KEY),
+            'email_reissue_token' => $this->route('email_reissue_token'),
         ]);
     }
 }

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Requests\Users\UpdateByReissuePasswordRequest;
 use App\Http\Controllers\Requests\Users\UpdateEmailRequest;
-use App\Http\Controllers\Requests\Users\UpdatePasswordRequest;
 use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateByReissuePassword extends BaseController
 {
@@ -19,11 +18,13 @@ class UpdateByReissuePassword extends BaseController
      * @param int $id
      * @return JsonResponse
      */
-    public function __invoke(UpdatePasswordRequest $request, int $id)
+    public function __invoke(UpdateByReissuePasswordRequest $request, string $emailReissueToken)
     {
-        $user = User::find($id);
-        $this->authorize('update', $user);
+
+        $user = User::findByEmailReissueToken($emailReissueToken);
+
         $user->updatePassword($request->input()['password']);
+        $user->updateColumn(null, 'email_reissue_token');
 
         return ResponseUtils::success($user);
     }

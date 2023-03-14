@@ -113,12 +113,6 @@ class User extends BaseModel implements
         $entity->save();
     }
 
-    // TODO: 引数をdomainにしても良いかも
-    public function updateColumn(string $email, string $targetName) {
-        $this->$targetName = $email;
-        $this->save();
-    }
-
     public function updatePassword($password) {
 
         $this->password = Hash::make($password);
@@ -129,4 +123,7 @@ class User extends BaseModel implements
         return self::query()->where('email', $email)->first();
     }
 
+    public static function findByEmailReissueToken($emailReissueToken){
+        return self::query()->where('email_reissue_token', $emailReissueToken)->first();
+    }
 }

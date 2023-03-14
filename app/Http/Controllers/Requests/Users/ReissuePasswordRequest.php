@@ -24,7 +24,7 @@ class ReissuePasswordRequest extends BaseFormRequest
 
         if (!isset($entity)) {//Response::HTTP_BAD_REQUEST
             $exception = new BadRequestException('', 403, ['errors' => [
-                'レコードの存在しないidです。'
+                'レコードの存在しないemailです。'
             ]]);
 
             throw $exception;

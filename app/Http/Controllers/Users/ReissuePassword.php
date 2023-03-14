@@ -26,11 +26,13 @@ class ReissuePassword extends BaseController
     {
         $user = User::findByEmail($email);
 
-        $user->email_reissue_token = hash('sha256', uniqid());
-
         if ($user->social !== null) {
             throw new UpdateEmailUserException('', 403, ['ソーシャル認証のユーザは変更できません。']);
         }
+
+        $user->updateColumn(hash('sha256', uniqid()), 'email_reissue_token');
+
+        $user->save();
 
         Mail::send(new ReissuePasswordMail($user));
 
