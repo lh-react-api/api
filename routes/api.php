@@ -33,6 +33,7 @@ Route::group(['middleware' => [
     Route::patch('users/{user_id}/password', \App\Http\Controllers\Users\UpdatePassword::class);
 
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
+    Route::delete('users/{user_id}/withdrawal', \App\Http\Controllers\Users\UpdateStatusWithdrawal::class);
 
     Route::post('auth/signout', \App\Http\Controllers\Auth\Signout::class);
     Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
