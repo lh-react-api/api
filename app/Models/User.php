@@ -98,6 +98,7 @@ class User extends BaseModel implements
         return self::with([
             'addresses',
             'defaultAddresses',
+            'credits',
         ])->find($id);
     }
 
