@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Utilities\ResponseUtils;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -70,6 +71,10 @@ class Handler extends ExceptionHandler
         if ($exception instanceof UpdateResourceException) {
             return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
         }
+        if ($exception instanceof AuthenticationException) {
+            return ResponseUtils::error(['auth error...'], 401);
+        }
+
 
         return $this->PHPError($exception);
     }
