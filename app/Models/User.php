@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Orders\OrdersProgress;
 use App\Models\domains\Users\Credential;
+use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -122,7 +123,10 @@ class User extends BaseModel implements
 
         $this->password = Hash::make($password);
         $this->save();
+    }
 
+    public static function findByEmail($email){
+        return self::query()->where('email', $email)->first();
     }
 
 }
