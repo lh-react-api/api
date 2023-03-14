@@ -19,13 +19,12 @@ return new class extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->comment('お知らせ');
 
-            $table->id()->comment('お知らせID');
-
-            $table->enum('division', NoticesDivision::toArray())->default(NoticesDivision::NOTICE->value)->comment('区分');
-            $table->string('title', 128)->comment('タイトル');
-            $table->text('text')->comment('お知らせ内容');
-            $table->date('notice_date')->nullable()->comment('公開日');
-            $table->date('close_date')->nullable()->comment('終了日');
+            $table->id()->comment(__('db.notices.id'));
+            $table->enum('division', NoticesDivision::toArray())->default(NoticesDivision::NOTICE->value)->comment(__('db.notices.division'));
+            $table->string('title', 128)->comment(__('db.notices.title'));
+            $table->text('text')->comment(__('db.notices.text'));
+            $table->date('notice_date')->nullable()->comment(__('db.notices.notice_date'));
+            $table->date('close_date')->nullable()->comment(__('db.notices.close_date'));
 
             MigrateUtils::timestamps($table);
         });

@@ -5,7 +5,7 @@ namespace App\Enums\Orders;
 use App\Enums\EnumInterface;
 use App\Enums\EnumTrait;
 
-enum OrdersStatus: string implements EnumInterface
+enum OrdersProgress: string implements EnumInterface
 {
     use EnumTrait;
     case YET = 'yet';

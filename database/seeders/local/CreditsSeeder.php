@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UsersSeeder extends Seeder
+class CreditsSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -16,33 +16,32 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+        DB::table('credits')->insert(
             [
                 [
-                    'email' => 'admin@sg.sandbox',
-                    'email_verified_at' => null,
-                    'password' => Hash::make('pass'),//pass
-                    'social' => null,
-                    'remember_token' => null,
-                    'is_admin' => true,
+                    'user_id' => 2,
+                    'stripe_customer_id' => 'XXXXX001',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
                     'updated_by' => 1,
                 ],
                 [
-                    'email' => 'ishikawa@sg.sandbox',
-                    'email_verified_at' => null,
-                    'password' => Hash::make('pass'),//pass
-                    'social' => null,
-                    'remember_token' => null,
-                    'is_admin' => false,
+                    'user_id' => 2,
+                    'stripe_customer_id' => 'XXXXX002',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
                     'updated_by' => 1,
                 ],
-
+                [
+                    'user_id' => 2,
+                    'stripe_customer_id' => 'XXXXX003',
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
             ]);
     }
 }

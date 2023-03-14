@@ -19,8 +19,11 @@ class Show extends BaseController
      */
     public function __invoke(Request $request, int $id)
     {
+        $user = User::findForShow($id);
+        $this->authorize('view', $user);
+
         return ResponseUtils::success(
-            User::findForShow($id)
+            $user
         );
     }
 }

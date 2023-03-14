@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Requests\Users;
 
-
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\User;
 
@@ -11,7 +10,7 @@ use App\Models\User;
  * Class MemberLoginRequest
  * @package App\Http\Controllers\Requests
  */
-class DeleteRequest extends BaseFormRequest
+class UpdatePasswordRequest extends BaseFormRequest
 {
     const DEFAULT_NAME = 'ユーザ';
     const ROUTE_KEY = 'user_id';
@@ -31,11 +30,13 @@ class DeleteRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            self::ROUTE_KEY => [
-                //TODO: 他のリレーションがあって削除できない時のバリデーション
-//                new NotExist((new Users)->getTable(), (int)$this->route(self::ROUTE_KEY)),
-            ]
+            'password' => ['required', 'max:255'],
         ];
+    }
+
+    public function attributes()
+    {
+        return [];
     }
 
     public function validationData()

@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('makers', function (Blueprint $table) {
             $table->comment('メーカマスタ');
 
-            $table->id()->comment('メーカID');
-            $table->string('name', 255)->comment('メーカ名');
-            $table->text('information')->nullable()->comment('メーカ情報');
+            $table->id()->comment(__('db.makers.id'));
+            $table->string('name', 255)->comment(__('db.makers.name'));
+            $table->text('information')->nullable()->comment(__('db.makers.information'));
 
             MigrateUtils::timestamps($table);
         });

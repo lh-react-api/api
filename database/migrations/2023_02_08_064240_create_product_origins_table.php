@@ -17,16 +17,16 @@ return new class extends Migration
         Schema::create('product_origins', function (Blueprint $table) {
             $table->comment('商品原本');
 
-            $table->id()->comment('商品原本ID');
-            $table->unsignedBigInteger('genre_id')->comment('ジャンルID');
-            $table->unsignedBigInteger('maker_id')->comment('メーカーID');
-            $table->string('name', 255)->comment('商品名');
-            $table->text('information')->nullable()->comment('商品情報');
-            $table->text('caution_text')->nullable()->comment('注意文言');
-            $table->string('size', 255)->nullable()->comment('商品サイズ');
-            $table->string('weight', 255)->nullable()->comment('商品重量');
-            $table->date('release_date')->nullable()->comment('発売日');
-            $table->string('thumbnail', 512)->nullable()->comment('商品サムネイル画像');
+            $table->id()->comment(__('db.product_origins.id'));
+            $table->unsignedBigInteger('genre_id')->comment(__('db.product_origins.genre_id'));
+            $table->unsignedBigInteger('maker_id')->comment(__('db.product_origins.maker_id'));
+            $table->string('name', 255)->comment(__('db.product_origins.name'));
+            $table->text('information')->nullable()->comment(__('db.product_origins.information'));
+            $table->text('caution_text')->nullable()->comment(__('db.product_origins.caution_text'));
+            $table->string('size', 255)->nullable()->comment(__('db.product_origins.size'));
+            $table->string('weight', 255)->nullable()->comment(__('db.product_origins.weight'));
+            $table->date('release_date')->nullable()->comment(__('db.product_origins.release_date'));
+            $table->string('thumbnail', 512)->nullable()->comment(__('db.product_origins.thumbnail'));
 
             MigrateUtils::timestamps($table);
 

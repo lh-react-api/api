@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Users\UsersSocial;
+use App\Enums\Users\UsersStatus;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,12 +18,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->comment('ユーザテーブル');
-            $table->id()->comment('ユーザID');;
-            $table->string('email')->comment('メールアドレス')->unique();
-            $table->timestamp('email_verified_at')->nullable()->comment('Laravelのメール認証日時');
-            $table->string('password')->nullable()->comment('パスワード');
-            $table->enum('social', UsersSocial::toArray())->nullable()->comment('ソーシャル認証');
-            $table->rememberToken()->comment('Laravel用の認証トークン');
+            $table->id()->comment(__('db.users.id'));;
+            $table->string('email')->comment(__('db.users.email'))->unique();
+            $table->timestamp('email_verified_at')->nullable()->comment(__('db.users.email_verified_at'));
+            $table->string('password')->nullable()->comment(__('db.users.password'));
+            $table->enum('social', UsersSocial::toArray())->nullable()->comment(__('db.users.social'));
+            $table->rememberToken()->comment(__('db.users.remember_token'));
+            $table->boolean('is_admin')->default(false)->comment(__('db.users.is_admin'));
+            $table->enum('status', UsersStatus::toArray())->comment(__('db.users.status'));
+
             MigrateUtils::timestamps($table);
         });
     }

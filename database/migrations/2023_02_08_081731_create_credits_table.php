@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('credits', function (Blueprint $table) {
             $table->comment('クレジットカード情報テーブル');
 
-            $table->id()->comment('クレジットカード情報ID');
-            $table->unsignedBigInteger('user_id')->comment('ユーザID');
-            $table->string('stripe_customer_id', 128)->comment('stripe顧客ID');
+            $table->id()->comment(__('db.credits.id'));
+            $table->unsignedBigInteger('user_id')->comment(__('db.credits.user_id'));
+            $table->string('stripe_customer_id', 128)->comment(__('db.credits.stripe_customer_id'));
 
             MigrateUtils::timestamps($table);
 

@@ -17,10 +17,10 @@ return new class extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->comment('商品画像');
 
-            $table->id()->comment('商品画像ID');
-            $table->unsignedBigInteger('products_id')->comment('商品ID');
-            $table->string('image', 512)->comment('商品画像');
-            $table->unsignedSmallInteger('order')->comment('表示順序');
+            $table->id()->comment(__('db.product_images.id'));
+            $table->unsignedBigInteger('products_id')->comment(__('db.product_images.products_id'));
+            $table->string('image', 512)->comment(__('db.product_images.image'));
+            $table->unsignedSmallInteger('order')->comment(__('db.product_images.order'));
 
             MigrateUtils::timestamps($table);
 

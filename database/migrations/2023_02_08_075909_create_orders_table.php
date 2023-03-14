@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Orders\OrdersStatus;
+use App\Enums\Orders\OrdersProgress;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,12 +18,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->comment('注文情報');
 
-            $table->id()->comment('注文情報ID');
-            $table->unsignedBigInteger('product_id')->comment('商品ID');
-            $table->unsignedBigInteger('user_id')->comment('ユーザID');
-            $table->enum('status', OrdersStatus::toArray())->default(OrdersStatus::YET->value)->comment('状態');
-            $table->string('sent_tracking_number', 128)->comment('発送追跡番号');
-            $table->string('return_tracking_number', 128)->comment('返送追跡番号');
+            $table->id()->comment(__('db.orders.id'));
+            $table->unsignedBigInteger('product_id')->comment(__('db.orders.product_id'));
+            $table->unsignedBigInteger('user_id')->comment(__('db.orders.user_id'));
+            $table->enum('status', OrdersProgress::toArray())->default(OrdersProgress::YET->value)->comment(__('db.orders.status'));
+            $table->string('sent_tracking_number', 128)->comment(__('db.orders.sent_tracking_number'));
+            $table->string('return_tracking_number', 128)->comment(__('db.orders.return_tracking_number'));
 
             MigrateUtils::timestamps($table);
 
