@@ -6,10 +6,12 @@ use App\Exceptions\UpdateEmailUserException;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Users\ReissuePasswordRequest;
 use App\Http\Controllers\Requests\Users\UpdateEmailRequest;
+use App\Mail\ReissuePasswordMail;
 use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ReissuePassword extends BaseController
 {
@@ -30,7 +32,7 @@ class ReissuePassword extends BaseController
             throw new UpdateEmailUserException('', 403, ['ソーシャル認証のユーザは変更できません。']);
         }
 
-        // sendmail
+        Mail::send(new ReissuePasswordMail($user));
 
         return ResponseUtils::success([]);
     }
