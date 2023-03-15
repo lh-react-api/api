@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Orders\OrdersProgress;
+use App\Enums\Users\UsersStatus;
 use App\Models\domains\Users\Credential;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,6 +45,10 @@ class User extends BaseModel implements
     protected $searches = [
         'email' => 'like',
         'social' => 'in',
+    ];
+
+    protected $appends = [
+        'statusLable',
     ];
 
     public function addresses()
@@ -112,17 +117,15 @@ class User extends BaseModel implements
         $entity->save();
     }
 
-    // TODO: 引数をdomainにしても良いかも
-    public function updateColumn(string $email, string $targetName) {
-        $this->$targetName = $email;
-        $this->save();
-    }
-
     public function updatePassword($password) {
 
         $this->password = Hash::make($password);
         $this->save();
+    }
 
+    public function getStatusLableAttribute($value)
+    {
+        return $this->status->description();
     }
 
 }
