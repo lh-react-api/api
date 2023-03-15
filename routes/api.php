@@ -44,6 +44,7 @@ Route::group(['middleware' => [
     Route::delete('users/{user_id}/withdrawal', \App\Http\Controllers\Users\UpdateStatusWithdrawal::class);
 
     // Addresses
+    Route::post('addresses', \App\Http\Controllers\Addresses\Store::class);
     Route::patch('users/{user_id}/addresses/isDefault', \App\Http\Controllers\Addresses\UpdateIsDefaultByUserId::class);
 
     // UpdateIsDefaultByUserId
