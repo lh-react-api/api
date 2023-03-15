@@ -106,8 +106,10 @@ class BaseModel extends Model
             ])->save();
         });
     }
+
     public function updateColumn($target, string $targetName) {
         $this->$targetName = $target;
         $this->save();
     }
+
 }

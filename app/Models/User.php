@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Orders\OrdersProgress;
+use App\Enums\Users\UsersStatus;
 use App\Models\domains\Users\Credential;
 use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,6 +46,10 @@ class User extends BaseModel implements
     protected $searches = [
         'email' => 'like',
         'social' => 'in',
+    ];
+
+    protected $appends = [
+        'statusLable',
     ];
 
     public function addresses()
@@ -119,8 +124,14 @@ class User extends BaseModel implements
         $this->save();
     }
 
+
     public static function findByEmail($email){
         return self::query()->where('email', $email)->first();
+    }
+
+    public function getStatusLableAttribute($value)
+    {
+        return $this->status->description();
     }
 
     public static function findByEmailReissueToken($emailReissueToken){
