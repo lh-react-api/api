@@ -9,6 +9,7 @@ use App\Models\Address;
 use App\Models\domains\Addresses\AddressContentEntity;
 use App\Models\domains\Addresses\AddressEntity;
 use App\Models\domains\Addresses\FullNameEntity;
+use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -27,6 +28,9 @@ class Store extends BaseController
 
         $input = new Collection($request->input());
 
+
+//        $this->authorize('create', User::find((int)$input->get('user_id')));
+
         $address = Address::create(new AddressEntity(
             (int)$input->get('user_id'),
             new FullNameEntity(
@@ -44,6 +48,9 @@ class Store extends BaseController
             )
         ));
 
+        // FIXME: 第二引数をAddressのモデルの型にしないとエラーになるクソ仕様、insertする前に認可を下ろすためにUserモデルを第二引数にしたい
+        $this->authorize('create');
+        $this->authorize('create', $address);
         return ResponseUtils::success($address);
     }
 }

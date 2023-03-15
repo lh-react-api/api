@@ -40,9 +40,10 @@ class AddressPolicy extends BasePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Address $address)
     {
-        //
+        $this->byAuthUser($address->user_id);
+        return true;
     }
 
     /**

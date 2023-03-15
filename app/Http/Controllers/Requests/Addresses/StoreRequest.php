@@ -12,7 +12,12 @@ use Illuminate\Validation\Rule;
  */
 class StoreRequest extends BaseFormRequest
 {
-    const DEFAULT_NAME = '住所';
+    const DEFAULT_NAME = 'ユーザ';
+
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * {@inheritdoc}
@@ -20,9 +25,16 @@ class StoreRequest extends BaseFormRequest
     public function rules()
     {
         return [
-//            'name' => ['required', 'max:255'],
-//            'email' => ['required', 'max:255', 'email', Rule::unique((new User)->getTable())],
-//            'password' => ['required', 'max:255'],
+            'user_id' => ['required', Rule::exists('users', 'id')],
+            'last_name' => ['required', 'max:128'],
+            'last_name_kana' => ['required', 'kana', 'max:128'],//kana追加
+            'first_name' => ['required', 'max:128'],
+            'first_name_kana' => ['required', 'kana', 'max:128'],//kana追加
+            'post_number' => ['required', 'string_num', 'max:7'],
+            'prefecture_name' => ['required', 'max:8'],
+            'city' => ['required', 'max:24'],
+            'block' => ['required', 'max:32'],
+            'building' => ['required', 'max:128'],
         ];
     }
 
