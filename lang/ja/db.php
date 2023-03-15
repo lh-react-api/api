@@ -9,6 +9,7 @@ return [
         'social' => 'ソーシャル認証',
         'is_admin' => '管理者フラグ',
         'remember_token' => 'Laravel用の認証トークン',
+        'email_reissue_token' => 'パスワード再発行のトークン',
         'status' => 'ステータス',
 
     ],

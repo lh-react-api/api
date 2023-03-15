@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Orders\OrdersProgress;
 use App\Enums\Users\UsersStatus;
 use App\Models\domains\Users\Credential;
+use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -123,9 +124,17 @@ class User extends BaseModel implements
         $this->save();
     }
 
+
+    public static function findByEmail($email){
+        return self::query()->where('email', $email)->first();
+    }
+
     public function getStatusLableAttribute($value)
     {
         return $this->status->description();
     }
 
+    public static function findByEmailReissueToken($emailReissueToken){
+        return self::query()->where('email_reissue_token', $emailReissueToken)->first();
+    }
 }

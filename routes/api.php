@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
 Route::post('auth/signup', \App\Http\Controllers\Auth\Signup::class);
+Route::get('users/{email}/password/reissue', \App\Http\Controllers\Users\ReissuePassword::class);
+Route::patch('users/{email_reissue_token}/password/reissue', \App\Http\Controllers\Users\UpdateByReissuePassword::class);
 
 Route::post('auth/sanctum/session/signin', \App\Http\Controllers\Auth\SanctumSessionSignin::class);
 Route::post('auth/sanctum/token/signin', \App\Http\Controllers\Auth\SanctumTokenSignin::class);
