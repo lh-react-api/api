@@ -49,7 +49,6 @@ class Store extends BaseController
         ));
 
         // FIXME: 第二引数をAddressのモデルの型にしないとエラーになるクソ仕様、insertする前に認可を下ろすためにUserモデルを第二引数にしたい
-        $this->authorize('create');
         $this->authorize('create', $address);
         return ResponseUtils::success($address);
     }
