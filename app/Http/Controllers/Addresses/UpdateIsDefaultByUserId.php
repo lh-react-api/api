@@ -24,7 +24,7 @@ class UpdateIsDefaultByUserId extends BaseController
         $addresses = $user->addresses;
         $address = $user->addresses->where('id', $request->input()['address_id'])->first();
 
-//        $this->authorize('update', $address);
+        $this->authorize('update', $address);
 
         foreach($addresses as $row) {
             $row->is_default = false;
