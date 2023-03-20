@@ -4,9 +4,8 @@ namespace App\Models;
 
 use App\Models\domains\Addresses\AddressEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class Address extends BaseModel
 {
     use HasFactory;
 
