@@ -24,6 +24,9 @@ class Address extends BaseModel
         'is_default',
     ];
 
+    protected $casts = [
+        'is_default' => 'boolean',
+    ];
     public static function create(AddressEntity $address) {
 
         $entity = (new Address)->fill([

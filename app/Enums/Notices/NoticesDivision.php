@@ -8,8 +8,8 @@ use App\Enums\EnumTrait;
 enum NoticesDivision: string implements EnumInterface
 {
     use EnumTrait;
-    case IMPORTANT = 'important';
-    case NOTICE = 'notice';
+    case IMPORTANT = 'IMPORTANT';
+    case NOTICE = 'NOTICE';
 
     /**
      * @return string

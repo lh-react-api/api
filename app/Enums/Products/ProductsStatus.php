@@ -8,9 +8,9 @@ use App\Enums\EnumTrait;
 enum ProductsStatus: string implements EnumInterface
 {
     use EnumTrait;
-    case IN_STOCK = 'in_stock';
-    case ON_LEASE = 'on_lease';
-    case BLOKEN = 'bloken';
+    case IN_STOCK = 'IN_STOCK';
+    case ON_LEASE = 'ON_LEASE';
+    case BLOKEN = 'BLOKEN';
     /**
      * @return string
      */
