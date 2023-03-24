@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\Orders\OrdersProgress;
 use App\Enums\Users\UsersStatus;
 use App\Models\domains\Users\Credential;
-use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -49,7 +48,7 @@ class User extends BaseModel implements
     ];
 
     protected $appends = [
-        'statusLable',
+        'statusLabel',
     ];
 
     public function addresses()
@@ -129,9 +128,10 @@ class User extends BaseModel implements
         return self::query()->where('email', $email)->first();
     }
 
-    public function getStatusLableAttribute($value)
+    public function getStatusLabelAttribute($value)
     {
-        return $this->status->description();
+        return $this->enumLabel($this->status, "App\Enums\Users\UsersStatus");
+
     }
 
     public static function findByEmailReissueToken($emailReissueToken){

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Users\UsersStatus;
 use App\Exceptions\DatabaseErrorException;
 use App\Models\traits\common\SearchTrait;
 use App\Models\traits\common\WhereHasTrait;
@@ -25,6 +26,7 @@ class BaseModel extends Model
      *
      * TimeStampをDatetimeに変更する。
      */
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -112,4 +114,11 @@ class BaseModel extends Model
         $this->save();
     }
 
+    public function enumLabel($status, $enum) {
+        if (is_string($status)) {
+            $status = $enum::tryFrom($status);
+        }
+        if (is_null($status)) return null;
+        return $status->description();
+    }
 }

@@ -81,6 +81,7 @@ return [
         'file'    => ':attributeには、:max kB以下のファイルを指定してください。',
         'string'  => ':attributeは、:max文字以下で指定してください。',
         'array'   => ':attributeは:max個以下指定してください。',
+//        'string_num' => ':attributeには、:max以下の文字列の数字を指定してください。',
     ],
     'mimes'                => ':attributeには:valuesタイプのファイルを指定してください。',
     'mimetypes'            => ':attributeには:valuesタイプのファイルを指定してください。',
@@ -89,6 +90,7 @@ return [
         'file'    => ':attributeには、:min kB以上のファイルを指定してください。',
         'string'  => ':attributeは、:min文字以上で指定してください。',
         'array'   => ':attributeは:min個以上指定してください。',
+//        'string_num' =>  ':attributeには、:min以上の文字列の数字を指定してください。',　FIXME: 本当はこれやりたい
     ],
     'not_in'               => '選択された:attributeは正しくありません。',
     'not_regex'            => ':attributeの形式が正しくありません。',
@@ -156,6 +158,7 @@ return [
     'kata_kana' => ':attributeには、カタカナを指定してください。',
     'kana' => ':attributeには、ひらがなを指定してください。',
     'tel' => ':attributeには、有効な電話番号を指定してください。',
+    'string_num' => ':attributeには、文字列の数字を指定してください。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
