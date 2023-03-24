@@ -8,10 +8,10 @@ use App\Enums\EnumTrait;
 enum InquiriesStatus: string implements EnumInterface
 {
     use EnumTrait;
-    case YET = 'yet';
-    case DOING = 'doing';
-    case COMPLETED = 'completed';
-    case UNNECESSARY = 'unnecessary';
+    case YET = 'YET';
+    case DOING = 'DOING';
+    case COMPLETED = 'COMPLETED';
+    case UNNECESSARY = 'UNNECESSARY';
     /**
      * @return string
      */

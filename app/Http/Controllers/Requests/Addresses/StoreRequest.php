@@ -27,9 +27,9 @@ class StoreRequest extends BaseFormRequest
         return [
             'user_id' => ['required', Rule::exists('users', 'id')],
             'last_name' => ['required', 'max:128'],
-            'last_name_kana' => ['required', 'kana', 'max:128'],//kana追加
+            'last_name_kana' => ['required', 'kana', 'max:128'],
             'first_name' => ['required', 'max:128'],
-            'first_name_kana' => ['required', 'kana', 'max:128'],//kana追加
+            'first_name_kana' => ['required', 'kana', 'max:128'],
             'post_number' => ['required', 'string_num', 'max:7'],
             'prefecture_name' => ['required', 'max:8'],
             'city' => ['required', 'max:24'],

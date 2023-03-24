@@ -8,8 +8,8 @@ use App\Enums\EnumTrait;
 enum UsersSocial: string implements EnumInterface
 {
     use EnumTrait;
-    case GOOGLE = 'google';
-    case AMAZON = 'amazon';
+    case GOOGLE = 'GOOGLE';
+    case AMAZON = 'AMAZON';
 
     /**
      * @return string

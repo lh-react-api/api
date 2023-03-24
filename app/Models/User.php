@@ -36,6 +36,7 @@ class User extends BaseModel implements
     protected $hidden = [
         'password',
         'remember_token',
+        'emailReissueToken',
     ];
 
     protected $casts = [

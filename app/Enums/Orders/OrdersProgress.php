@@ -8,12 +8,12 @@ use App\Enums\EnumTrait;
 enum OrdersProgress: string implements EnumInterface
 {
     use EnumTrait;
-    case YET = 'yet';
-    case SENT = 'sent';
-    case RENTALING = 'rentaling';
-    case RETURN = 'return';
-    case RECEIPT = 'receipt';
-    case CLOSE = 'close';
+    case YET = 'YET';
+    case SENT = 'SENT';
+    case RENTALING = 'RENTALING';
+    case RETURN = 'RETURN';
+    case RECEIPT = 'RECEIPT';
+    case CLOSE = 'CLOSE';
     /**
      * @return string
      */
