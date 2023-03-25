@@ -16,5 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(AddressSeeder::class);
         $this->call(CreditsSeeder::class);
+        $this->call(MakersSeeder::class);
+        $this->call(GenresSeeder::class);
+        $this->call(ProductOriginsSeeder::class);
+        $this->call(ProductTypesSeeder::class);
+        $this->call(ProductRanksSeeder::class);
+        $this->call(ProductsSeeder::class);
+
+
     }
 }
