@@ -49,6 +49,7 @@ Route::group(['middleware' => [
 
     // ProductOrigin
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
+    Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
 
     // UpdateIsDefaultByUserId
 });

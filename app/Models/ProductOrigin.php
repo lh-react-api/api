@@ -62,4 +62,17 @@ class ProductOrigin extends BaseModel
     {
         return $this->belongsTo(Genre::class);
     }
+
+
+    public static function findForShow(int $id){
+        return self::with([
+            'products',
+            'products.productType',
+            'products.productRank',
+            'priceMinProduct',
+            'priceMaxProduct',
+            'maker',
+            'genre',
+        ])->find($id);
+    }
 }
