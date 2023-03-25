@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\Request;
@@ -24,8 +25,12 @@ class ProductOrigin extends BaseModel
     {
         $query->with([
             'products',
-//            'priceMinProduct',
-//            'priceMaxProduct'
+            'products.productType',
+            'products.productRank',
+            'priceMinProduct',
+            'priceMaxProduct',
+            'maker',
+            'genre',
         ]);
         $query->searchByDefined($request);
         $this->_whereHasEq($query, $request, 'products.name', 'products');
@@ -41,11 +46,20 @@ class ProductOrigin extends BaseModel
 
     public function priceMinProduct(): HasOne
     {
-
         return $this->hasOne(Product::class)->ofMany('price', 'min');
     }
     public function priceMaxProduct(): HasOne
     {
         return $this->hasOne(Product::class)->ofMany('price', 'max');
+    }
+
+    public function maker(): BelongsTo
+    {
+        return $this->belongsTo(Maker::class);
+    }
+
+    public function genre(): BelongsTo
+    {
+        return $this->belongsTo(Genre::class);
     }
 }
