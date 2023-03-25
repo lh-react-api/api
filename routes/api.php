@@ -47,5 +47,8 @@ Route::group(['middleware' => [
     Route::post('addresses', \App\Http\Controllers\Addresses\Store::class);
     Route::patch('users/{user_id}/addresses/isDefault', \App\Http\Controllers\Addresses\UpdateIsDefaultByUserId::class);
 
+    // ProductOrigin
+    Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
+
     // UpdateIsDefaultByUserId
 });

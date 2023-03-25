@@ -35,6 +35,7 @@ trait WhereHasTrait
 
     public function _whereHasBase(Builder $query, Request $request, string $columnName, string $relationName, string $requestKey, string $operator): Builder
     {
+
         return $query->when($request->get($requestKey), function($query, $target) use ($columnName, $relationName, $operator) {
             return $query->WhereHas($relationName, function ($query) use ($target, $columnName, $relationName, $operator) {
                 $query->where($columnName, $operator, $target);
