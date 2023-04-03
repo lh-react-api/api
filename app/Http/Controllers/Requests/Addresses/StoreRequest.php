@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
  */
 class StoreRequest extends BaseFormRequest
 {
-    const DEFAULT_NAME = 'ユーザ';
+    const DEFAULT_NAME = '住所';
 
     public function authorize()
     {
