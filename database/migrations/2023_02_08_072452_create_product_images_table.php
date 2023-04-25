@@ -18,13 +18,13 @@ return new class extends Migration
             $table->comment('商品画像');
 
             $table->id()->comment(__('db.product_images.id'));
-            $table->unsignedBigInteger('products_id')->comment(__('db.product_images.products_id'));
+            $table->unsignedBigInteger('product_id')->comment(__('db.product_images.product_id'));
             $table->string('image', 512)->comment(__('db.product_images.image'));
             $table->unsignedSmallInteger('order')->comment(__('db.product_images.order'));
 
             MigrateUtils::timestamps($table);
 
-            $table->foreign('products_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('products');
+            $table->foreign('product_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('products');
 
         });
     }

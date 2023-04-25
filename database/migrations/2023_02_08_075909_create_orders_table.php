@@ -21,7 +21,7 @@ return new class extends Migration
             $table->id()->comment(__('db.orders.id'));
             $table->unsignedBigInteger('product_id')->comment(__('db.orders.product_id'));
             $table->unsignedBigInteger('user_id')->comment(__('db.orders.user_id'));
-            $table->enum('status', OrdersProgress::toArray())->default(OrdersProgress::YET->value)->comment(__('db.orders.status'));
+            $table->enum('progress', OrdersProgress::toArray())->default(OrdersProgress::YET->value)->comment(__('db.orders.progress'));
             $table->string('sent_tracking_number', 128)->comment(__('db.orders.sent_tracking_number'));
             $table->string('return_tracking_number', 128)->comment(__('db.orders.return_tracking_number'));
 
