@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\local;
 
+use App\Models\Order;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,17 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductTypesSeeder::class);
         $this->call(ProductRanksSeeder::class);
         $this->call(ProductsSeeder::class);
-
-
+        $this->call(InquiryTypesSeeder::class);
+        $this->call(InquiriesSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(AdminAuthoritiesSeeder::class);
+        $this->call(ProductImagesSeeder::class);
+        $this->call(RecommendProductsSeeder::class);
+        $this->call(ProductReviewsSeeder::class);
+        $this->call(OrdersSeeder::class);
+        $this->call(NoticesSeeder::class);
+        $this->call(DemandsSeeder::class);
+        $this->call(DeliverTimesSeeder::class);
+        $this->call(DeliveriesSeeder::class);
     }
 }
