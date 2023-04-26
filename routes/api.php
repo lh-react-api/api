@@ -52,4 +52,27 @@ Route::group(['middleware' => [
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
 
     // UpdateIsDefaultByUserId
+
+    /**
+     * 管理系API群
+     */
+
+    /**
+     * 管理者権限
+     * AdminAuthority
+     */
+    Route::get('admin/adminAuthorities', \App\Http\Controllers\Admin\AdminAuthorities\index::class);
+    Route::get('admin/adminAuthorities/{admin_authority_id}', \App\Http\Controllers\Admin\AdminAuthorities\Show::class);
+    Route::post('admin/adminAuthorities', \App\Http\Controllers\Admin\AdminAuthorities\Store::class);
+    Route::put('admin/adminAuthorities/{admin_authority_id}', \App\Http\Controllers\Admin\AdminAuthorities\Update::class);
+    Route::delete('admin/adminAuthorities/{admin_authority_id}', \App\Http\Controllers\Admin\AdminAuthorities\Delete::class);
+    /**
+     * 管理者権限マスタ
+     * Roles
+     */
+    Route::get('admin/roles', \App\Http\Controllers\Admin\Roles\index::class);
+    Route::get('admin/roles/{roles_id}', \App\Http\Controllers\Admin\Roles\Show::class);
+    Route::post('admin/roles', \App\Http\Controllers\Admin\Roles\Store::class);
+    Route::put('admin/roles/{roles_id}', \App\Http\Controllers\Admin\Roles\Update::class);
+    Route::delete('admin/roles/{roles_id}', \App\Http\Controllers\Admin\Roles\Delete::class);
 });
