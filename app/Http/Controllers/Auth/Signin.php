@@ -22,7 +22,6 @@ class Signin extends BaseController
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $user->tokens()->where('name', 'api_token')->delete();
