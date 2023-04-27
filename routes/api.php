@@ -48,6 +48,11 @@ Route::group(['middleware' => [
     Route::patch('users/{user_id}/addresses/isDefault', \App\Http\Controllers\Addresses\UpdateIsDefaultByUserId::class);
     Route::delete('addresses/{address_id}', \App\Http\Controllers\Addresses\Delete::class);
 
+
+    // Genres
+    Route::get('genres', \App\Http\Controllers\Genres\index::class);
+
+
     // ProductOrigin
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
