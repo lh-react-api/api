@@ -58,6 +58,15 @@ Route::group(['middleware' => [
      */
 
     /**
+     * お知らせ
+     * Notices
+     */
+    Route::get('admin/notices', \App\Http\Controllers\Admin\Notices\index::class);
+    Route::get('admin/notices/{notice_id}', \App\Http\Controllers\Admin\Notices\Show::class);
+    Route::post('admin/notices', \App\Http\Controllers\Admin\Notices\Store::class);
+    Route::put('admin/notices/{notice_id}', \App\Http\Controllers\Admin\Notices\Update::class);
+    Route::delete('admin/notices/{notice_id}', \App\Http\Controllers\Admin\Notices\Delete::class);
+    /**
      * 管理者権限
      * AdminAuthority
      */
