@@ -58,6 +58,15 @@ Route::group(['middleware' => [
      */
 
     /**
+     * メーカー
+     * Makers
+     */
+    Route::get('admin/makers', \App\Http\Controllers\Admin\Makers\index::class);
+    Route::get('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Show::class);
+    Route::post('admin/makers', \App\Http\Controllers\Admin\Makers\Store::class);
+    Route::put('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Update::class);
+    Route::delete('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Delete::class);
+    /**
      * 管理者権限
      * AdminAuthority
      */
