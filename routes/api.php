@@ -58,6 +58,15 @@ Route::group(['middleware' => [
      */
 
     /**
+     * 配達情報
+     * delivers
+     */
+    Route::get('admin/delivers', \App\Http\Controllers\Admin\Delivers\index::class);
+    Route::get('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Show::class);
+    Route::post('admin/delivers', \App\Http\Controllers\Admin\Delivers\Store::class);
+    Route::put('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Update::class);
+    Route::delete('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Delete::class);
+    /**
      * 管理者権限
      * AdminAuthority
      */

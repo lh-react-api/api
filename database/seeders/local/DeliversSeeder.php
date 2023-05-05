@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DeliveriesSeeder extends Seeder
+class DeliversSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -15,7 +15,7 @@ class DeliveriesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('deliveries')->insert(
+        DB::table('delivers')->insert(
             [
                 [
                     'order_id' => 1,
