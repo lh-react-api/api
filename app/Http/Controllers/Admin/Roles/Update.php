@@ -23,14 +23,12 @@ class Update extends BaseController
     {
         $input = new Collection($request->input());
         $role = Role::query()->find($roleId);
-        $updateRole = Role::updateEntity(
-            $role,
+        $this->authorize('adminUpdate', $role);
+        $role->updateEntity(
             new RoleEntity(
                 $input->get('name'),
             )
         );
-        $this->authorize('adminUpdate', $updateRole);
-
-        return ResponseUtils::success($updateRole);
+        return ResponseUtils::success($role);
     }
 }

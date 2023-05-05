@@ -23,16 +23,15 @@ class Update extends BaseController
     public function __invoke(UpdateRequest $request,int $adminAuthorityId)
     {
         $input = new Collection($request->input());
-        $adminAuthority = AdminAuthority::query()->find($adminAuthorityId);
-        $updateAdminAuthority = AdminAuthority::updateEntity(
-            $adminAuthority,
+        $adminAuthority = AdminAuthority::find($adminAuthorityId);
+        $this->authorize('adminUpdate', $adminAuthority);
+        $adminAuthority->updateEntity(
             new AdminAuthorityEntity(
                 $input->get('user_id'),
                 $input->get('role_id'),
-                $input->get('action'),
+                $input->get('action')
             )
         );
-        $this->authorize('adminUpdate', $adminAuthority);
-        return ResponseUtils::success($updateAdminAuthority);
+        return ResponseUtils::success($adminAuthority);
     }
 }
