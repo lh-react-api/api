@@ -24,6 +24,7 @@ class Genres extends ClosureBaseModel
     protected $searches = [
         'name' => 'like',
         'position' => 'eq',
+        'parent_id' => 'eq',
     ];
 
     /**
