@@ -19,14 +19,36 @@ return new class extends Migration
 
             $table->id()->comment(__('db.genres.id'));
             $table->string('name', 255)->comment(__('db.genres.name'));
-            $table->unsignedBigInteger('upper_id')->nullable()->comment(__('db.genres.upper_id'));
-            $table->unsignedInteger('level')->default(1)->comment(__('db.genres.level'));
+            $table->unsignedBigInteger('parent_id')->nullable()->comment(__('db.genres.parent_id'));
+            $table->integer('position', false, true)->comment(__('db.genres.level'));
             $table->text('information')->nullable()->comment(__('db.genres.information'));
             $table->string('image', 512)->nullable()->comment(__('db.genres.image'));
 
             MigrateUtils::timestamps($table, false);
 
-            $table->foreign('upper_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('genres');
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('genres')
+                ->onDelete('set null');
+        });
+
+        Schema::create('genre_closure', function (Blueprint $table) {
+            $table->increments('closure_id');
+
+            $table->unsignedBigInteger('ancestor', false, true);
+            $table->unsignedBigInteger('descendant', false, true);
+            $table->unsignedBigInteger('depth', false, true);
+
+            $table->foreign('ancestor')
+                ->references('id')
+                ->on('genres')
+                ->onDelete('cascade');
+
+            $table->foreign('descendant')
+                ->references('id')
+                ->on('genres')
+                ->onDelete('cascade');
+
         });
     }
 
@@ -37,6 +59,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('genre_closure');
         Schema::dropIfExists('genres');
     }
 };
