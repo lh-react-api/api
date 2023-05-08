@@ -32,6 +32,11 @@ Route::group(['middleware' => [
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
+    // My
+    Route::get('my/addresses/default', \App\Http\Controllers\My\Addresses\_Default::class);
+//    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
+//    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
+
     // Users
     Route::get('users', \App\Http\Controllers\Users\index::class);
     Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
