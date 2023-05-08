@@ -5,6 +5,7 @@ namespace App\Http\Controllers\My\Addresses;
 use App\Http\Controllers\BaseController;
 use App\Models\Address;
 use App\Utilities\ResponseUtils;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,18 +17,20 @@ class _Default extends BaseController
      * Handle the incoming request.
      *
      * @param Request $request
-     * @param int $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function __invoke(Request $request)
     {
+        $user = Auth::user();
+
+        $this->authorize('view', $user);
+
         $address = Address::query()
             ->where('is_default',true)
-            ->where('user_id', Auth::id())
+            ->where('user_id', $user->id)
             ->first()
         ;
-
-//        $this->authorize('view', $user);
 
         return ResponseUtils::success(
             $address
