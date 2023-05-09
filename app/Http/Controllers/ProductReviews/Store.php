@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Inquiries;
+namespace App\Http\Controllers\ProductReviews;
 
-use App\Enums\Inquiries\InquiriesStatus;
 use App\Exceptions\DatabaseErrorException;
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Requests\Inquiries\StoreRequest;
-use App\Models\domains\Inquiries\InquiryEntity;
-use App\Models\Inquiry;
+use App\Http\Controllers\Requests\ProductReviews\StoreRequest;
+use App\Models\domains\ProductReviews\ProductReviewEntity;
+use App\Models\ProductReview;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class Store extends BaseController
 {
@@ -26,12 +26,12 @@ class Store extends BaseController
     {
         $input = new Collection($request->input());
 
-
-        $entity = Inquiry::create(new InquiryEntity(
-            $input->get('inquiry_type_id'),
-            $input->get('email'),
+        $entity = ProductReview::create(new ProductReviewEntity(
+            $input->get('product_id'),
+            $input->get('user_id') ?? Auth::id(),
+            $input->get('title'),
             $input->get('text'),
-            InquiriesStatus::YET,
+            $input->get('evaluation'),
         ));
 
         $entity->save();
