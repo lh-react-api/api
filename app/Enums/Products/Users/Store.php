@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Enums\Products\Users;
 
 use App\Exceptions\DatabaseErrorException;
 use App\Http\Controllers\BaseController;

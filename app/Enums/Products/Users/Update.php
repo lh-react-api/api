@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Enums\Products\Users;
 
-use App\Exceptions\DatabaseErrorException;
 use App\Exceptions\UpdateResourceException;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Users\UpdateRequest;
