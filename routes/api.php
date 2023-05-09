@@ -49,7 +49,6 @@ Route::group(['middleware' => [
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
     // Users
-    Route::get('users', \App\Http\Controllers\Users\Index::class);
     Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
@@ -70,7 +69,10 @@ Route::group(['middleware' => [
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
 
-    // UpdateIsDefaultByUserId
+
+    // Inquiries
+    Route::post('inquiries', \App\Http\Controllers\Inquiries\Store::class);
+
 
     /**
      * 管理系API群

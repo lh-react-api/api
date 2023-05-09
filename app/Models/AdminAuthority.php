@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\domains\AdminAuthorities\AdminAuthorityEntity;
+use App\Models\domains\AdminAuthorities\InquiryEntity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class AdminAuthority extends BaseModel
     }
 
 
-    public static function create(AdminAuthorityEntity $adminAuthority) {
+    public static function create(InquiryEntity $adminAuthority) {
 
         $entity = (new AdminAuthority())->fill([
             'user_id' => $adminAuthority->getUserId(),
@@ -65,7 +65,7 @@ class AdminAuthority extends BaseModel
         return $entity;
     }
 
-    public function updateEntity(AdminAuthorityEntity $aminAuthority)
+    public function updateEntity(InquiryEntity $aminAuthority)
     {
         $entity = $this->fill([
            'user_id' => $aminAuthority->getUserId(),
