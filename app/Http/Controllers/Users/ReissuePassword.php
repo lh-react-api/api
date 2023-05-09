@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Products\Users;
+namespace App\Http\Controllers\Users;
 
 use App\Exceptions\UpdateEmailUserException;
 use App\Http\Controllers\BaseController;
