@@ -33,7 +33,12 @@ Route::group(['middleware' => [
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
     // My
-    Route::get('my/addresses/default', \App\Http\Controllers\My\Addresses\_Default::class);
+    Route::get('my/user', \App\Http\Controllers\My\User\Show::class);
+    Route::patch('my/user/email', \App\Http\Controllers\My\User\UpdateEmail::class);
+    Route::patch('my/user/password', \App\Http\Controllers\My\User\UpdatePassword::class);
+    Route::delete('my/user/withdrawal', \App\Http\Controllers\My\User\UpdateStatusWithdrawal::class);
+
+    Route::get('my/address/default', \App\Http\Controllers\My\Address\_Default::class);
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
