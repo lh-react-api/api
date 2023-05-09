@@ -38,26 +38,25 @@ Route::group(['middleware' => [
     Route::patch('my/user/password', \App\Http\Controllers\My\User\UpdatePassword::class);
     Route::delete('my/user/withdrawal', \App\Http\Controllers\My\User\UpdateStatusWithdrawal::class);
 
+    Route::get('my/addresses', \App\Http\Controllers\My\Addresses\Index::class);
+
     Route::get('my/address/default', \App\Http\Controllers\My\Address\_Default::class);
+    Route::patch('/my/address/isDefault', \App\Http\Controllers\My\Address\UpdateIsDefault::class);
+
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
     // Users
-    Route::get('users', \App\Http\Controllers\Users\index::class);
+    Route::get('users', \App\Http\Controllers\Users\Index::class);
     Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
-    Route::get('users/{user_id}', \App\Http\Controllers\Users\Show::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
-    Route::patch('users/{user_id}/email', \App\Http\Controllers\Users\UpdateEmail::class);
-    Route::patch('users/{user_id}/password', \App\Http\Controllers\Users\UpdatePassword::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
-    Route::delete('users/{user_id}/withdrawal', \App\Http\Controllers\Users\UpdateStatusWithdrawal::class);
 
     // Addresses
     Route::post('addresses', \App\Http\Controllers\Addresses\Store::class);
     Route::put('addresses/{address_id}', \App\Http\Controllers\Addresses\Update::class);
 
-    Route::patch('users/{user_id}/addresses/isDefault', \App\Http\Controllers\Addresses\UpdateIsDefaultByUserId::class);
     Route::delete('addresses/{address_id}', \App\Http\Controllers\Addresses\Delete::class);
 
 
