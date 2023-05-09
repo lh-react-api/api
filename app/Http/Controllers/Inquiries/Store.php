@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Inquiries;
 use App\Enums\Inquiries\InquiriesStatus;
 use App\Exceptions\DatabaseErrorException;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Requests\Inquiries\StoreRequest;
 use App\Models\domains\Inquiries\InquiryEntity;
 use App\Models\Inquiry;
-use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +22,7 @@ class Store extends BaseController
      * @return JsonResponse
      * @throws DatabaseErrorException
      */
-    public function __invoke(Request $request)
+    public function __invoke(StoreRequest $request)
     {
         $input = new Collection($request->input());
 
