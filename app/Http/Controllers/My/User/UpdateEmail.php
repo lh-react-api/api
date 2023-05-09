@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\My\User;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Requests\Users\UpdateEmailRequest;
-use App\Models\User;
+use App\Http\Controllers\Requests\My\User\UpdateEmailRequest;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateEmail extends BaseController
 {
@@ -17,9 +17,9 @@ class UpdateEmail extends BaseController
      * @param int $id
      * @return JsonResponse
      */
-    public function __invoke(UpdateEmailRequest $request, int $id)
+    public function __invoke(UpdateEmailRequest $request)
     {
-        $user = User::find($id);
+        $user = Auth::user();
         $this->authorize('update', $user);
 
         $user->updateColumn($request->input()['email'], 'email');

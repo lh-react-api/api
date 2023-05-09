@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\My\Addresses;
+namespace App\Http\Controllers\My\Address;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Address;

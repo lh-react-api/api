@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\My\User;
 
 use App\Http\Controllers\BaseController;
-use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Show extends BaseController
 {
@@ -17,9 +17,9 @@ class Show extends BaseController
      * @param int $id
      * @return JsonResponse
      */
-    public function __invoke(Request $request, int $id)
+    public function __invoke(Request $request)
     {
-        $user = User::findForShow($id);
+        $user = Auth::user();
         $this->authorize('view', $user);
 
         return ResponseUtils::success(
