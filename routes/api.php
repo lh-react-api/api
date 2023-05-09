@@ -65,6 +65,8 @@ Route::group(['middleware' => [
     Route::get('genres', \App\Http\Controllers\Genres\index::class);
 
 
+    // Genres
+    Route::get('deliverTimes', \App\Http\Controllers\DeliverTimes\index::class);
     // ProductOrigin
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
