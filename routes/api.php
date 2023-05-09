@@ -43,6 +43,8 @@ Route::group(['middleware' => [
     Route::get('my/address/default', \App\Http\Controllers\My\Address\_Default::class);
     Route::patch('/my/address/isDefault', \App\Http\Controllers\My\Address\UpdateIsDefault::class);
 
+    Route::get('my/orders', \App\Http\Controllers\My\orders\Index::class);
+
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
