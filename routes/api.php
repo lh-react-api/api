@@ -67,10 +67,13 @@ Route::group(['middleware' => [
 
     // Genres
     Route::get('deliverTimes', \App\Http\Controllers\DeliverTimes\index::class);
+
     // ProductOrigin
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
 
+    // ProductReviews
+    Route::post('productReviews', \App\Http\Controllers\ProductReviews\Store::class);
 
     // Inquiries
     Route::post('inquiries', \App\Http\Controllers\Inquiries\Store::class);
