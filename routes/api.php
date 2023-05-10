@@ -84,6 +84,15 @@ Route::group(['middleware' => [
      */
 
     /**
+     * 配達情報マスタ
+     * DeliverTimes
+     */
+    Route::get('admin/deliverTimes', \App\Http\Controllers\Admin\DeliverTimes\index::class);
+    Route::get('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Show::class);
+    Route::post('admin/deliverTimes', \App\Http\Controllers\Admin\DeliverTimes\Store::class);
+    Route::put('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Update::class);
+    Route::delete('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Delete::class);
+    /**
      * 管理者権限
      * AdminAuthority
      */
