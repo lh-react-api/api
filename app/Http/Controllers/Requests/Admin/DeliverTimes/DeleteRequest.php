@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Requests\Admin\DeliverTimes;
 
 
 use App\Http\Controllers\Requests\BaseFormRequest;
+use App\Models\Deliver;
 use App\Models\DeliverTime;
-
 
 /**
  * Class MemberLoginRequest
@@ -31,8 +31,12 @@ class DeleteRequest extends BaseFormRequest
     {
         return [
             self::ROUTE_KEY => [
-                //TODO: 他のリレーションがあって削除できない時のバリデーション
-//                new NotExist((new Users)->getTable(), (int)$this->route(self::ROUTE_KEY)),
+                function($attribute, $value, $fail) {
+                    $delivers = (new Deliver)->query()->where('deliver_time_id', '=' , $value)->get();
+                    if (count($delivers) > 0) {
+                        $fail('紐づく配達情報が存在するため削除できません');
+                    }
+                }
             ]
         ];
     }
