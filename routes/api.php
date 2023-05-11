@@ -84,6 +84,24 @@ Route::group(['middleware' => [
      */
 
     /**
+     * お問い合わせ
+     * Inqueries
+     */
+    Route::get('admin/inquiries', \App\Http\Controllers\Admin\Inquiries\index::class);
+    Route::get('admin/inquiries/{inquiry_id}', \App\Http\Controllers\Admin\Inquiries\Show::class);
+    Route::post('admin/inquiries', \App\Http\Controllers\Admin\Inquiries\Store::class);
+    Route::put('admin/inquiries/{inquiry_id}', \App\Http\Controllers\Admin\Inquiries\Update::class);
+    Route::delete('admin/inquiries/{inquiry_id}', \App\Http\Controllers\Admin\Inquiries\Delete::class);
+    /**
+     * お問い合わせ種別
+     * InquiryTypes
+     */
+    Route::get('admin/inquiryTypes', \App\Http\Controllers\Admin\InquiryTypes\index::class);
+    Route::get('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Show::class);
+    Route::post('admin/inquiryTypes', \App\Http\Controllers\Admin\InquiryTypes\Store::class);
+    Route::put('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Update::class);
+    Route::delete('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Delete::class);
+    /**
      * 管理者権限
      * AdminAuthority
      */
