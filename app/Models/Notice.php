@@ -49,7 +49,7 @@ class Notice extends BaseModel
         return $entity;
     }
     
-    public function updateEntity(NoticeEntity $NoticeEntity) {
+    public function put(NoticeEntity $NoticeEntity) {
         $entity = $this->fill([
             'division' => $NoticeEntity->getDivision(),
             'title' => $NoticeEntity->getTitle(),

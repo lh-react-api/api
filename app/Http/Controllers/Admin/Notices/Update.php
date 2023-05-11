@@ -22,9 +22,9 @@ class Update extends BaseController
     public function __invoke(UpdateRequest $request, int $noticeId)
     {
         $input = new Collection($request->input());
-        $notice = Notice::query()->find($noticeId);
+        $notice = Notice::find($noticeId);
         $this->authorize('adminUpdate', $notice);
-        $notice->updateEntity(new NoticeEntity(
+        $notice->put(new NoticeEntity(
             $input->get('division'),
             $input->get('title'),
             $input->get('text'),
