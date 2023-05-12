@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\Products\ProductsStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -70,15 +69,11 @@ class ProductOrigin extends BaseModel
         return $this->belongsTo(Genre::class);
     }
 
-
     public static function findForShow(int $id){
         return self::with([
             'activeProducts',
-//            'products',
-//            'products.productType',
-//            'products.productRank',
-            'priceMinProduct',
-            'priceMaxProduct',
+//            'priceMinProduct',
+//            'priceMaxProduct',
 //            'maker',
 //            'genre',
         ])->find($id);
