@@ -30,30 +30,30 @@ class Show extends BaseController
         $productRankIds = $model->activeProducts->pluck('product_rank_id')->unique();
         $productIds = $model->activeProducts->pluck('id')->unique();
 
-        // フロントに伝えるべきこと：「productTypes」もしくは「productRanks」が空の時は飛ばして欲しい
+        // MEMO: フロントに伝えるべきこと：「productTypes」もしくは「productRanks」が空の時は飛ばして欲しい
         // フロントに伝えるべきこと：productsの内容は、安い順番で並ぶので、最初と最後を使って貰えば最大値最小値は出せる
         //　　　　　　　　　　　　　　（フロント側で難しければ、よしなにする）
         // とりあえずは在庫にあるものだけ出すようにする
 
-//        $model->productTypes = $productTypeIds->reduce(function ($carry, $item) use ($id) {
-//            $result = ProductType::with(['products' => function ($query) use ($id) {
-//                return $query
-//                    ->where('product_origin_id', $id)
-//                    ->orderBy('price', 'asc');
-//            }])->find($item);
-//
-//            return $carry->push($result);
-//        }, new Collection([]));
-//
-//        $model->productRanks = $productRankIds->reduce(function ($carry, $item) use ($id) {
-//            $result = ProductRank::with(['products' => function ($query) use ($id) {
-//                return $query
-//                    ->where('product_origin_id', $id)
-//                    ->orderBy('price', 'asc');
-//            }])->find($item);
-//
-//            return $carry->push($result);
-//        }, new Collection([]));
+        $model->productTypes = $productTypeIds->reduce(function ($carry, $item) use ($id) {
+            $result = ProductType::with(['products' => function ($query) use ($id) {
+                return $query
+                    ->where('product_origin_id', $id)
+                    ->orderBy('price', 'asc');
+            }])->find($item);
+
+            return $carry->push($result);
+        }, new Collection([]));
+
+        $model->productRanks = $productRankIds->reduce(function ($carry, $item) use ($id) {
+            $result = ProductRank::with(['products' => function ($query) use ($id) {
+                return $query
+                    ->where('product_origin_id', $id)
+                    ->orderBy('price', 'asc');
+            }])->find($item);
+
+            return $carry->push($result);
+        }, new Collection([]));
 
         //　ProductReview
         $model->productReviews = ProductReview::query()->whereIn('product_id', $productIds)->get();
