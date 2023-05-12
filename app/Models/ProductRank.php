@@ -49,7 +49,7 @@ class ProductRank extends BaseModel
         return $entity;
     }
 
-    public function updateEntity(ProductRankEntity $productRank) {
+    public function put(ProductRankEntity $productRank) {
 
         $entity = $this->fill([
             'rank' => $productRank->getRank(),

@@ -22,9 +22,9 @@ class Update extends BaseController
     public function __invoke(UpdateRequest $request, int $productRankId)
     {
         $input = new Collection($request->input());
-        $productRank = ProductRank::query()->find($productRankId);
+        $productRank = ProductRank::find($productRankId);
         $this->authorize('adminUpdate', $productRank);
-        $productRank->updateEntity(new ProductRankEntity(
+        $productRank->put(new ProductRankEntity(
             $input->get('rank'),
             $input->get('information'),
             (float)$input->get('discount_rate'),

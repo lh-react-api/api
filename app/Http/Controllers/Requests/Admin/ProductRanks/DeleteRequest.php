@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Requests\Admin\ProductRanks;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\ProductRank;
+use App\Models\Product;
 
 
 /**
@@ -31,8 +32,12 @@ class DeleteRequest extends BaseFormRequest
     {
         return [
             self::ROUTE_KEY => [
-                //TODO: 他のリレーションがあって削除できない時のバリデーション
-//                new NotExist((new Users)->getTable(), (int)$this->route(self::ROUTE_KEY)),
+                function($attribute, $value, $fail) {
+                    $product = (new Product())->query()->where('product_rank_id', '=' , $value)->get();
+                    if (count($product) > 0) {
+                        $fail('紐づく商品情報が存在するため削除できません');
+                    }
+                }
             ]
         ];
     }
