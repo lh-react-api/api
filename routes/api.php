@@ -80,7 +80,7 @@ Route::group(['middleware' => [
 
     // Notices
     Route::get('notices', \App\Http\Controllers\Notices\Index::class);
-
+    Route::get('notices/{notice_id}', \App\Http\Controllers\Notices\Show::class);
 
     /**
      * 管理系API群

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Requests\Addresses;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
-use App\Models\User;
-use Illuminate\Validation\Rule;
+use App\Models\Address;
 
 /**
  * Class MemberLoginRequest
@@ -13,9 +12,12 @@ use Illuminate\Validation\Rule;
 class UpdateRequest extends BaseFormRequest
 {
     const DEFAULT_NAME = '住所';
+    const ROUTE_KEY = 'address_id';
 
     public function authorize()
     {
+        $this->existsRecordById((new Address), (int)$this->route(self::ROUTE_KEY));
+
         return true;
     }
 
