@@ -23,9 +23,9 @@ class Update extends BaseController
     public function __invoke(UpdateRequest $request, int $makerId)
     {
         $input = new Collection($request->input());
-        $maker = Maker::query()->find($makerId);
+        $maker = Maker::find($makerId);
         $this->authorize('adminUpdate', $maker);
-        $maker->updateEntity(
+        $maker->put(
             new MakerEntity(
                 $input->get('name'),
                 $input->get('information')

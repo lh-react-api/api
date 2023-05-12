@@ -30,11 +30,11 @@ class Maker extends BaseModel
         return self::find($id);
     }
     
-    public static function create(makerEntity $genre) {
+    public static function create(makerEntity $maker) {
 
         $entity = (new maker())->fill([
-            'name' => $genre->getName(),
-            'information' => $genre->getInfomation(),
+            'name' => $maker->getName(),
+            'information' => $maker->getInfomation(),
         ]);
 
         $entity->save();
@@ -42,11 +42,11 @@ class Maker extends BaseModel
         return $entity;
     }
     
-    public function updateEntity(makerEntity $genre) {
+    public function put(makerEntity $maker) {
 
         $entity = $this->fill([
-            'name' => $genre->getName(),
-            'information' => $genre->getInfomation(),
+            'name' => $maker->getName(),
+            'information' => $maker->getInfomation(),
         ]);
 
         $entity->save();
