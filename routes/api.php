@@ -78,6 +78,9 @@ Route::group(['middleware' => [
     // Inquiries
     Route::post('inquiries', \App\Http\Controllers\Inquiries\Store::class);
 
+    // Notices
+    Route::get('notices', \App\Http\Controllers\Notices\Index::class);
+
 
     /**
      * 管理系API群
