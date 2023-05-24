@@ -75,6 +75,9 @@ Route::group(['middleware' => [
     // ProductReviews
     Route::post('productReviews', \App\Http\Controllers\ProductReviews\Store::class);
 
+    // ProductReviews
+    Route::get('recommendProducts', \App\Http\Controllers\RecommendProducts\Index::class);
+
     // Inquiries
     Route::post('inquiries', \App\Http\Controllers\Inquiries\Store::class);
 
