@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,8 @@ Route::group(['middleware' => [
     Route::patch('/my/address/isDefault', \App\Http\Controllers\My\Address\UpdateIsDefault::class);
 
     Route::get('my/orders', \App\Http\Controllers\My\orders\Index::class);
+
+    Route::get('my/credits', \App\Http\Controllers\My\Credits\Index::class);
 
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);

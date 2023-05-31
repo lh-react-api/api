@@ -6,6 +6,11 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Auth\SignupRequest;
 use App\Models\domains\Users\Credential;
 use App\Models\User;
+use App\Models\Stripe;
+use App\Models\Credit;
+use App\Models\domains\Credits\CreditEntity;
+
+;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,9 +29,12 @@ class Signup extends BaseController
     {
 
         $credentials = new Credential($request->input('email'), $request->input('password'));
-
         User::create($credentials);
-
+        $stripeCustomer = (new Stripe)->createCustomer($request->input('email'));
+        Credit::create(new CreditEntity(
+            User::findByEmail($request->input('email'))->id,
+            $stripeCustomer->id
+        ));
         if (Auth::attempt($credentials->toArray())) {
             $user = Auth::user();
             $user->tokens()->where('name', 'api_token')->delete();
