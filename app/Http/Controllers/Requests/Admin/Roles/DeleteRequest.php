@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Requests\Admin\Roles;
 
 
 use App\Http\Controllers\Requests\BaseFormRequest;
+use App\Models\AdminAuthority;
 use App\Models\Role;
 
 
@@ -31,8 +32,12 @@ class DeleteRequest extends BaseFormRequest
     {
         return [
             self::ROUTE_KEY => [
-                //TODO: 他のリレーションがあって削除できない時のバリデーション
-//                new NotExist((new Users)->getTable(), (int)$this->route(self::ROUTE_KEY)),
+                function($attribute, $value, $fail) {
+                    $productOrigins = (new AdminAuthority())->query()->where('role_id', '=' , $value)->get();
+                    if (count($productOrigins) > 0) {
+                        $fail('紐づく管理者権限情報が存在するため削除できません');
+                    }
+                }
             ]
         ];
     }
