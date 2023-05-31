@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Requests\Admin\Roles;
+namespace App\Http\Controllers\Requests\Admin\Inquiries;
 
-
+use App\Enums\Inquiries\InquiriesStatus;
 use App\Http\Controllers\Requests\BaseFormRequest;
-use App\Models\AdminAuthority;
-use App\Models\Role;
+use App\Models\Inquiry;
 
 
 /**
@@ -14,13 +13,13 @@ use App\Models\Role;
  */
 class DeleteRequest extends BaseFormRequest
 {
-    const ROUTE_KEY = 'roles_id';
+    const ROUTE_KEY = 'inquiry_id';
     /**
      * @return bool
      */
     public function authorize()
     {
-        $this->existsRecordById((new Role()), (int)$this->route(self::ROUTE_KEY));
+        $this->existsRecordById((new Inquiry()), (int)$this->route(self::ROUTE_KEY));
 
         return true;
     }
@@ -33,9 +32,10 @@ class DeleteRequest extends BaseFormRequest
         return [
             self::ROUTE_KEY => [
                 function($attribute, $value, $fail) {
-                    $productOrigins = (new AdminAuthority())->query()->where('role_id', '=' , $value)->get();
-                    if (count($productOrigins) > 0) {
-                        $fail('紐づく管理者権限情報が存在するため削除できません');
+                    $status = Inquiry::find($value)->status;
+                    if (strtoupper($status) === InquiriesStatus::YET->value || 
+                        strtoupper($status) === InquiriesStatus::DOING->value) {
+                        $fail('対応未完了のお問い合わせのため削除できません');
                     }
                 }
             ]

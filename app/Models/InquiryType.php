@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\domains\Roles\RoleEntity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\domains\InquiryTypes\InquiryTypeEntity;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 
-class Role extends BaseModel
+class InquiryType extends BaseModel
 {
     use HasFactory;
 
     protected $searches = [
-        'name' => 'eq',
+        'text' => 'like',
     ];
 
     protected $fillable = [
-        'name',
+        'text',
     ];
 
     public function scopeSearchIndex(Builder $query, Request $request): Builder
@@ -29,28 +29,25 @@ class Role extends BaseModel
     public static function findForShow(int $id){
         return self::find($id);
     }
-
-    public static function findNameForId(string $name){
-        return Role::query()->where('name', '=', $name)->get();
-    }
     
-    public static function create(RoleEntity $roles) {
+    public static function create(InquiryTypeEntity $inquiryTypeEntity) {
 
-        $entity = (new Role())->fill([
-            'name' => $roles->getName(),
+        $entity = (new InquiryType())->fill([
+            'text' => $inquiryTypeEntity->getText(),
         ]);
 
         $entity->save();
 
         return $entity;
     }
+    
+    public function put(InquiryTypeEntity $inquiryTypeEntity) {
 
-    public function put(RoleEntity $role)
-    {
         $entity = $this->fill([
-           'name' => $role->getName(),
+            'text' => $inquiryTypeEntity->getText(),
         ]);
-        $entity->save();   
+
+        $entity->save();
 
         return $entity;
     }

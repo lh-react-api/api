@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Products\ProductsStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -44,6 +44,12 @@ class ProductOrigin extends BaseModel
         return $this->hasMany(Product::class);
     }
 
+    public function activeProducts(): HasMany
+    {
+        return $this->hasMany(Product::class)
+            ->where('products.status', '=', ProductsStatus::IN_STOCK);
+    }
+
     public function priceMinProduct(): HasOne
     {
         return $this->hasOne(Product::class)->ofMany('price', 'min');
@@ -63,16 +69,13 @@ class ProductOrigin extends BaseModel
         return $this->belongsTo(Genre::class);
     }
 
-
     public static function findForShow(int $id){
         return self::with([
-            'products',
-            'products.productType',
-            'products.productRank',
-            'priceMinProduct',
-            'priceMaxProduct',
-            'maker',
-            'genre',
+            'activeProducts',
+//            'priceMinProduct',
+//            'priceMaxProduct',
+//            'maker',
+//            'genre',
         ])->find($id);
     }
 }

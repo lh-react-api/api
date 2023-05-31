@@ -22,9 +22,9 @@ class Update extends BaseController
     public function __invoke(UpdateRequest $request, int $roleId)
     {
         $input = new Collection($request->input());
-        $role = Role::query()->find($roleId);
+        $role = Role::find($roleId);
         $this->authorize('adminUpdate', $role);
-        $role->updateEntity(
+        $role->put(
             new RoleEntity(
                 $input->get('name'),
             )
