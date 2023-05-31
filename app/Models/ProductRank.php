@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\domains\ProductRanks\ProductRankEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class ProductRank extends BaseModel
@@ -61,5 +62,9 @@ class ProductRank extends BaseModel
         $entity->save();
 
         return $entity;
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 }

@@ -13,8 +13,8 @@ class AdminAuthority extends BaseModel
     use HasFactory;
 
     protected $searches = [
-        'user_id' => 'equal',
-        'role_id' => 'equal',
+        'user_id' => 'eq',
+        'role_id' => 'eq',
     ];
 
     protected $fillable = [
@@ -65,11 +65,15 @@ class AdminAuthority extends BaseModel
         return $entity;
     }
 
-    public static function updateEntity(AdminAuthority $adminAuthority, AdminAuthorityEntity $inputAdminAuthority) {
-        $adminAuthority->user_id = $inputAdminAuthority->getUserId();
-        $adminAuthority->role_id = $inputAdminAuthority->getRoleId();
-        $adminAuthority->action = $inputAdminAuthority->getAction();
-        $adminAuthority->save();
-        return $adminAuthority;
+    public function put(AdminAuthorityEntity $aminAuthority)
+    {
+        $entity = $this->fill([
+           'user_id' => $aminAuthority->getUserId(),
+           'role_id' => $aminAuthority->getRoleId(),
+           'action' => $aminAuthority->getAction(),
+        ]);
+        $entity->save();   
+
+        return $entity;
     }
 }

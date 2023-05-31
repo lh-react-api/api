@@ -129,7 +129,7 @@ return [
         'phone_number' => '電話番号',
         'email' => '連絡用メールアドレス',
     ],
-    'deliveries' => [
+    'delivers' => [
         'id' => '配達情報ID',
         'order_id' => '注文ID',
         'deliver_time_id' => '配達時間ID',
