@@ -20,8 +20,8 @@ class GenresSeeder extends Seeder
             [
                 [
                     'name' => '電子機器',
-                    'upper_id' => null,
-                    'level' => 1,
+                    'parent_id' => null,
+                    'position' => 1,
                     'information' => '電子機器全般（これがジャンル分けの正ではないよ）',
                     'image' => 'https://smartGarage/images',
                     'created_at' => Carbon::now(),
@@ -31,8 +31,8 @@ class GenresSeeder extends Seeder
                 ],
                 [
                     'name' => 'ゲーム機',
-                    'upper_id' => 1,
-                    'level' => 2,
+                    'parent_id' => 1,
+                    'position' => 2,
                     'information' => '家庭用ゲーム機',
                     'image' => 'https://smartGarage/images',
                     'created_at' => Carbon::now(),

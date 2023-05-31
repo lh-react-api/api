@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Exceptions\UpdateResourceException;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Users\DeleteRequest;
 use App\Models\User;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 
 class Delete extends BaseController
 {

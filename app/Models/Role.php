@@ -12,7 +12,7 @@ class Role extends BaseModel
     use HasFactory;
 
     protected $searches = [
-        'name' => 'equal',
+        'name' => 'eq',
     ];
 
     protected $fillable = [
@@ -45,9 +45,13 @@ class Role extends BaseModel
         return $entity;
     }
 
-    public static function updateEntity(Role $role, RoleEntity $inputRole) {
-        $role->name = $inputRole->getName();
-        $role->save();
-        return $role;
+    public function put(RoleEntity $role)
+    {
+        $entity = $this->fill([
+           'name' => $role->getName(),
+        ]);
+        $entity->save();   
+
+        return $entity;
     }
 }

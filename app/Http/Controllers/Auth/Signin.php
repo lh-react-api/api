@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Users\UsersStatus;
 use App\Http\Controllers\BaseController;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
@@ -24,6 +25,10 @@ class Signin extends BaseController
         ]);
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            if ($user->status !== UsersStatus::ACTIVE->value) {
+                return response()->json([], 401);
+            }
             $user->tokens()->where('name', 'api_token')->delete();
             $token = $request->user()->createToken('api_token');
             return ResponseUtils::success(['token' => $token->plainTextToken]);

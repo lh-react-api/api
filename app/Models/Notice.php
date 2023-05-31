@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\domains\Notices\NoticeEntity;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -61,5 +62,12 @@ class Notice extends BaseModel
         $entity->save();
 
         return $entity;
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query
+            ->where('notice_date', '<=', Carbon::now()->format('Y-m-d'))
+            ->where('close_date', '>=', Carbon::now()->format('Y-m-d'));
     }
 }
