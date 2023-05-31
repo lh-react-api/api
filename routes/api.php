@@ -93,6 +93,15 @@ Route::group(['middleware' => [
      */
 
     /**
+     * 商品ランク
+     * productRanks
+     */
+    Route::get('admin/productRanks', \App\Http\Controllers\Admin\ProductRanks\index::class);
+    Route::get('admin/productRanks/{product_rank_id}', \App\Http\Controllers\Admin\ProductRanks\Show::class);
+    Route::post('admin/productRanks', \App\Http\Controllers\Admin\ProductRanks\Store::class);
+    Route::put('admin/productRanks/{product_rank_id}', \App\Http\Controllers\Admin\ProductRanks\Update::class);
+    Route::delete('admin/productRanks/{product_rank_id}', \App\Http\Controllers\Admin\ProductRanks\Delete::class);
+    /**
      * 配達情報
      * delivers
      */
