@@ -93,6 +93,25 @@ Route::group(['middleware' => [
      */
 
     /**
+     * 配達情報
+     * delivers
+     */
+    Route::get('admin/delivers', \App\Http\Controllers\Admin\Delivers\index::class);
+    Route::get('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Show::class);
+    Route::post('admin/delivers', \App\Http\Controllers\Admin\Delivers\Store::class);
+    Route::put('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Update::class);
+    Route::delete('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Delete::class);
+    /**
+     * 配達情報マスタ
+     * DeliverTimes
+     */
+    Route::get('admin/deliverTimes', \App\Http\Controllers\Admin\DeliverTimes\index::class);
+    Route::get('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Show::class);
+    Route::post('admin/deliverTimes', \App\Http\Controllers\Admin\DeliverTimes\Store::class);
+    Route::put('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Update::class);
+    Route::delete('admin/deliverTimes/{deliver_time_id}', \App\Http\Controllers\Admin\DeliverTimes\Delete::class);
+
+    /**
      * お問い合わせ
      * Inqueries
      */
@@ -110,6 +129,7 @@ Route::group(['middleware' => [
     Route::post('admin/inquiryTypes', \App\Http\Controllers\Admin\InquiryTypes\Store::class);
     Route::put('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Update::class);
     Route::delete('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Delete::class);
+
     /**
      * 管理者権限
      * AdminAuthority
