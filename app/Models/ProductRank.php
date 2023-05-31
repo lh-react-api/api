@@ -62,6 +62,7 @@ class ProductRank extends BaseModel
         $entity->save();
 
         return $entity;
+    }
 
     public function products(): HasMany
     {
