@@ -46,7 +46,9 @@ Route::group(['middleware' => [
 
     Route::get('my/orders', \App\Http\Controllers\My\orders\Index::class);
 
+    // stripe関連
     Route::get('my/credits', \App\Http\Controllers\My\Credits\Index::class);
+    Route::get('my/credits/id', \App\Http\Controllers\My\Credits\ShowStripeId::class);
 
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
