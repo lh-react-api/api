@@ -116,7 +116,7 @@ class RolesSeeder extends Seeder
                     'updated_by' => 1,
                 ],
                 [
-                    'name' => 'deliveries',
+                    'name' => 'delivers',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),

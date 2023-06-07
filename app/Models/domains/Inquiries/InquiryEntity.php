@@ -11,7 +11,9 @@ class InquiryEntity extends BaseDomain
         protected int $inquiryTypeId,
         protected string $email,
         protected string $text,
-        protected InquiriesStatus $status,
+        // 管理側はステータスも自由に登録させるためstringも許容
+        // バリデーションでENUMはチェックする
+        protected InquiriesStatus|string $status, 
     ) {
     }
 
@@ -30,7 +32,7 @@ class InquiryEntity extends BaseDomain
         return $this->text;
     }
 
-    public function getStatus(): InquiriesStatus
+    public function getStatus(): InquiriesStatus|string
     {
         return $this->status;
     }
