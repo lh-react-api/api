@@ -34,7 +34,7 @@ class DeleteRequest extends BaseFormRequest
                 // デフォルトは削除できない
                 function($attribute, $value, $fail) {
                     $address = Address::find($value);
-                    if (!$address->is_default) {
+                    if ($address->is_default) {
                         $fail('この住所はデフォルトのため削除することができません。');
                     }
                 }
