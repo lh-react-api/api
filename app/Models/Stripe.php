@@ -202,4 +202,20 @@ class Stripe
         return $productRnak->rank . ':' . $productRnak->information;
     }
 
+    /**
+     * サブスクリプション登録
+     *
+     * @return object
+     */
+    public function createSubscription(string $productId, string $cardId) {
+        $product = $this->getProduct($productId);
+        return $this->stripe->subscriptions->create([
+            'customer' => $this->customerId,
+            'items' => [
+                ['price' => $product->default_price],
+            ],
+            'default_payment_method' => $cardId
+        ]);
+    }
+
 }

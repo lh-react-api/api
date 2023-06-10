@@ -26,22 +26,6 @@ class CreditsSeeder extends Seeder
                     'updated_at' => Carbon::now(),
                     'updated_by' => 1,
                 ],
-                [
-                    'user_id' => 2,
-                    'stripe_customer_id' => 'XXXXX002',
-                    'created_at' => Carbon::now(),
-                    'created_by' => 1,
-                    'updated_at' => Carbon::now(),
-                    'updated_by' => 1,
-                ],
-                [
-                    'user_id' => 2,
-                    'stripe_customer_id' => 'XXXXX003',
-                    'created_at' => Carbon::now(),
-                    'created_by' => 1,
-                    'updated_at' => Carbon::now(),
-                    'updated_by' => 1,
-                ],
             ]);
     }
 }
