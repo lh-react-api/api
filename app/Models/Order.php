@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\domains\Orders\OrderEntity;
+use App\Enums\Orders\OrdersSettlementState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends BaseModel
@@ -43,5 +44,18 @@ class Order extends BaseModel
 
         return $entity;
     }
+
+    public static function searchForSubscriptionId(string $subscriptionId): Order {
+        return Order::query()->where('subscription_id', '=', $subscriptionId)->first();
+    }
+
+    public function updateSettlementState(OrdersSettlementState $state) {
+        $entity = $this->fill([
+            'settlement_state' => $state,
+        ]);
+        $entity->save();
+        return $entity;
+    }
+
 
 }
