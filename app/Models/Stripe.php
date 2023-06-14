@@ -218,4 +218,17 @@ class Stripe
         ]);
     }
 
+    /**
+     * サブスクリプションの停止
+     *
+     * @param string $subscriptionId
+     * @return object
+     */
+    public function cancelSubscription(string $subscriptionId) {
+        return $this->stripe->subscriptions->cancel(
+            $subscriptionId,
+            []
+        );
+    }
+
 }
