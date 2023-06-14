@@ -93,7 +93,7 @@ class Stripe
     private function searchPrice(string $productId) {
         return $this->stripe->prices->search([
             'query' => "product:'$productId'",
-          ])->data;
+        ])->data;
     }
 
     /**
@@ -171,6 +171,22 @@ class Stripe
                 'name' => $product->name,
                 'description' => $this->getDescription($product->product_rank_id),
                 'default_price' => $defaultPriceId
+            ]
+        );
+    }
+
+    /**
+     * 商品をアーカイブ化する
+     * stripeの使用上一度でも決済した商品は削除できないため
+     *
+     * @param string $stripeProductId
+     * @return void
+     */
+    public function arciveProduct(string $stripeProductId) {
+        return $this->stripe->products->update(
+            $stripeProductId,
+            [
+                'active' => false
             ]
         );
     }
