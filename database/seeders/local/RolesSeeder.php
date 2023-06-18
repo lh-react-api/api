@@ -19,6 +19,7 @@ class RolesSeeder extends Seeder
             [
                 [
                     'name' => 'users',
+                    'ja_name' => 'ユーザー情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -26,6 +27,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'product_origins',
+                    'ja_name' => '商品原本情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -33,6 +35,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'product_types',
+                    'ja_name' => '商品種別情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -40,6 +43,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'product_ranks',
+                    'ja_name' => '商品ランク情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -47,6 +51,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'products',
+                    'ja_name' => '商品情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -54,6 +59,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'product_images',
+                    'ja_name' => '商品画像情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -61,6 +67,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'product_reviews',
+                    'ja_name' => '商品レビュー情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -68,6 +75,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'recommend_products',
+                    'ja_name' => 'おすすめ商品情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -75,6 +83,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'addresses',
+                    'ja_name' => '住所情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -82,6 +91,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'orders',
+                    'ja_name' => '注文情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -89,6 +99,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'credits',
+                    'ja_name' => 'クレジットカード情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -96,6 +107,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'genres',
+                    'ja_name' => 'ジャンルマスタ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -103,6 +115,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'makers',
+                    'ja_name' => 'メーカーマスタ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -110,6 +123,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'demands',
+                    'ja_name' => '請求情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -117,6 +131,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'delivers',
+                    'ja_name' => '配達情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -124,6 +139,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'notices',
+                    'ja_name' => 'お知らせ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -131,6 +147,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'inquiries',
+                    'ja_name' => 'お問い合わせ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -138,6 +155,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'inquiry_types',
+                    'ja_name' => 'お問い合わせ種別情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -145,6 +163,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'deliver_times',
+                    'ja_name' => '配達時間マスタ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -152,6 +171,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'admin_authorities',
+                    'ja_name' => '管理権限情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -159,6 +179,7 @@ class RolesSeeder extends Seeder
                 ],
                 [
                     'name' => 'roles',
+                    'ja_name' => '管理権限マスタ情報管理権限',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
