@@ -43,4 +43,23 @@ enum AdminAuthoritiesAction: string implements EnumInterface
                 return 3;
         }
     }
+
+    /**
+     * 引数に応じて権限チェックのカラム位置を返す
+     *
+     * @param int $cullum
+     * @return int
+     */
+    public static function getAcrion(int $cullum) {
+        switch ($cullum) {
+            case 0:
+                return AdminAuthoritiesAction::CREATE->value;
+            case 1:
+                return AdminAuthoritiesAction::READ->value;
+            case 2:
+                return AdminAuthoritiesAction::UPDATE->value;
+            default :
+                return AdminAuthoritiesAction::DELETE->value;
+        }
+    }
 }

@@ -46,6 +46,8 @@ Route::group(['middleware' => [
 
     Route::get('my/orders', \App\Http\Controllers\My\orders\Index::class);
 
+    Route::get('my/admin/adminAuthorities', \App\Http\Controllers\My\Admin\AdminAuthorities\Index::class);
+
     // stripe関連
     Route::get('my/credits', \App\Http\Controllers\My\Credits\Index::class);
     Route::get('my/credits/id', \App\Http\Controllers\My\Credits\ShowStripeId::class);

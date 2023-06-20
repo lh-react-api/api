@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->id()->comment(__('db.roles.id'));
             $table->string('name')->comment(__('db.roles.name'));
+            $table->string('ja_name')->comment(__('db.roles.ja_name'));
 
             MigrateUtils::timestamps($table);
         });
