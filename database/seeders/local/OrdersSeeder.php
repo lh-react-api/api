@@ -24,6 +24,8 @@ class OrdersSeeder extends Seeder
                     'progress' => 'YET',
                     'sent_tracking_number' => 'AAAAA-BBBBB-CCCC',
                     'return_tracking_number' => 'XXXXX-YYYYY-ZZZZZ',
+                    'settlement_state' => 'PROCESSING',
+                    'subscription_id' => 'sub_XXXXX-YYYYY-ZZZZZ',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),

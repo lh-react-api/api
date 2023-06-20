@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Orders\OrdersProgress;
+use App\Enums\Orders\OrdersSettlementState;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->enum('progress', OrdersProgress::toArray())->default(OrdersProgress::YET->value)->comment(__('db.orders.progress'));
             $table->string('sent_tracking_number', 128)->comment(__('db.orders.sent_tracking_number'));
             $table->string('return_tracking_number', 128)->comment(__('db.orders.return_tracking_number'));
+            $table->enum('settlement_state', OrdersSettlementState::toArray())->default(OrdersSettlementState::PROCESSING->value)->comment(__('db.orders.settlement_state'));
+            $table->string('subscription_id', 128)->comment(__('db.orders.return_tracking_number'));
 
             MigrateUtils::timestamps($table);
 
