@@ -21,7 +21,9 @@ class Index extends BaseController
     {
         $cardlist = Credit::getCardList();
         return ResponseUtils::success(
-            $cardlist
+            [
+                'data' => $cardlist
+            ]  
         );
     }
 }
