@@ -55,7 +55,22 @@ class Stripe
         return $this->stripe->customers->update(
             $this->customerId,
             [
-                'email' => $email
+                'email' => $email         
+            ]
+        );
+    }
+  
+    /**
+     * カード情報の登録
+     *
+     * @param string $token
+     * @return void
+     */
+    public function createSource(string $token) {
+        return $this->stripe->customers->createSource(
+            $this->customerId,
+            [
+                'source' => $token,
             ]
         );
     }
