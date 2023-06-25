@@ -46,6 +46,21 @@ class Stripe
     }
 
     /**
+     * メールアドレス更新
+     *
+     * @param string $email
+     * @return Object https://stripe.com/docs/api/customers/object
+     */
+    public function updateCustomerEmail(string $email) {
+        return $this->stripe->customers->update(
+            $this->customerId,
+            [
+                'email' => $email         
+            ]
+        );
+    }
+  
+    /**
      * カード情報の登録
      *
      * @param string $token
