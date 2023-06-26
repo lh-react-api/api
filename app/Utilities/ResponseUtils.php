@@ -21,7 +21,11 @@ class ResponseUtils
      */
     public static function success($content=[])
     {
-        return response()->json($content);
+        return response()->json(
+            [
+                'data' => $content
+            ]
+        );
     }
 
     /**
