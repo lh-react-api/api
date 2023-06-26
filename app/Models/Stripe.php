@@ -22,6 +22,19 @@ class Stripe
     }
 
     /**
+     * Undocumented function
+     *
+     * @return Object https://stripe.com/docs/api/setup_intents
+     */
+    public function generateCrientSecret() {
+        return $this->stripe->setupIntents->create(
+            [
+                'customer' => $this->customerId,
+                'payment_method_types' => ['card'],
+            ]
+        );
+    }
+    /**
      * 自身のstripe顧客IDをセット
      *
      * @return void
