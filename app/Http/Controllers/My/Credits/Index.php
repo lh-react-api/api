@@ -20,10 +20,6 @@ class Index extends BaseController
     public function __invoke(Request $request)
     {
         $cardlist = Credit::getCardList();
-        return ResponseUtils::success(
-            [
-                'data' => $cardlist
-            ]  
-        );
+        return ResponseUtils::success($cardlist);
     }
 }

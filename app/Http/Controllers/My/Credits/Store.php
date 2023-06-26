@@ -28,10 +28,6 @@ class Store extends BaseController
         $stripe->setMyCustomerId();
         $stripe->createSource($input->get('token'));
         $cardlist = Credit::getCardList();
-        return ResponseUtils::success(
-            [
-                'data' => $cardlist
-            ]  
-        );
+        return ResponseUtils::success($cardlist);
     }
 }
