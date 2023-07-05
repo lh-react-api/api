@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ProductOrigins;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Product;
 use App\Models\ProductOrigin;
 use App\Models\ProductRank;
 use App\Models\ProductReview;
@@ -21,22 +22,43 @@ class Show extends BaseController
      * @param Request $request
      * @param int $id
      * @return JsonResponse
+     *
+     * このAPIは商品種別によって、商品ランクが変わるそのため商品を特定している状態にしたい。
+     * 商品が特定されてるケースは通常処理
+     * 商品種別が特定されている場合は、それを用いてその中で一番安いものを選択中の商品とする
+     * 何もリクエストがない場合は、一番安い在庫商品を特定状態にする
      */
     public function __invoke(Request $request, int $id)
     {
         $model = ProductOrigin::findForShow($id);
-        $activeProductTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
 
-        // TODO: $activeProductTypeIdsがなかったら在庫切れだよね
+        // activeProductsは安い順に並んでいる
+        $model->selectedProduct = (function () use ($request, $model){
+            // 商品が特定されている
+            if (!empty($request->get('product_id'))) {
+                return Product::find($request->get('product_id'));
+            }
+            // 商品タイプだけ特定されている
+            if (!empty($request->get('product_type_id'))) {
+                return Product::query()
+                    ->where('product_type_id', $request->get('product_type_id'))
+                    ->orderBy('price', 'asc')
+                    ->first();
+            }
+            // 何も特定されていないので一番安いのを用いる
+            // activeProductsは安い順に並んでいる
+            return $model->activeProducts->first();
+        })();
+
+        // TODO: $selectedProductがなかったらnotfound
         // throw new NotFount();
 
-        // 商品ランクの戻り値を生成
+        // アクティブな商品に紐づく商品タイプを全て返却
+        $activeProductTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
         $model->productTypes = ProductType::query()->whereIn('id', $activeProductTypeIds->toArray())->get();
-        // 以降利用する商品種別を決定、リクエストがなければデフォルトをサーバーで決めてしまう。
-        $productTypeId = $request->get('product_type_ida') ?? $activeProductTypeIds->first();
 
         // 選択された表品種別に基づいた、商品ランクを取得
-        $model->productRanks = $this->getProductRankWithActiveProductByTypeId($model, $productTypeId);
+        $model->productRanks = $this->getProductRankWithActiveProductByTypeId($model, $model->selectedProduct->product_type_id);
 
         $productIds = ProductOrigin::with( 'products')->find($id)->products->pluck('id')->unique();
 
@@ -63,6 +85,7 @@ class Show extends BaseController
     private function getProductRankWithActiveProductByTypeId($model, $productTypeId) {
         $carry = [];
         ProductRank::all()->map(function ($current) use ($model, $productTypeId, &$carry){
+            // $model->activeProductsの並び順が用いられるのでここでは順番を意識しなくてOK
             $current->products = $model
                 ->activeProducts
                 ->where('product_type_id', $productTypeId)

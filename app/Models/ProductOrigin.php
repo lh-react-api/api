@@ -71,7 +71,7 @@ class ProductOrigin extends BaseModel
 
     public static function findForShow(int $id){
         return self::with([
-            'activeProducts',
+            'activeProducts' => function ($query) { return $query->orderBy('price', 'asc');},
 //            'priceMinProduct',
 //            'priceMaxProduct',
 //            'maker',
