@@ -25,55 +25,96 @@ class Show extends BaseController
     public function __invoke(Request $request, int $id)
     {
         $model = ProductOrigin::findForShow($id);
+        $activeProductTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
 
-        $productTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
-        $productRankIds = $model->activeProducts->pluck('product_rank_id')->unique();
-        $productIds = $model->activeProducts->pluck('id')->unique();
+        // TODO: $activeProductTypeIdsがなかったら在庫切れだよね
+        // throw new NotFount();
 
-        // MEMO: フロントに伝えるべきこと：「productTypes」もしくは「productRanks」が空の時は飛ばして欲しい
-        // フロントに伝えるべきこと：productsの内容は、安い順番で並ぶので、最初と最後を使って貰えば最大値最小値は出せる
-        //　　　　　　　　　　　　　　（フロント側で難しければ、よしなにする）
-        // とりあえずは在庫にあるものだけ出すようにする
+        // 商品ランクの戻り値を生成
+        $model->productTypes = ProductType::query()->whereIn('id', $activeProductTypeIds->toArray())->get();
+        // 以降利用する商品種別を決定、リクエストがなければデフォルトをサーバーで決めてしまう。
+        $productTypeId = $request->get('product_type_ida') ?? $activeProductTypeIds->first();
 
-        $model->productTypes = $productTypeIds->reduce(function ($carry, $item) use ($id) {
-            $result = ProductType::with(['products' => function ($query) use ($id) {
-                return $query
-                    ->where('product_origin_id', $id)
-                    ->orderBy('price', 'asc');
-            }])->find($item);
+        // 選択された表品種別に基づいた、商品ランクを取得
+        $model->productRanks = $this->getProductRankWithActiveProductByTypeId($model, $productTypeId);
 
-            return $carry->push($result);
-        }, new Collection([]));
+        $productIds = ProductOrigin::with( 'products')->find($id)->products->pluck('id')->unique();
 
-        $model->productRanks = $productRankIds->reduce(function ($carry, $item) use ($id) {
-            $result = ProductRank::with(['products' => function ($query) use ($id) {
-                return $query
-                    ->where('product_origin_id', $id)
-                    ->orderBy('price', 'asc');
-            }])->find($item);
+        // これレビューが全てのレビューになっているの注意
+        $productReviewsInfos = $this->getProductReviewsInfos($productIds);
+        $model->productReviews = $productReviewsInfos->productReviews;
+        $model->productReviewNumbers = $productReviewsInfos->productReviewNumbers;
+        $model->productReviewNumberAve = $productReviewsInfos->productReviewNumberAve;
 
-            return $carry->push($result);
-        }, new Collection([]));
-
-        //　ProductReview
-        $model->productReviews = ProductReview::query()->whereIn('product_id', $productIds)->get();
-        $model->productReviewNumbers = [
-            1 => $model->productReviews->where('evaluation', 1)->count(),
-            2 => $model->productReviews->where('evaluation', 2)->count(),
-            3 => $model->productReviews->where('evaluation', 3)->count(),
-            4 => $model->productReviews->where('evaluation', 4)->count(),
-            5 => $model->productReviews->where('evaluation', 5)->count()
-        ];
-
-        $productReviewCount = 0;
-        collect($model->productReviewNumbers)->map(function ($item, $key) use (&$productReviewCount){
-            $productReviewCount += $item * $key;
-        });
-
-        $model->productReviewNumberAve = round($productReviewCount / $model->productReviews->count(), 1);
-
+        // 画像はproductに紐付ける
         return ResponseUtils::success(
             $model
         );
+
+//        $productTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
+//        $productRankIds = $model->activeProducts->pluck('product_rank_id')->unique();
+//        // 商品種別と商品原本に紐づく商品
+//        $model->productTypes_old = $this->getProductTypeWithActiveProduct($id, $productTypeIds);
+//        // 商品ランクと商品原本に紐づく商品
+//        $model->productRanks_old = $this->getProductRankWithActiveProduct($id, $productRankIds);
+
+    }
+
+    private function getProductRankWithActiveProductByTypeId($model, $productTypeId) {
+        $carry = [];
+        ProductRank::all()->map(function ($current) use ($model, $productTypeId, &$carry){
+            $current->products = $model
+                ->activeProducts
+                ->where('product_type_id', $productTypeId)
+                ->where('product_rank_id', $current->id)
+            ;
+            $carry[] = $current;
+        });
+        return $carry;
+    }
+    private function getProductTypeWithActiveProduct ($productOriginId, $productTypeIds) {
+        return $productTypeIds->reduce(function ($carry, $item) use ($productOriginId) {
+            $result = ProductType::with(['products' => function ($query) use ($productOriginId) {
+                return $query
+                    ->where('product_origin_id', $productOriginId)
+                    ->orderBy('price', 'asc');
+            }])->find($item);
+
+            return $carry->push($result);
+        }, new Collection([]));
+    }
+    private function getProductRankWithActiveProduct ($productOriginId, $productRankIds) {
+        return $productRankIds->reduce(function ($carry, $item) use ($productOriginId) {
+            $result = ProductRank::with(['products' => function ($query) use ($productOriginId) {
+                return $query
+                    ->where('product_origin_id', $productOriginId)
+                    ->orderBy('price', 'asc');
+            }])->find($item);
+
+            return $carry->push($result);
+        }, new Collection([]));
+    }
+
+    private function getProductReviewsInfos($productIds) {
+
+        $result = new \stdClass();
+        $result->productReviews = ProductReview::query()->whereIn('product_id', $productIds)->get();
+        $result->productReviewNumbers = [
+            1 => $result->productReviews->where('evaluation', 1)->count(),
+            2 => $result->productReviews->where('evaluation', 2)->count(),
+            3 => $result->productReviews->where('evaluation', 3)->count(),
+            4 => $result->productReviews->where('evaluation', 4)->count(),
+            5 => $result->productReviews->where('evaluation', 5)->count()
+        ];
+
+        $productReviewCount = 0;
+        collect($result->productReviewNumbers)->map(function ($item, $key) use (&$productReviewCount){
+            $productReviewCount += $item * $key;
+        });
+
+        $result->productReviewNumberAve =
+            round($productReviewCount / $result->productReviews->count(), 1);
+
+        return $result;
     }
 }
