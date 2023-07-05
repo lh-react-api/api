@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ProductOrigins;
 
+use App\Exceptions\NotFoundRequestException;
 use App\Http\Controllers\BaseController;
 use App\Models\Product;
 use App\Models\ProductOrigin;
@@ -27,12 +28,14 @@ class Show extends BaseController
      * 商品が特定されてるケースは通常処理
      * 商品種別が特定されている場合は、それを用いてその中で一番安いものを選択中の商品とする
      * 何もリクエストがない場合は、一番安い在庫商品を特定状態にする
+     * @throws NotFoundRequestException
      */
     public function __invoke(Request $request, int $id)
     {
         $model = ProductOrigin::findForShow($id);
 
         // activeProductsは安い順に並んでいる
+        // TODO: 画像はproductのを使うのか、productOriginのサムネイルから使うのか、種別ごとに足すのか相談して決める
         $model->selectedProduct = (function () use ($request, $model){
             // 商品が特定されている
             if (!empty($request->get('product_id'))) {
@@ -51,7 +54,9 @@ class Show extends BaseController
         })();
 
         // TODO: $selectedProductがなかったらnotfound
-        // throw new NotFount();
+         if (empty($model->selectedProduct)) {
+             throw new NotFoundRequestException();
+         }
 
         // アクティブな商品に紐づく商品タイプを全て返却
         $activeProductTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
