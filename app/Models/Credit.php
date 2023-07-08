@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use APP\Models\domains\Credits\CreditEntity;
+use App\Models\Stripe\StripeCustomer;
 
 class Credit extends BaseModel
 {
@@ -30,7 +31,7 @@ class Credit extends BaseModel
 
     public static function getCardList()
     {   
-        $stripe = new Stripe();
+        $stripe = new StripeCustomer();
         $stripe->setMyCustomerId();
         return $stripe->getCustmerCardlist();
     }

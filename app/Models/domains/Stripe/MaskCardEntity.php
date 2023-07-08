@@ -7,12 +7,12 @@ use App\Models\domains\BaseDomain;
 class MaskCardEntity extends BaseDomain
 {
     public function __construct(
-        public string    $cardId,
-        public string    $brand,
-        public string    $cvcCheck,
-        public int       $expMonth,
-        public int       $expYear,
-        public string    $last4,
+        public string       $cardId,
+        public string       $brand,
+        public string|null  $cvcCheck,
+        public int          $expMonth,
+        public int          $expYear,
+        public string       $last4,
     ){}
 
     public function getCardId(): string

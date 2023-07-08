@@ -17,6 +17,7 @@ use App\Models\domains\Delivers\DeliverEntity;
 use App\Models\domains\Commons\VersatilityUserEntity;
 use App\Models\domains\Addresses\AddressContentEntity;
 use App\Models\domains\Demands\DemandEntity;
+use App\Models\Stripe\StripeSubscription;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -34,7 +35,7 @@ class Store extends BaseController
     public function __invoke(StoreRequest $request)
     {
         $input = new Collection($request->input());
-        $stripe = new Stripe();
+        $stripe = new StripeSubscription();
         $stripe->setMyCustomerId();
         $product = Product::find($input->get('product_id'));
         $stripeSubscriptionResult = $stripe->createSubscription(
