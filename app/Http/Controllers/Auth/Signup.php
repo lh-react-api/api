@@ -6,9 +6,9 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Auth\SignupRequest;
 use App\Models\domains\Users\Credential;
 use App\Models\User;
-use App\Models\Stripe;
 use App\Models\Credit;
 use App\Models\domains\Credits\CreditEntity;
+use App\Models\Stripe\StripeCustomer;
 
 ;
 use App\Utilities\ResponseUtils;
@@ -30,7 +30,7 @@ class Signup extends BaseController
 
         $credentials = new Credential($request->input('email'), $request->input('password'));
         User::create($credentials);
-        $stripeCustomer = (new Stripe)->createCustomer($request->input('email'));
+        $stripeCustomer = (new StripeCustomer())->createCustomer($request->input('email'));
         Credit::create(new CreditEntity(
             User::findByEmail($request->input('email'))->id,
             $stripeCustomer->id
