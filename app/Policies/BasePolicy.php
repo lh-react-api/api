@@ -35,7 +35,7 @@ class BasePolicy
     protected function byAdminAuthUser(AdminAuthoritiesAction $authority) {
         $role = Role::findNameForId(Str::of(AdminAuthorityUtils::getContorolerName())->snake());
         $adminAuthority = AdminAuthority::findAdminAuthority(Auth::id(), $role[0]->id);
-        if (!AdminAuthorityUtils::checkAuthority($adminAuthority[0]->action, $authority)) {
+        if (count($adminAuthority) == 0 || !AdminAuthorityUtils::checkAuthority($adminAuthority[0]->action, $authority)) {
             throw new PolicyException("", Response::HTTP_FORBIDDEN,
                 [__('操作権限がありません')]
             );
