@@ -36,6 +36,7 @@ class Show extends BaseController
 
         // activeProductsは安い順に並んでいる
         // TODO: 画像はproductのを使うのか、productOriginのサムネイルから使うのか、種別ごとに足すのか相談して決める
+        // 高い順に変える
         $model->selectedProduct = (function () use ($request, $model){
             // 商品が特定されている
             if (!empty($request->get('product_id'))) {

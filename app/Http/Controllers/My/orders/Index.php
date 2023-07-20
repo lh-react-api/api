@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Address;
 use App\Models\Order;
 use App\Utilities\ResponseUtils;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class Index extends BaseController
      *
      * @param Request $request
      * @param int $id
-     * @return JsonResponse
+     * @return LengthAwarePaginator
      */
     public function __invoke(Request $request)
     {
@@ -26,11 +27,8 @@ class Index extends BaseController
 
         $address = Order::query()
             ->where('user_id', $user->id)
-            ->get()
         ;
 
-        return ResponseUtils::success(
-            $address
-        );
+        return $this->paginate($address, $request);
     }
 }
