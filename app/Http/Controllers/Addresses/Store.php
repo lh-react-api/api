@@ -45,7 +45,8 @@ class Store extends BaseController
                 $input->get('city'),
                 $input->get('block'),
                 $input->get('building') ?? null
-            )
+            ),
+            $input->get('phone_number')
         ));
 
         // FIXME: 第二引数をAddressのモデルの型にしないとエラーになるクソ仕様、insertする前に認可を下ろすためにUserモデルを第二引数にしたい

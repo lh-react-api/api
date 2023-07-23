@@ -16,8 +16,11 @@ class Deliver extends BaseModel
     protected $fillable = [
         'order_id',
         'deliver_time_id',
-        'name',
-        'name_kana',
+        'user_id',
+        'last_name',
+        'last_name_kana',
+        'first_name',
+        'first_name_kana',
         'post_number',
         'prefecture_name',
         'city',
@@ -43,15 +46,17 @@ class Deliver extends BaseModel
         $entity = (new Deliver())->fill([
             'order_id' => $deliver->getOrderId(),
             'deliver_time_id' => $deliver->getDeliverTimeId(),
-            'name' => $deliver->getVersatilityUserEntity()->getName(),
-            'name_kana' => $deliver->getVersatilityUserEntity()->getNameKana(),
+            'last_name' => $deliver->getFullNameEntity()->getLastName(),
+            'last_name_kana' => $deliver->getFullNameEntity()->getLastNameKana(),
+            'first_name' => $deliver->getFullNameEntity()->getFirstName(),
+            'first_name_kana' => $deliver->getFullNameEntity()->getFirstNameKana(),
             'post_number' => $deliver->getAddressContentEntity()->getPostNumber(),
             'prefecture_name' => $deliver->getAddressContentEntity()->getPrefectureName(),
             'city' => $deliver->getAddressContentEntity()->getCity(),
             'block' => $deliver->getAddressContentEntity()->getBlock(),
             'building' => $deliver->getAddressContentEntity()->getBuilding(),
-            'phone_number' => $deliver->getVersatilityUserEntity()->getPhoneNumber(),
-            'email' => $deliver->getVersatilityUserEntity()->getEmail(),
+            'phone_number' => $deliver->getPhoneNumber(),
+            'email' => $deliver->getEmail(),
         ]);
 
         $entity->save();
@@ -64,15 +69,17 @@ class Deliver extends BaseModel
         $entity = $this->fill([
             'order_id' => $deliver->getOrderId(),
             'deliver_time_id' => $deliver->getDeliverTimeId(),
-            'name' => $deliver->getVersatilityUserEntity()->getName(),
-            'name_kana' => $deliver->getVersatilityUserEntity()->getNameKana(),
+            'last_name' => $deliver->getFullNameEntity()->getLastName(),
+            'last_name_kana' => $deliver->getFullNameEntity()->getLastNameKana(),
+            'first_name' => $deliver->getFullNameEntity()->getFirstName(),
+            'first_name_kana' => $deliver->getFullNameEntity()->getFirstNameKana(),
             'post_number' => $deliver->getAddressContentEntity()->getPostNumber(),
             'prefecture_name' => $deliver->getAddressContentEntity()->getPrefectureName(),
             'city' => $deliver->getAddressContentEntity()->getCity(),
             'block' => $deliver->getAddressContentEntity()->getBlock(),
             'building' => $deliver->getAddressContentEntity()->getBuilding(),
-            'phone_number' => $deliver->getVersatilityUserEntity()->getPhoneNumber(),
-            'email' => $deliver->getVersatilityUserEntity()->getEmail(),
+            'phone_number' => $deliver->getPhoneNumber(),
+            'email' => $deliver->getEmail(),
         ]);
 
         $entity->save();

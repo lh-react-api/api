@@ -4,14 +4,16 @@ namespace App\Models\domains\Demands;
 
 use App\Models\domains\BaseDomain;
 use App\Models\domains\Addresses\AddressContentEntity;
-use App\Models\domains\Commons\VersatilityUserEntity;
+use App\Models\domains\Addresses\FullNameEntity;
 
 class DemandEntity extends BaseDomain
 {
     public function __construct(
         protected int $orderId,
-        protected VersatilityUserEntity $versatilityUserEntity,
+        protected FullNameEntity $fullNameEntity,
         protected AddressContentEntity $addressContentEntity,
+        protected string $phoneNumber,
+        protected string $email
     )
     {
     }
@@ -21,13 +23,23 @@ class DemandEntity extends BaseDomain
         return $this->orderId;
     }
 
-    public function getVersatilityUserEntity(): VersatilityUserEntity
+    public function getFullNameEntity(): FullNameEntity
     {
-        return $this->versatilityUserEntity;
+        return $this->fullNameEntity;
     }
 
     public function getAddressContentEntity(): AddressContentEntity
     {
         return $this->addressContentEntity;
+    }
+
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 }

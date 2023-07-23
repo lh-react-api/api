@@ -15,8 +15,10 @@ class Demand extends BaseModel
 
     protected $fillable = [
         'order_id',
-        'name',
-        'name_kana',
+        'last_name',
+        'last_name_kana',
+        'first_name',
+        'first_name_kana',
         'post_number',
         'prefecture_name',
         'city',
@@ -37,19 +39,21 @@ class Demand extends BaseModel
         return self::find($id);
     }
 
-    public static function create(DemandEntity $deliver) {
+    public static function create(DemandEntity $demand) {
 
         $entity = (new Demand())->fill([
-            'order_id' => $deliver->getOrderId(),
-            'name' => $deliver->getVersatilityUserEntity()->getName(),
-            'name_kana' => $deliver->getVersatilityUserEntity()->getNameKana(),
-            'post_number' => $deliver->getAddressContentEntity()->getPostNumber(),
-            'prefecture_name' => $deliver->getAddressContentEntity()->getPrefectureName(),
-            'city' => $deliver->getAddressContentEntity()->getCity(),
-            'block' => $deliver->getAddressContentEntity()->getBlock(),
-            'building' => $deliver->getAddressContentEntity()->getBuilding(),
-            'phone_number' => $deliver->getVersatilityUserEntity()->getPhoneNumber(),
-            'email' => $deliver->getVersatilityUserEntity()->getEmail(),
+            'order_id' => $demand->getOrderId(),
+            'last_name' => $demand->getFullNameEntity()->getLastName(),
+            'last_name_kana' => $demand->getFullNameEntity()->getLastNameKana(),
+            'first_name' => $demand->getFullNameEntity()->getFirstName(),
+            'first_name_kana' => $demand->getFullNameEntity()->getFirstNameKana(),
+            'post_number' => $demand->getAddressContentEntity()->getPostNumber(),
+            'prefecture_name' => $demand->getAddressContentEntity()->getPrefectureName(),
+            'city' => $demand->getAddressContentEntity()->getCity(),
+            'block' => $demand->getAddressContentEntity()->getBlock(),
+            'building' => $demand->getAddressContentEntity()->getBuilding(),
+            'phone_number' => $demand->getPhoneNumber(),
+            'email' => $demand->getEmail(),
         ]);
 
         $entity->save();
@@ -57,19 +61,21 @@ class Demand extends BaseModel
         return $entity;
     }
 
-    public function updateEntity(DemandEntity $deliver)
+    public function updateEntity(DemandEntity $demand)
     {
         $entity = $this->fill([
-            'order_id' => $deliver->getOrderId(),
-            'name' => $deliver->getVersatilityUserEntity()->getName(),
-            'name_kana' => $deliver->getVersatilityUserEntity()->getNameKana(),
-            'post_number' => $deliver->getAddressContentEntity()->getPostNumber(),
-            'prefecture_name' => $deliver->getAddressContentEntity()->getPrefectureName(),
-            'city' => $deliver->getAddressContentEntity()->getCity(),
-            'block' => $deliver->getAddressContentEntity()->getBlock(),
-            'building' => $deliver->getAddressContentEntity()->getBuilding(),
-            'phone_number' => $deliver->getVersatilityUserEntity()->getPhoneNumber(),
-            'email' => $deliver->getVersatilityUserEntity()->getEmail(),
+            'order_id' => $demand->getOrderId(),
+            'last_name' => $demand->getFullNameEntity()->getLastName(),
+            'last_name_kana' => $demand->getFullNameEntity()->getLastNameKana(),
+            'first_name' => $demand->getFullNameEntity()->getFirstName(),
+            'first_name_kana' => $demand->getFullNameEntity()->getFirstNameKana(),
+            'post_number' => $demand->getAddressContentEntity()->getPostNumber(),
+            'prefecture_name' => $demand->getAddressContentEntity()->getPrefectureName(),
+            'city' => $demand->getAddressContentEntity()->getCity(),
+            'block' => $demand->getAddressContentEntity()->getBlock(),
+            'building' => $demand->getAddressContentEntity()->getBuilding(),
+            'phone_number' => $demand->getPhoneNumber(),
+            'email' => $demand->getEmail(),
         ]);
 
         $entity->save();
