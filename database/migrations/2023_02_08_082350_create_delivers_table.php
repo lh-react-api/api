@@ -20,9 +20,10 @@ return new class extends Migration
             $table->id()->comment(__('db.delivers.id'));
             $table->unsignedBigInteger('order_id')->comment(__('db.delivers.order_id'));
             $table->unsignedBigInteger('deliver_time_id')->comment(__('db.delivers.deliver_time_id'));
-
-            $table->string('name', 128)->comment(__('db.delivers.name'));
-            $table->string('name_kana', 128)->comment(__('db.delivers.name_kana'));
+            $table->string('last_name', 128)->comment(__('db.delivers.last_name'));
+            $table->string('last_name_kana', 128)->comment(__('db.delivers.last_name_kana'));
+            $table->string('first_name', 128)->comment(__('db.delivers.first_name'));
+            $table->string('first_name_kana', 128)->comment(__('db.delivers.first_name_kana'));
             $table->string('post_number', 7)->comment(__('db.delivers.post_number'));
             $table->string('prefecture_name', 8)->comment(__('db.delivers.prefecture_name'));
             $table->string('city', 24)->comment(__('db.delivers.city'));

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('city', 24)->comment(__('db.addresses.city'));
             $table->string('block', 32)->comment(__('db.addresses.block'));
             $table->string('building', 128)->nullable()->comment(__('db.addresses.building'));
+            $table->string('phone_number', 32)->comment(__('db.addresses.phone_number'));
             $table->boolean('is_default')->default(false)->comment(__('db.addresses.is_default'));
 
             MigrateUtils::timestamps($table);
