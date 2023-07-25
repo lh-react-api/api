@@ -35,7 +35,8 @@ class UpdateRequest extends BaseFormRequest
             'prefecture_name' => ['required', 'max:8'],
             'city' => ['required', 'max:24'],
             'block' => ['required', 'max:32'],
-            'building' => ['required', 'max:128'],
+            'building' => ['max:128'],
+            'phone_number' => ['required', 'max:32'],
         ];
     }
 

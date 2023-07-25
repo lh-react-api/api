@@ -19,8 +19,10 @@ class DemandsSeeder extends Seeder
             [
                 [
                     'order_id' => 1,
-                    'name' => '石川',
-                    'name_kana' => 'いしかわ',
+                    'last_name' => '石川',
+                    'last_name_kana' => 'いしかわ',
+                    'first_name' => '辰也',
+                    'first_name_kana' => 'たつや',
                     'post_number' => '1000000',
                     'prefecture_name' => '東京都',
                     'city' => '品川区',
@@ -35,8 +37,10 @@ class DemandsSeeder extends Seeder
                 ],
                 [
                     'order_id' => 1,
-                    'name' => '石川2',
-                    'name_kana' => 'いしかわ2',
+                    'last_name' => '石川2',
+                    'last_name_kana' => 'いしかわ2',
+                    'first_name' => '辰也2',
+                    'first_name_kana' => 'たつや2',
                     'post_number' => '1000000',
                     'prefecture_name' => '東京都',
                     'city' => '品川区',

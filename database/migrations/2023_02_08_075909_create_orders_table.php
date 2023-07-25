@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('sent_tracking_number', 128)->comment(__('db.orders.sent_tracking_number'));
             $table->string('return_tracking_number', 128)->comment(__('db.orders.return_tracking_number'));
             $table->enum('settlement_state', OrdersSettlementState::toArray())->default(OrdersSettlementState::PROCESSING->value)->comment(__('db.orders.settlement_state'));
-            $table->string('subscription_id', 128)->comment(__('db.orders.return_tracking_number'));
+            $table->string('subscription_id', 128)->comment(__('db.orders.subscription_id'));
 
             MigrateUtils::timestamps($table);
 

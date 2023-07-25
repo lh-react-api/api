@@ -12,6 +12,7 @@ class Order extends BaseModel
 
     protected $appends = [
         'progressLabel',
+        'settlementStateLabel',
     ];
 
     protected $fillable = [
@@ -28,6 +29,11 @@ class Order extends BaseModel
     {
         return $this->enumLabel($this->progress, "App\Enums\Orders\OrdersProgress");
 
+    }
+
+    public function getSettlementStateLabelAttribute($value)
+    {
+        return $this->enumLabel($this->settlement_state, "App\Enums\Orders\OrdersSettlementState");
     }
 
     public static function create(OrderEntity $orderEntity) {

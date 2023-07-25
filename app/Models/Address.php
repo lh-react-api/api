@@ -21,6 +21,7 @@ class Address extends BaseModel
         'city',
         'block',
         'building',
+        'phone_number',
         'is_default',
     ];
 
@@ -41,6 +42,7 @@ class Address extends BaseModel
             'city' => $address->getAddressContentEntity()->getCity(),
             'block' => $address->getAddressContentEntity()->getBlock(),
             'building' => $address->getAddressContentEntity()->getBuilding(),
+            'phone_number' => $address->getPhoneNumberEntity(),
             'is_default' => false,
         ]);
 
@@ -62,6 +64,7 @@ class Address extends BaseModel
             'city' => $address->getAddressContentEntity()->getCity(),
             'block' => $address->getAddressContentEntity()->getBlock(),
             'building' => $address->getAddressContentEntity()->getBuilding(),
+            'phone_number' => $address->getPhoneNumberEntity(),
             'is_default' => false,
         ]);
 
