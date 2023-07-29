@@ -19,8 +19,32 @@ class CreditsSeeder extends Seeder
         DB::table('credits')->insert(
             [
                 [
+                    'user_id' => 1,
+                    'stripe_customer_id' => 'cus_OLtoiQItILazls',
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
+                [
                     'user_id' => 2,
-                    'stripe_customer_id' => 'XXXXX001',
+                    'stripe_customer_id' => 'cus_OLtq3MbX0IVdeN',
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
+                [
+                    'user_id' => 3,
+                    'stripe_customer_id' => 'cus_OCB8lC02VeDiis',
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
+                [
+                    'user_id' => 4,
+                    'stripe_customer_id' => 'cus_OLtr1EeqEbNtmw',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
