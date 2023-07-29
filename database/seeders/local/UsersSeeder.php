@@ -42,7 +42,30 @@ class UsersSeeder extends Seeder
                     'updated_at' => Carbon::now(),
                     'updated_by' => 1,
                 ],
-
+                [
+                    'email' => 'shi_abe@tale-jp.com',
+                    'email_verified_at' => null,
+                    'password' => Hash::make('hke6ynp*frv5pxh@THA'),//pass
+                    'social' => null,
+                    'remember_token' => null,
+                    'is_admin' => false,
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
+                [
+                    'email' => 'smagare@sg.sandbox',
+                    'email_verified_at' => null,
+                    'password' => Hash::make('pass'),//pass
+                    'social' => null,
+                    'remember_token' => null,
+                    'is_admin' => false,
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
             ]);
     }
 }
