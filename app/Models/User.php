@@ -30,6 +30,7 @@ class User extends BaseModel implements
     protected $fillable = [
         'email',
         'password',
+        'stripe_customer_id',
         'social',
     ];
 
@@ -113,8 +114,8 @@ class User extends BaseModel implements
         $entity = (new User)->fill([
             'email' => $credential->getEmail(),
             'password' => Hash::make($credential->getPassword()),
+            'stripe_customer_id' => $credential->getStripeCustomerId()
         ]);
-
         $entity->save();
     }
 
@@ -127,6 +128,10 @@ class User extends BaseModel implements
 
     public static function findByEmail($email){
         return self::query()->where('email', $email)->first();
+    }
+
+    public static function findByStripeCustomerId($customerId){
+        return self::query()->where('stripe_customer_id', $customerId)->first();
     }
 
     public function getStatusLabelAttribute($value)

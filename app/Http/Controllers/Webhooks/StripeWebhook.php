@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Webhooks;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Order;
+use App\Models\Credit;
 use App\Enums\Orders\OrdersSettlementState;
 use Illuminate\Http\Request;
 use Stripe\Webhook;
@@ -18,13 +19,17 @@ class StripeWebhook extends BaseController
 
         try {
             $event = Webhook::constructEvent($payload, $sigHeader, $endpointSecret);
-            $subscriptionId = $event->data->object->subscription;
             if ($event->type === 'invoice.payment_succeeded') {
-                $order = Order::searchForSubscriptionId($subscriptionId);
+                $order = Order::searchForSubscriptionId($event->data->object->subscription);
                 $order->updateSettlementState(OrdersSettlementState::SUCCESS);
             } else if ($event->type === 'invoice.payment_failed') {
-                $order = Order::searchForSubscriptionId($subscriptionId);
+                $order = Order::searchForSubscriptionId($event->data->object->subscription);
                 $order->updateSettlementState(OrdersSettlementState::FAILED);
+            } else if ($event->type === 'payment_method.attached') {
+                Credit::createForWebhook(
+                    $event->data->object->id,
+                    $event->data->object->customer
+                );
             } else {
                 // 何もしない
             }
