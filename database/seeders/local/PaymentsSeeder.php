@@ -5,9 +5,8 @@ namespace Database\Seeders\local;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
-class CreditsSeeder extends Seeder
+class PaymentsSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -16,12 +15,12 @@ class CreditsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('credits')->insert(
+        DB::table('payments')->insert(
             [
                 [
-                    'user_id' => 1,
-                    'payments_source' => 'card_1NZCVdDTj4HgVUnillJyPa1b',
-                    'status' => 'ENABLE',
+                    'order_id' => 1,
+                    'settlement_state' => 'PROCESSING',
+                    'payment_date' => '2023-01-01',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),

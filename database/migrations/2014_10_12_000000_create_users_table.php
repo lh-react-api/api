@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('email_reissue_token', 64)->nullable()->comment(__('db.users.email_reissue_token'));
             $table->boolean('is_admin')->default(false)->comment(__('db.users.is_admin'));
             $table->enum('status', UsersStatus::toArray())->comment(__('db.users.status'));
+            $table->string('stripe_customer_id', 128)->comment(__('db.users.stripe_customer_id'));
+
 
             MigrateUtils::timestamps($table);
         });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Credits\CreditsStatus;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +20,8 @@ return new class extends Migration
 
             $table->id()->comment(__('db.credits.id'));
             $table->unsignedBigInteger('user_id')->comment(__('db.credits.user_id'));
-            $table->string('stripe_customer_id', 128)->comment(__('db.credits.stripe_customer_id'));
+            $table->string('payments_source', 128)->comment(__('db.credits.payments_source'));
+            $table->enum('status', CreditsStatus::toArray())->default(CreditsStatus::ENABLE->value)->comment(__('db.credits.status'));
 
             MigrateUtils::timestamps($table);
 
