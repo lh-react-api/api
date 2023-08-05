@@ -34,6 +34,12 @@ class Credit extends BaseModel
         $entity->save();
     }
 
+    public function updateStatus(CreditsStatus $status)
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
     public static function getCardList()
     {   
         $userId = Auth::user()->id;
