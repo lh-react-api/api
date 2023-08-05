@@ -20,8 +20,7 @@ return new class extends Migration
 
             $table->id()->comment(__('db.payments.id'));
             $table->unsignedBigInteger('order_id')->comment(__('db.payments.order_id'));
-            $table->enum('settlement_state', PaymentsSettlementState::toArray())->default(PaymentsSettlementState::PROCESSING->value)->comment(__('db.payments.settlement_state'));
-            $table->date('payment_date')->comment(__('db.payments.payment_date'));
+            $table->enum('settlement_state', PaymentsSettlementState::toArray())->default(PaymentsSettlementState::SUCCESS->value)->comment(__('db.payments.settlement_state'));
             
             MigrateUtils::timestamps($table);
         });
