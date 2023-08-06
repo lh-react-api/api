@@ -6,9 +6,11 @@ use App\Http\Controllers\BaseController;
 use App\Models\Order;
 use App\Models\Credit;
 use App\Models\Payment;
+use App\Enums\Orders\OrdersProgress;
 use App\Enums\Orders\OrdersSettlementState;
 use App\Enums\Payments\PaymentsSettlementState;
 use App\Models\domains\Payments\PaymentEntity;
+use App\Models\Stripe\StripeMail;
 use Illuminate\Http\Request;
 use Stripe\Webhook;
 
@@ -29,6 +31,7 @@ class StripeWebhook extends BaseController
                     $order->id,
                     PaymentsSettlementState::SUCCESS
                 ));
+                StripeMail::PaymentSuccessMail($event);
             } else if ($event->type === 'invoice.payment_failed') {
                 $order = Order::searchForSubscriptionId($event->data->object->subscription);
                 $order->updateSettlementState(OrdersSettlementState::FAILED);
@@ -36,11 +39,19 @@ class StripeWebhook extends BaseController
                     $order->id,
                     PaymentsSettlementState::FAILED
                 ));
+                StripeMail::PaymentFailedMail($event);
+            } else if ($event->type === 'customer.subscription.deleted') {
+                $order = Order::searchForSubscriptionId($event->data->object->id);
+                $order->updateProgress(OrdersProgress::STOP);
+                StripeMail::cancelSubscription($event);
             } else if ($event->type === 'payment_method.attached') {
                 Credit::createForWebhook(
                     $event->data->object->id,
                     $event->data->object->customer
                 );
+            } else if ($event->type === 'invoice.upcoming') {
+                // 次回請求日のお知らせ
+                StripeMail::invoiceUpcoming($event);
             } else {
                 // 何もしない
             }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Orders\OrdersProgress;
 use App\Models\domains\Orders\OrderEntity;
 use App\Enums\Orders\OrdersSettlementState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,6 +59,14 @@ class Order extends BaseModel
     public function updateSettlementState(OrdersSettlementState $state) {
         $entity = $this->fill([
             'settlement_state' => $state,
+        ]);
+        $entity->save();
+        return $entity;
+    }
+
+    public function updateProgress(OrdersProgress $progress) {
+        $entity = $this->fill([
+            'progress' => $progress,
         ]);
         $entity->save();
         return $entity;
