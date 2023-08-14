@@ -38,4 +38,17 @@ class StripeSubscription extends StripeBase
         );
     }
 
+    /**
+     * サブスクリプション取得
+     *
+     * @param string $subscriptionId
+     * @return object
+     */
+    public function getSubscription(string $subscriptionId) {
+        return $this->stripe->subscriptions->retrieve(
+            $subscriptionId,
+            []
+        );
+    }
+
 }

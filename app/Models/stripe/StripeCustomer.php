@@ -2,8 +2,6 @@
 
 namespace App\Models\Stripe;
 
-use App\Models\domains\Stripe\MaskCardEntity;
-
 class StripeCustomer extends StripeBase
 {
 
@@ -49,31 +47,6 @@ class StripeCustomer extends StripeBase
             'query' => "email:'$email'",
             'limit' => 1
         ])->data;
-    }
-
-    /**
-     * 自身の登録済みカード情報を取得
-     *
-     * @return Cllection<MaskCardEntity>
-     */
-    public function getCustmerCardlist() {
-        $stripeCards = $this->stripe->customers->allSources(
-            $this->customerId,
-            [
-                'object' => 'card',
-                'limit' => 100
-            ]
-        )->data;
-        return collect(array_map(function ($card){
-            return new MaskCardEntity(
-                $card->id,
-                $card->brand,
-                $card->cvc_check,
-                $card->exp_month,
-                $card->exp_year,
-                $card->last4,
-            );
-        }, $stripeCards));
     }
 
     /**

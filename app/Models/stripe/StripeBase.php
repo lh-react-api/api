@@ -3,7 +3,6 @@
 namespace App\Models\Stripe;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Credit;
 
 class StripeBase
 {
@@ -24,10 +23,7 @@ class StripeBase
      * @return void
      */
     public function setMyCustomerId() {
-        $credit = Credit::searchForUserId(Auth::user()->id);
-        if ($credit) {
-            $this->customerId = $credit->stripe_customer_id;
-        }   
+        $this->customerId = Auth::user()->stripe_customer_id;
     }
 
 }

@@ -51,8 +51,10 @@ Route::group(['middleware' => [
     // stripe関連
     Route::get('my/stripe/clientSecret', \App\Http\Controllers\My\Stripe\GeneratClientSecret::class);
     Route::get('my/credits', \App\Http\Controllers\My\Credits\Index::class);
+    Route::delete('my/credits/{credit_id}', \App\Http\Controllers\My\Credits\Delete::class);
     Route::post('orders', \App\Http\Controllers\Orders\Store::class);
     Route::get('orders/{order_id}', \App\Http\Controllers\Orders\Show::class);
+    Route::delete('orders/{order_id}', \App\Http\Controllers\Orders\DELETE::class);
 
 //    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
 //    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);

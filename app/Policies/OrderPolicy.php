@@ -33,4 +33,17 @@ class OrderPolicy extends BasePolicy
         $this->byAuthUser($order->user_id);
         return true;
     }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Address  $address
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function delete(User $user, Order $order)
+    {
+        $this->byAuthUser($order->user_id);
+        return true;
+    }
 }

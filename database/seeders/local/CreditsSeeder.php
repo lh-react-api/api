@@ -20,23 +20,8 @@ class CreditsSeeder extends Seeder
             [
                 [
                     'user_id' => 1,
-                    'stripe_customer_id' => 'cus_OLtoiQItILazls',
-                    'created_at' => Carbon::now(),
-                    'created_by' => 1,
-                    'updated_at' => Carbon::now(),
-                    'updated_by' => 1,
-                ],
-                [
-                    'user_id' => 2,
-                    'stripe_customer_id' => 'cus_OLtq3MbX0IVdeN',
-                    'created_at' => Carbon::now(),
-                    'created_by' => 1,
-                    'updated_at' => Carbon::now(),
-                    'updated_by' => 1,
-                ],
-                [
-                    'user_id' => 3,
-                    'stripe_customer_id' => 'cus_OCB8lC02VeDiis',
+                    'payments_source' => 'card_1NZCVdDTj4HgVUnillJyPa1b',
+                    'status' => 'ENABLE',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
@@ -44,7 +29,8 @@ class CreditsSeeder extends Seeder
                 ],
                 [
                     'user_id' => 4,
-                    'stripe_customer_id' => 'cus_OLtr1EeqEbNtmw',
+                    'payments_source' => 'pm_1NaITLDTj4HgVUniNzD9Xzgn',
+                    'status' => 'ENABLE',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,
                     'updated_at' => Carbon::now(),
