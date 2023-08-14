@@ -21,10 +21,10 @@ class Index extends BaseController
         $user = Auth::user();
         $this->authorize('view', $user);
 
-        $order = Order::query()
+        $query = (new Order)->newQuery()
             ->where('user_id', $user->id)
-        ;
+            ->searchIndex($request);
 
-        return $this->paginate($order, $request);
+        return $this->paginate($query, $request);
     }
 }
