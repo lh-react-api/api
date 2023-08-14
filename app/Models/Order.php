@@ -6,10 +6,24 @@ use App\Enums\Orders\OrdersProgress;
 use App\Models\domains\Orders\OrderEntity;
 use App\Enums\Orders\OrdersSettlementState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+
 
 class Order extends BaseModel
 {
     use HasFactory;
+
+    protected $searches = [
+        'progress' => 'eq',
+    ];
+
+    public function scopeSearchIndex(Builder $query, Request $request): Builder
+    {
+        $query->searchByDefined($request);
+        
+        return $query;
+    }
 
     protected $appends = [
         'progressLabel',
