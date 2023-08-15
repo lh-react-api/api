@@ -34,4 +34,9 @@ class Payment extends BaseModel
 
         return $entity;
     }
+
+    public function statusUpdate(PaymentsSettlementState $state) {
+        $this->settlement_state = $state;
+        $this->save();
+    }
 }
