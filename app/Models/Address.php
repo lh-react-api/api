@@ -30,7 +30,11 @@ class Address extends BaseModel
     ];
     public static function create(AddressEntity $address): Address
     {
-
+        $is_default = false;
+        $count = Address::where('user_id', $address->getUserId())->count();
+        if ($count === 0) {
+            $is_default = true;
+        }
         $entity = (new Address)->fill([
             'user_id' => $address->getUserId(),
             'last_name' => $address->getFullName()->getLastName(),
@@ -43,7 +47,7 @@ class Address extends BaseModel
             'block' => $address->getAddressContentEntity()->getBlock(),
             'building' => $address->getAddressContentEntity()->getBuilding(),
             'phone_number' => $address->getPhoneNumberEntity(),
-            'is_default' => false,
+            'is_default' => $is_default,
         ]);
 
         $entity->save();
