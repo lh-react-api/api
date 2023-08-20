@@ -2,8 +2,6 @@
 
 namespace App\Models\Stripe;
 
-use App\Models\domains\Stripe\MaskCardEntity;
-
 class StripePaymentMethod extends StripeBase
 {
 

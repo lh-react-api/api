@@ -77,10 +77,7 @@ class StripeWebhook extends BaseController
                 StripeMail::cancelSubscription($event);
             } else if ($event->type === 'payment_method.attached') {
                 // カード登録
-                Credit::createForWebhook(
-                    $event->data->object->id,
-                    $event->data->object->customer
-                );
+                Credit::createForWebhook($event);
             } else if ($event->type === 'invoice.upcoming') {
                 // 次回請求日のお知らせ
                 StripeMail::invoiceUpcoming($event);

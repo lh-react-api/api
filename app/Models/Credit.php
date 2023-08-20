@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Credits\CreditsStatus;
-use App\Models\Stripe\StripePaymentMethod;
-use App\Models\domains\Stripe\MaskCardEntity;
-use Stripe\PaymentMethod;
+use Stripe\Event;
 
 class Credit extends BaseModel
 {
@@ -16,18 +14,25 @@ class Credit extends BaseModel
     protected $fillable = [
         'user_id',
         'payments_source',
+        'brand',
+        'cvc_check',
+        'exp_month',
+        'exp_year',
+        'last4',
         'status',
     ];
-    protected $appends = [
-        'detail',
-    ];
 
-    public static function createForWebhook(string $paymentsSource, string $customerId)
+    public static function createForWebhook(Event $event)
     {
-        $user = User::findByStripeCustomerId($customerId);
+        $user = User::findByStripeCustomerId($event->data->object->customer);
         $entity = (new Credit())->fill([
             'user_id' => $user->id,
-            'payments_source' => $paymentsSource,
+            'payments_source' => $event->data->object->id,
+            'brand' => $event->data->object->card->brand,
+            'cvc_check' => $event->data->object->card->checks->cvc_check,
+            'exp_month' => sprintf('%02d', $event->data->object->card->exp_month),
+            'exp_year' => $event->data->object->card->exp_year,
+            'last4' => $event->data->object->card->last4,
             'status' => CreditsStatus::ENABLE,
         ]);
 
@@ -41,25 +46,10 @@ class Credit extends BaseModel
     }
 
     public static function getCardList()
-    {   
+    {
         $userId = Auth::user()->id;
-        $creditCards = self::query()->where('user_id', $userId)
-                                   ->where('status', CreditsStatus::ENABLE)->get();
-        $paymentMethods = $creditCards->map(function ($card){
-            $stripe = new StripePaymentMethod();
-            $stripe->setMyCustomerId();    
-            return $stripe->getRetrievePaymentMethod($card->payments_source);
-        });
-        return $paymentMethods->map(function ($paymentMethod){
-            return new MaskCardEntity(
-                $paymentMethod->id,
-                $paymentMethod->card->brand,
-                $paymentMethod->card->cvc_check,
-                $paymentMethod->card->exp_month,
-                $paymentMethod->card->exp_year,
-                $paymentMethod->card->last4,
-            );
-        });
+        return self::query()->where('user_id', $userId)
+                            ->where('status', CreditsStatus::ENABLE)->get();
     }
 
     public static function searchForUserId(string $userId): Credit{
