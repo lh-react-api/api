@@ -21,6 +21,7 @@ class Delete extends BaseController
     {
         $inquiry = Inquiry::find($inquiryId);
         $this->authorize('adminDelete', $inquiry);
+        $inquiry->delete();
 
         return ResponseUtils::success(
             $inquiry
