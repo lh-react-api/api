@@ -19,6 +19,7 @@ class PaymentsSeeder extends Seeder
             [
                 [
                     'order_id' => 1,
+                    'credit_id' => 1,
                     'settlement_state' => 'SUCCESS',
                     'created_at' => Carbon::now(),
                     'created_by' => 1,

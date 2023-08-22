@@ -24,7 +24,7 @@ class StoreRequest extends BaseFormRequest
     {
         return [
             'product_id' => ['required', Rule::exists('products', 'id')],
-            'stripe_card_id' => ['required'],
+            'credit_id' => ['required', Rule::exists('credits', 'id')],
             'deliver_address_id'  => ['required', Rule::exists('addresses', 'id')],
             'deliver_time_id'  => ['required', Rule::exists('deliver_times', 'id')],
             'demand_address_id'  => ['required', Rule::exists('addresses', 'id')],

@@ -9,6 +9,7 @@ class PaymentEntity extends BaseDomain
 {
     public function __construct(
         protected int $orderId,
+        protected int $creditId,
         protected PaymentsSettlementState|string $settlementState, 
     ) {
     }
@@ -16,6 +17,11 @@ class PaymentEntity extends BaseDomain
     public function getOrderId(): int
     {
         return $this->orderId;
+    }
+
+    public function getCreditId(): int
+    {
+        return $this->creditId;
     }
 
     public function getSettlementState(): PaymentsSettlementState

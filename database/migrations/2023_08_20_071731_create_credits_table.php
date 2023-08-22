@@ -21,6 +21,11 @@ return new class extends Migration
             $table->id()->comment(__('db.credits.id'));
             $table->unsignedBigInteger('user_id')->comment(__('db.credits.user_id'));
             $table->string('payments_source', 128)->comment(__('db.credits.payments_source'));
+            $table->string('brand', 32)->comment(__('db.credits.brand'));
+            $table->string('cvc_check', 32)->comment(__('db.credits.cvc_check'));
+            $table->string('exp_month', 2)->comment(__('db.credits.exp_month'));
+            $table->string('exp_year', 8)->comment(__('db.credits.exp_year'));
+            $table->string('last4', 4)->comment(__('db.credits.last4'));
             $table->enum('status', CreditsStatus::toArray())->default(CreditsStatus::ENABLE->value)->comment(__('db.credits.status'));
 
             MigrateUtils::timestamps($table);

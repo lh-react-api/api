@@ -21,6 +21,7 @@ class OrdersSeeder extends Seeder
                 [
                     'product_id' => 1,
                     'user_id' => 1,
+                    'credit_id' => 1,
                     'progress' => 'YET',
                     'sent_tracking_number' => 'AAAAA-BBBBB-CCCC',
                     'return_tracking_number' => 'XXXXX-YYYYY-ZZZZZ',

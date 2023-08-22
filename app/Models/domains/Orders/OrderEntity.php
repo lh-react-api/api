@@ -11,10 +11,11 @@ class OrderEntity extends BaseDomain
     public function __construct(
         protected int $productId,
         protected int $userId,
-        protected OrdersProgress|string $progress, 
+        protected int $creditId,
+        protected OrdersProgress|string $progress,
         protected string $sentTrackingNumber,
         protected string $returnTrackingNumber,
-        protected OrdersSettlementState|string $settlementState, 
+        protected OrdersSettlementState|string $settlementState,
         protected string $subscriptionId,
     ) {
     }
@@ -27,6 +28,11 @@ class OrderEntity extends BaseDomain
     public function getUserId(): int
     {
         return $this->userId;
+    }
+
+    public function getCreditId(): int
+    {
+        return $this->creditId;
     }
 
     public function getProgress(): OrdersProgress

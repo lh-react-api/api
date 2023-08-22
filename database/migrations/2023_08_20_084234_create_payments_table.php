@@ -20,9 +20,13 @@ return new class extends Migration
 
             $table->id()->comment(__('db.payments.id'));
             $table->unsignedBigInteger('order_id')->comment(__('db.payments.order_id'));
+            $table->unsignedBigInteger('credit_id')->comment(__('db.credits.credit_id'));
             $table->enum('settlement_state', PaymentsSettlementState::toArray())->default(PaymentsSettlementState::SUCCESS->value)->comment(__('db.payments.settlement_state'));
             
             MigrateUtils::timestamps($table);
+
+            $table->foreign('order_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('orders');
+            $table->foreign('credit_id')->onUpdate('RESTRICT')->onDelete('RESTRICT')->references('id')->on('credits');
         });
     }
 
