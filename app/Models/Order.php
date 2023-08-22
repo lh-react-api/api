@@ -21,18 +21,20 @@ class Order extends BaseModel
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
-        
+
         return $query;
     }
 
     protected $appends = [
         'progressLabel',
         'settlementStateLabel',
+        'creditCard',
     ];
 
     protected $fillable = [
         'product_id',
         'user_id',
+        'credit_id',
         'progress',
         'sent_tracking_number',
         'return_tracking_number',
@@ -51,10 +53,16 @@ class Order extends BaseModel
         return $this->enumLabel($this->settlement_state, "App\Enums\Orders\OrdersSettlementState");
     }
 
+    public function getCreditCardAttribute()
+    {
+        return Credit::find($this->credit_id);
+    }
+
     public static function create(OrderEntity $orderEntity) {
         $entity = (new Order())->fill([
             'product_id' => $orderEntity->getProductId(),
             'user_id' => $orderEntity->getUserId(),
+            'credit_id' => $orderEntity->getCreditId(),
             'progress' => $orderEntity->getProgress(),
             'sent_tracking_number' => $orderEntity->getSentTrackingNumber(),
             'return_tracking_number' => $orderEntity->getReturnTrackingNumber(),

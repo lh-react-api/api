@@ -39,6 +39,7 @@ class StripeWebhook extends BaseController
                 } else {
                     Payment::create(new PaymentEntity(
                         $order->id,
+                        $order->credit_id,
                         PaymentsSettlementState::SUCCESS
                     ));
                 }
@@ -56,6 +57,7 @@ class StripeWebhook extends BaseController
                     if (!$exist) {
                         Payment::create(new PaymentEntity(
                             $order->id,
+                            $order->credit_id,
                             PaymentsSettlementState::FAILED
                         ));
                     }
@@ -65,6 +67,7 @@ class StripeWebhook extends BaseController
                     // 決済のリトライがかからないようにサブスクをキャンセルしておく
                     Payment::create(new PaymentEntity(
                         $order->id,
+                        $order->credit_id,
                         PaymentsSettlementState::FAILED
                     ));
                     (new StripeSubscription)->cancelSubscription($event->data->object->subscription);

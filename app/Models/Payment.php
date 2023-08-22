@@ -16,6 +16,7 @@ class Payment extends BaseModel
 
     protected $fillable = [
         'order_id',
+        'credit_id',
         'settlement_state',
         'payment_date',
     ];
@@ -28,6 +29,7 @@ class Payment extends BaseModel
     public static function create(PaymentEntity $paymentEntity) {
         $entity = (new Payment())->fill([
             'order_id' => $paymentEntity->getOrderId(),
+            'credit_id' => $paymentEntity->getCreditId(),
             'settlement_state' => $paymentEntity->getSettlementState(),
         ]);
         $entity->save();

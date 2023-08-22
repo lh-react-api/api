@@ -12,6 +12,7 @@ use App\Models\Deliver;
 use App\Enums\Orders\OrdersProgress;
 use App\Enums\Orders\OrdersSettlementState;
 use App\Models\Address;
+use App\Models\Credit;
 use App\Models\Demand;
 use App\Models\domains\Delivers\DeliverEntity;
 use App\Models\domains\Addresses\FullNameEntity;
@@ -38,14 +39,16 @@ class Store extends BaseController
         $stripe = new StripeSubscription();
         $stripe->setMyCustomerId();
         $product = Product::find($input->get('product_id'));
+        $credit = Credit::find($input->get('credit_id'));
         $user = Auth::user();
         $stripeSubscriptionResult = $stripe->createSubscription(
             $product->stripe_plan_id,
-            $input->get('stripe_card_id')
+            $credit->payments_source,
         );
         $orderResult = (new Order)->create(new OrderEntity(
             $input->get('product_id'),
             $user->id,
+            $input->get('credit_id'),
             OrdersProgress::YET,
             '',
             '',
