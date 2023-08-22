@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,91 +13,151 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * 認証関連（ミドルウェアなし）
+ */
 Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
 Route::post('auth/signup', \App\Http\Controllers\Auth\Signup::class);
+
+/**
+ * パスワード変更関連
+ */
 Route::get('users/{email}/password/reissue', \App\Http\Controllers\Users\ReissuePassword::class);
 Route::patch('users/{email_reissue_token}/password/reissue', \App\Http\Controllers\Users\UpdateByReissuePassword::class);
 
-//Route::post('auth/sanctum/session/signin', \App\Http\Controllers\Auth\SanctumSessionSignin::class);
-//Route::post('auth/sanctum/token/signin', \App\Http\Controllers\Auth\SanctumTokenSignin::class);
-
+/**
+ * ミドルウェア適用
+ * auth:sanctum → Laravel Sanctumパッケージを利用するAPI認証ミドルウェア
+ * transaction → DBトランザクション処理用のミドルウェア
+ * formatRequestParam → リクエストパラメータのフォーマッターミドルウェア
+ */
 Route::group(['middleware' => [
     'auth:sanctum',
     'transaction',
     'formatRequestParam'
 ]], function () {
 
-    // Auth
+    /**
+     * 認証関連
+     * Auth
+     */
     Route::post('auth/signout', \App\Http\Controllers\Auth\Signout::class);
-//    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
-//    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
 
-    // My
+    /**  ログイン中ユーザー用のAPI群  */
+    /**
+     * ユーザー
+     * Users
+     */
     Route::get('my/user', \App\Http\Controllers\My\User\Show::class);
     Route::patch('my/user/email', \App\Http\Controllers\My\User\UpdateEmail::class);
     Route::patch('my/user/password', \App\Http\Controllers\My\User\UpdatePassword::class);
     Route::delete('my/user/withdrawal', \App\Http\Controllers\My\User\UpdateStatusWithdrawal::class);
 
+    /**
+     * 住所
+     * Addresses
+     */
     Route::get('my/addresses', \App\Http\Controllers\My\Addresses\Index::class);
-
     Route::get('my/address/default', \App\Http\Controllers\My\Address\_Default::class);
     Route::patch('/my/address/isDefault', \App\Http\Controllers\My\Address\UpdateIsDefault::class);
 
+    /**
+     * 注文情報
+     * orders
+     */
     Route::get('my/orders', \App\Http\Controllers\My\orders\Index::class);
 
-    Route::get('my/admin/adminAuthorities', \App\Http\Controllers\My\Admin\AdminAuthorities\Index::class);
-
-    // stripe関連
-    Route::get('my/stripe/clientSecret', \App\Http\Controllers\My\Stripe\GeneratClientSecret::class);
+    /**
+     * クレジットカード
+     * Credits
+     */
     Route::get('my/credits', \App\Http\Controllers\My\Credits\Index::class);
     Route::delete('my/credits/{credit_id}', \App\Http\Controllers\My\Credits\Delete::class);
-    Route::post('orders', \App\Http\Controllers\Orders\Store::class);
-    Route::get('orders/{order_id}', \App\Http\Controllers\Orders\Show::class);
-    Route::delete('orders/{order_id}', \App\Http\Controllers\Orders\DELETE::class);
 
-//    Route::post('auth/sanctum/session/signout', \App\Http\Controllers\Auth\SanctumSessionSignout::class);
-//    Route::post('auth/sanctum/token/signout', \App\Http\Controllers\Auth\SanctumTokenSignout::class);
+    /**
+     * stripe
+     */
+    Route::get('my/stripe/clientSecret', \App\Http\Controllers\My\Stripe\GeneratClientSecret::class);
 
-    // Users
+    /** 一般API群 **/
+
+    /**
+     * ユーザー
+     * Users
+     */
     Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
 
-    // Addresses
+    /**
+     * 住所
+     * Addresses
+     */
     Route::post('addresses', \App\Http\Controllers\Addresses\Store::class);
     Route::put('addresses/{address_id}', \App\Http\Controllers\Addresses\Update::class);
-
     Route::delete('addresses/{address_id}', \App\Http\Controllers\Addresses\Delete::class);
 
 
-    // Genres
+    /**
+     * ジャンル
+     * genres
+     */
     Route::get('genres', \App\Http\Controllers\Genres\index::class);
 
-
-    // Genres
+    /**
+     * 配達時間マスタ
+     * deliverTimes
+     */
     Route::get('deliverTimes', \App\Http\Controllers\DeliverTimes\index::class);
 
-    // ProductOrigin
+    /**
+     * 商品原本
+     * ProductOrigin
+     */
     Route::get('productOrigins', \App\Http\Controllers\ProductOrigins\index::class);
     Route::get('productOrigins/{product_origin_id}', \App\Http\Controllers\ProductOrigins\Show::class);
 
-    // ProductReviews
+    /**
+     * 商品レビュー
+     * ProductReviews
+     */
     Route::post('productReviews', \App\Http\Controllers\ProductReviews\Store::class);
 
-    // ProductReviews
+    /**
+     * おすすめ商品
+     * recommendProducts
+     */
     Route::get('recommendProducts', \App\Http\Controllers\RecommendProducts\Index::class);
 
-    // Inquiries
+    /**
+     * お問い合わせ
+     * Inquiries
+     */
     Route::post('inquiries', \App\Http\Controllers\Inquiries\Store::class);
 
-    // Notices
+    /**
+     * お知らせ
+     * Notices
+     */
     Route::get('notices', \App\Http\Controllers\Notices\Index::class);
     Route::get('notices/{notice_id}', \App\Http\Controllers\Notices\Show::class);
 
     /**
-     * 管理系API群
+     * 注文情報
+     * orders
      */
+    Route::get('orders/{order_id}', \App\Http\Controllers\Orders\Show::class);
+    Route::post('orders', \App\Http\Controllers\Orders\Store::class);
+    Route::delete('orders/{order_id}', \App\Http\Controllers\Orders\DELETE::class);
+
+
+    /**　管理系API群 **/
+
+    /**
+     * 自身の管理者情報を取得
+     */
+    Route::get('my/admin/adminAuthorities', \App\Http\Controllers\My\Admin\AdminAuthorities\Index::class);
 
     /**
      * メーカー
@@ -119,7 +178,7 @@ Route::group(['middleware' => [
     Route::post('admin/notices', \App\Http\Controllers\Admin\Notices\Store::class);
     Route::put('admin/notices/{notice_id}', \App\Http\Controllers\Admin\Notices\Update::class);
     Route::delete('admin/notices/{notice_id}', \App\Http\Controllers\Admin\Notices\Delete::class);
-  
+
     /**
      * 商品ランク
      * productRanks
