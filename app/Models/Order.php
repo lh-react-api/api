@@ -94,5 +94,12 @@ class Order extends BaseModel
         return $entity;
     }
 
+    public function updateCreditId(int $creditId) {
+        $entity = $this->fill([
+            'credit_id' => $creditId,
+        ]);
+        $entity->save();
+        return $entity;
+    }
 
 }

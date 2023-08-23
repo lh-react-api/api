@@ -73,6 +73,13 @@ class StripeWebhook extends BaseController
                     (new StripeSubscription)->cancelSubscription($event->data->object->subscription);
                 }
                 StripeMail::PaymentFailedMail($event);
+            } else if ($event->type === 'customer.subscription.updated') {
+                // サブスクリプションの更新
+                if ($event->data->object->metadata->event === 'updatePaymentMethod') {
+                    // 決済方法の更新
+                    $order = Order::searchForSubscriptionId($event->data->object->id);
+                    StripeMail::paymentMethodUpdate($event, $order->creditCard);
+                }
             } else if ($event->type === 'customer.subscription.deleted') {
                 // サブスク停止
                 $order = Order::searchForSubscriptionId($event->data->object->id);

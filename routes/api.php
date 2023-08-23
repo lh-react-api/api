@@ -149,6 +149,7 @@ Route::group(['middleware' => [
      */
     Route::get('orders/{order_id}', \App\Http\Controllers\Orders\Show::class);
     Route::post('orders', \App\Http\Controllers\Orders\Store::class);
+    Route::patch('orders/{order_id}/credit', \App\Http\Controllers\Orders\UpdateCredit::class);
     Route::delete('orders/{order_id}', \App\Http\Controllers\Orders\DELETE::class);
 
 
