@@ -10,6 +10,7 @@ class AddressEntity extends BaseDomain
         protected int $userId,
         protected FullNameEntity $fullName,
         protected AddressContentEntity $addressContentEntity,
+        protected string $phoneNumber
     ) {
     }
 
@@ -24,6 +25,10 @@ class AddressEntity extends BaseDomain
     public function getAddressContentEntity(): AddressContentEntity
     {
         return $this->addressContentEntity;
+    }
+    public function getPhoneNumberEntity(): string
+    {
+        return $this->phoneNumber;
     }
 
 }

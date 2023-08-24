@@ -6,8 +6,6 @@ use App\Http\Controllers\BaseController;
 use App\Utilities\ResponseUtils;
 use App\Models\Credit;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Stripe;
 
 class Index extends BaseController
 {

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\My\orders;
 
 use App\Http\Controllers\BaseController;
-use App\Models\Address;
 use App\Models\Order;
 use App\Utilities\ResponseUtils;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +17,6 @@ class Index extends BaseController
      * Handle the incoming request.
      *
      * @param Request $request
-     * @param int $id
      * @return LengthAwarePaginator
      */
     public function __invoke(Request $request)
@@ -25,10 +24,9 @@ class Index extends BaseController
         $user = Auth::user();
         $this->authorize('view', $user);
 
-        $address = Order::query()
+        $query = (new Order)->newQuery()
             ->where('user_id', $user->id)
-        ;
-
-        return $this->paginate($address, $request);
+            ->searchIndex($request);
+        return $this->paginate($query, $request);
     }
 }

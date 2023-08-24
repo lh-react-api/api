@@ -45,7 +45,8 @@ class Update extends BaseController
                     $input->get('city'),
                     $input->get('block'),
                     $input->get('building') ?? null
-                )
+                ),
+                $input->get('phone_number')
             )
         );
 

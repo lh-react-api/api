@@ -7,7 +7,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Requests\Admin\Delivers\StoreRequest;
 use App\Models\Deliver;
 use App\Models\domains\Addresses\AddressContentEntity;
-use App\Models\domains\Commons\VersatilityUserEntity;
+use App\Models\domains\Addresses\FullNameEntity;
 use App\Models\domains\Delivers\DeliverEntity;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
@@ -29,11 +29,11 @@ class Store extends BaseController
         $deliver = Deliver::create(new DeliverEntity(
             $input->get('order_id'),
             $input->get('deliver_time_id'),
-            new VersatilityUserEntity(
-                $input->get('name'),
-                $input->get('name_kana'),
-                $input->get('phone_number'),
-                $input->get('email'),
+            new FullNameEntity(
+                $input->get('last_name'),
+                $input->get('last_name_kana'),
+                $input->get('first_name'),
+                $input->get('first_name_kana')
             ),
             new AddressContentEntity(
                 $input->get('post_number'),
@@ -41,7 +41,9 @@ class Store extends BaseController
                 $input->get('city'),
                 $input->get('block'),
                 $input->get('building') ?? null
-            )
+            ),
+            $input->get('phone_number'),
+            $input->get('email'),
         ));
 
         $this->authorize('adminCreate', $deliver);

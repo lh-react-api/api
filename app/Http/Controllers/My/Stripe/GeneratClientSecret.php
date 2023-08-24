@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\My\Stripe;
 
 use App\Http\Controllers\BaseController;
-use App\Models\Stripe;
+use App\Models\Stripe\StripeIntents;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class GeneratClientSecret extends BaseController
      */
     public function __invoke(Request $request)
     {
-        $stripe = new Stripe();
+        $stripe = new StripeIntents();
         $stripe->setMyCustomerId();
         $clientSecret =  $stripe->generateCrientSecret();
         return ResponseUtils::success(

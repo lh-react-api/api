@@ -9,14 +9,16 @@ use App\Models\domains\Orders\OrderEntity;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Deliver;
-use App\Models\Stripe;
 use App\Enums\Orders\OrdersProgress;
 use App\Enums\Orders\OrdersSettlementState;
+use App\Models\Address;
+use App\Models\Credit;
 use App\Models\Demand;
 use App\Models\domains\Delivers\DeliverEntity;
-use App\Models\domains\Commons\VersatilityUserEntity;
+use App\Models\domains\Addresses\FullNameEntity;
 use App\Models\domains\Addresses\AddressContentEntity;
 use App\Models\domains\Demands\DemandEntity;
+use App\Models\Stripe\StripeSubscription;
 use App\Utilities\ResponseUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -34,54 +36,63 @@ class Store extends BaseController
     public function __invoke(StoreRequest $request)
     {
         $input = new Collection($request->input());
-        $stripe = new Stripe();
+        $stripe = new StripeSubscription();
         $stripe->setMyCustomerId();
         $product = Product::find($input->get('product_id'));
+        $credit = Credit::find($input->get('credit_id'));
+        $user = Auth::user();
         $stripeSubscriptionResult = $stripe->createSubscription(
             $product->stripe_plan_id,
-            $input->get('stripe_card_id')
+            $credit->payments_source,
         );
         $orderResult = (new Order)->create(new OrderEntity(
             $input->get('product_id'),
-            Auth::id(),
+            $user->id,
+            $input->get('credit_id'),
             OrdersProgress::YET,
             '',
             '',
             OrdersSettlementState::PROCESSING,
             $stripeSubscriptionResult->id,
         ));
+        $deliverAddress = Address::find($input->get('deliver_address_id'));
         $deliverResult = (new Deliver)->create(new DeliverEntity(
             $orderResult->id,
-            $input->get('deliver_info')['deliver_time_id'],
-            new VersatilityUserEntity(
-                $input->get('deliver_info')['name'],
-                $input->get('deliver_info')['name_kana'],
-                $input->get('deliver_info')['phone_number'],
-                $input->get('deliver_info')['email'],
+            $input->get('deliver_time_id'),
+            new FullNameEntity(
+                $deliverAddress->last_name,
+                $deliverAddress->last_name_kana,
+                $deliverAddress->first_name,
+                $deliverAddress->first_name_kana,
             ),
             new AddressContentEntity(
-                $input->get('deliver_info')['post_number'],
-                $input->get('deliver_info')['prefecture_name'],
-                $input->get('deliver_info')['city'],
-                $input->get('deliver_info')['block'],
-                $input->get('deliver_info')['building'],
+                $deliverAddress->post_number,
+                $deliverAddress->prefecture_name,
+                $deliverAddress->city,
+                $deliverAddress->block,
+                $deliverAddress->building,
             ),
+            $deliverAddress->phone_number,
+            $user->email,
         ));
+        $demandAddress = Address::find($input->get('deliver_address_id'));
         $demandResult = (new Demand)->create(new DemandEntity(
             $orderResult->id,
-            new VersatilityUserEntity(
-                $input->get('deliver_info')['name'],
-                $input->get('deliver_info')['name_kana'],
-                $input->get('deliver_info')['phone_number'],
-                $input->get('deliver_info')['email'],
+            new FullNameEntity(
+                $deliverAddress->last_name,
+                $deliverAddress->last_name_kana,
+                $deliverAddress->first_name,
+                $deliverAddress->first_name_kana,
             ),
             new AddressContentEntity(
-                $input->get('deliver_info')['post_number'],
-                $input->get('deliver_info')['prefecture_name'],
-                $input->get('deliver_info')['city'],
-                $input->get('deliver_info')['block'],
-                $input->get('deliver_info')['building'],
+                $deliverAddress->post_number,
+                $deliverAddress->prefecture_name,
+                $deliverAddress->city,
+                $deliverAddress->block,
+                $deliverAddress->building,
             ),
+            $deliverAddress->phone_number,
+            $user->email,
         ));
 
         return ResponseUtils::success([
