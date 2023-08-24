@@ -35,8 +35,12 @@ class Show extends BaseController
         $model = ProductOrigin::findForShow($id);
 
         // activeProductsは安い順に並んでいる
-        // TODO: 画像はproductのを使うのか、productOriginのサムネイルから使うのか、種別ごとに足すのか相談して決める
-        // 高い順に変える
+        // 高い順に変える?
+        
+        // MEMO: 画像はproductのを使うのか、productOriginのサムネイルから使うのか、種別ごとに足すのか相談して決める
+        //       product_typeに紐づくテーブルを用意して対応した。
+
+
         $model->selectedProduct = (function () use ($request, $model){
             // 商品が特定されている
             if (!empty($request->get('product_id'))) {
@@ -54,14 +58,13 @@ class Show extends BaseController
             return $model->activeProducts->first();
         })();
 
-        // TODO: $selectedProductがなかったらnotfound
          if (empty($model->selectedProduct)) {
              throw new NotFoundRequestException();
          }
 
         // アクティブな商品に紐づく商品タイプを全て返却
         $activeProductTypeIds = $model->activeProducts->pluck('product_type_id')->unique();
-        $model->productTypes = ProductType::query()->whereIn('id', $activeProductTypeIds->toArray())->get();
+        $model->productTypes = ProductType::with('product_type_images')->whereIn('id', $activeProductTypeIds->toArray())->get();
 
         // 選択された表品種別に基づいた、商品ランクを取得
         $model->productRanks = $this->getProductRankWithActiveProductByTypeId($model, $model->selectedProduct->product_type_id);

@@ -13,4 +13,10 @@ class ProductType extends BaseModel
     {
         return $this->hasMany(Product::class);
     }
+
+    public function product_type_images(): HasMany
+    {
+        return $this->hasMany(ProductTypeImage::class);
+    }
+
 }

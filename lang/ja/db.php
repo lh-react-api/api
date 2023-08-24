@@ -67,6 +67,12 @@ return [
         'image' => '商品画像',
         'order' => '表示順序',
     ],
+    'product_type_images' => [
+        'id' => '商品画像ID',
+        'products_id' => '商品ID',
+        'image' => '商品画像',
+        'order' => '表示順序',
+    ],
     'recommend_products' => [
         'id' => 'おすすめ商品ID',
         'products_id' => '商品ID',
