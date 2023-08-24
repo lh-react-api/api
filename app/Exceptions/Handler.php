@@ -56,21 +56,15 @@ class Handler extends ExceptionHandler
             return $exception->response;
         }
 
-        if ($exception instanceof BadRequestException) {
+        if ($exception instanceof NotFoundRequestException ||
+            $exception instanceof DatabaseErrorException ||
+            $exception instanceof PolicyException ||
+            $exception instanceof BadRequestException ||
+            $exception instanceof UpdateResourceException
+        ) {
             return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
         }
 
-        if ($exception instanceof PolicyException) {
-            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
-        }
-
-        if ($exception instanceof DatabaseErrorException) {
-            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
-        }
-
-        if ($exception instanceof UpdateResourceException) {
-            return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
-        }
         if ($exception instanceof AuthenticationException) {
             return ResponseUtils::error(['auth error...'], 401);
         }

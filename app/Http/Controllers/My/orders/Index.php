@@ -4,6 +4,9 @@ namespace App\Http\Controllers\My\orders;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Order;
+use App\Utilities\ResponseUtils;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +27,6 @@ class Index extends BaseController
         $query = (new Order)->newQuery()
             ->where('user_id', $user->id)
             ->searchIndex($request);
-
         return $this->paginate($query, $request);
     }
 }
