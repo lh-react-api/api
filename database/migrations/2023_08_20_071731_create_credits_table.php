@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Credits\CreditsStatus;
+use App\Enums\Credits\CreditsBrand;
 use App\Utilities\MigrateUtils;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->id()->comment(__('db.credits.id'));
             $table->unsignedBigInteger('user_id')->comment(__('db.credits.user_id'));
             $table->string('payments_source', 128)->comment(__('db.credits.payments_source'));
-            $table->string('brand', 32)->comment(__('db.credits.brand'));
+            $table->enum('brand', CreditsBrand::toArray())->default(CreditsBrand::UNKNOWN->value)->comment(__('db.credits.brand'));
             $table->string('cvc_check', 32)->comment(__('db.credits.cvc_check'));
             $table->string('exp_month', 2)->comment(__('db.credits.exp_month'));
             $table->string('exp_year', 8)->comment(__('db.credits.exp_year'));
