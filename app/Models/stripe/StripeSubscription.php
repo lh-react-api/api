@@ -51,4 +51,21 @@ class StripeSubscription extends StripeBase
         );
     }
 
+    /**
+     * 決済方法の更新
+     *
+     * @param string $subscriptionId
+     * @return object
+     */
+    public function updatePaymentMethod(string $subscriptionId, string $paymentMethod) {
+        return $this->stripe->subscriptions->update(
+            $subscriptionId,
+            [
+                'default_payment_method' => $paymentMethod,
+                'metadata' => [
+                    'event' => 'updatePaymentMethod'
+                ],
+            ]
+        );
+    }
 }

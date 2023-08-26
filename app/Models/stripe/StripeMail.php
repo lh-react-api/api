@@ -8,10 +8,12 @@ use App\Mail\PaymentSuccessMail;
 use App\Mail\PaymentFailedMail;
 use App\Mail\CanselSubscriptionMail;
 use App\Mail\InvoiceUpcomingMail;
+use App\Mail\PaymentMethodUpdateMail;
 use App\Models\domains\Stripe\SubscriptionMailEntity;
 use App\Models\Stripe\StripeProduct;
 use App\Models\Stripe\StripeSubscription;
 use App\Models\User;
+use App\Models\Credit;
 use Stripe\Event;
 
 /**
@@ -116,5 +118,31 @@ class StripeMail
             )
         );
     }
-  
+
+    /**
+     * 決済方法の更新
+     *
+     * @param Event $event
+     * @return void
+     */
+    public static function paymentMethodUpdate(Event $event, Credit $credit){
+        $user = User::findByStripeCustomerId($event->data->object->customer);
+        $subscriptionInstance = new StripeSubscription();
+        $productId = $subscriptionInstance->getSubscription($event->data->object->id)->items->data[0]->plan->product;
+        $productInstance = new StripeProduct();
+        $product = $productInstance->getProduct($productId);
+        Mail::to($user->email)->send(
+            new PaymentMethodUpdateMail(
+                $user,
+                new SubscriptionMailEntity(
+                    $product->name,
+                    '',
+                    '',
+                    $credit->brand,
+                    $credit->last4,
+                )
+            )
+        );
+    }
+
 }
