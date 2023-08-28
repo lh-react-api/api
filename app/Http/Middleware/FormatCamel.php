@@ -23,6 +23,11 @@ class FormatCamel {
 
         $response = $next($request);
 
+        // FIXME: フロントからの無茶な要望により終わってる、実装
+        //        JsonResponse型のデフォルト値が[]なので、JsonResponse型をの拡張かここでの急場凌ぎを迫られた。
+        if (!method_exists($response, 'getData')) {
+            return $response;
+        }
         if (is_string($response->getData())) {
             return $response;
         }
