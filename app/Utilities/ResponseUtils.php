@@ -19,13 +19,12 @@ class ResponseUtils
      * @param $content
      * @return JsonResponse
      */
-    public static function success($content=[])
+    public static function success($content=null)
     {
-        return response()->json(
-            [
-                'data' => $content
-            ]
-        );
+        if (is_null($content)) {
+            return null;
+        }
+        return response()->json(['data' => $content]);
     }
 
     /**
