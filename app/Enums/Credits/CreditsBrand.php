@@ -27,15 +27,15 @@ enum CreditsBrand: string implements EnumInterface
     public function description(): string
     {
         return match($this) {
-            self::AMEX => 'amex',
-            self::DINERS => 'diners',
-            self::DISCOVER => 'discover',
-            self::EFTPOS_AU => 'eftpos_au',
-            self::JCB => 'jcb',
-            self::MASTERCARD => 'mastercard',
-            self::UNIONPAY => 'unionpay',
-            self::VISA => 'visa',
-            self::UNKNOWN => 'unknown',
+            self::AMEX => 'AmericanExpress',
+            self::DINERS => 'DinersClub',
+            self::DISCOVER => 'Discover',
+            self::EFTPOS_AU => 'EFTPOS(Australia)',
+            self::JCB => 'JCB',
+            self::MASTERCARD => 'Mastercard',
+            self::UNIONPAY => 'UnionPay',
+            self::VISA => 'Visa',
+            self::UNKNOWN => 'Unknown',
         };
     }
 }

@@ -23,6 +23,10 @@ class Credit extends BaseModel
         'status',
     ];
 
+    protected $appends = [
+        'brandLabel',
+    ];
+
     public static function createForWebhook(Event $event)
     {
         $user = User::findByStripeCustomerId($event->data->object->customer);
@@ -59,5 +63,10 @@ class Credit extends BaseModel
 
     public static function searchForUserId(string $userId): Credit{
         return Credit::query()->where('user_id', '=', $userId)->first();
+    }
+
+    public function getBrandLabelAttribute($value)
+    {
+        return $this->enumLabel($this->brand, "App\Enums\Credits\CreditsBrand");
     }
 }
