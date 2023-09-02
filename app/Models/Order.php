@@ -29,6 +29,7 @@ class Order extends BaseModel
         'progressLabel',
         'settlementStateLabel',
         'creditCard',
+        'product',
     ];
 
     protected $fillable = [
@@ -56,6 +57,16 @@ class Order extends BaseModel
     public function getCreditCardAttribute()
     {
         return Credit::find($this->credit_id);
+    }
+
+    public function getProductAttribute()
+    {
+        $product = Product::find($this->product_id);
+        $productOrigin = ProductOrigin::find($product->product_origin_id);
+        return [
+            'name' => $product->name,
+            'thumbnail' => $productOrigin->thumbnail,
+        ];
     }
 
     public static function create(OrderEntity $orderEntity) {
