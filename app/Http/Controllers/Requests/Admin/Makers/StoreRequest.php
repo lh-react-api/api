@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Requests\Admin\makers;
+namespace App\Http\Controllers\Requests\Admin\Makers;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
 use Illuminate\Validation\Rule;

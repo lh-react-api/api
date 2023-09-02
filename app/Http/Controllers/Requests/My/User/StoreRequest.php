@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Requests\Users;
+namespace App\Http\Controllers\Requests\My\User;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\User;

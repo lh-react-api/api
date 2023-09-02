@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\domains\makers;
+namespace App\Models\domains\Makers;
 
 use App\Models\domains\BaseDomain;
 

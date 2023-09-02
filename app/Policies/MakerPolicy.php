@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\maker;
+use App\Models\Maker;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Enums\AdminAuthorities\AdminAuthoritiesAction;
 
-class makerPolicy extends BasePolicy
+class MakerPolicy extends BasePolicy
 {
     use HandlesAuthorization;
 

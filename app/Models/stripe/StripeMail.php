@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Stripe;
+namespace App\Models\stripe;
 
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
