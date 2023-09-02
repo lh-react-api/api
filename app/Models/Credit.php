@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\Credits\CreditsBrand;
 use App\Enums\Credits\CreditsStatus;
 use Stripe\Event;
 
@@ -22,9 +23,17 @@ class Credit extends BaseModel
         'status',
     ];
 
+    protected $appends = [
+        'brandLabel',
+    ];
+
     public static function createForWebhook(Event $event)
     {
         $user = User::findByStripeCustomerId($event->data->object->customer);
+        $brand = $event->data->object->card->brand;
+        if (!in_array($brand, CreditsBrand::toArray())) {
+            $brand = CreditsBrand::UNKNOWN;
+        }
         $entity = (new Credit())->fill([
             'user_id' => $user->id,
             'payments_source' => $event->data->object->id,
@@ -54,5 +63,10 @@ class Credit extends BaseModel
 
     public static function searchForUserId(string $userId): Credit{
         return Credit::query()->where('user_id', '=', $userId)->first();
+    }
+
+    public function getBrandLabelAttribute($value)
+    {
+        return $this->enumLabel($this->brand, "App\Enums\Credits\CreditsBrand");
     }
 }
