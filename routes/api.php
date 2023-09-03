@@ -199,6 +199,17 @@ Route::group(['middleware' => [
     Route::post('admin/productRanks', \App\Http\Controllers\Admin\ProductRanks\Store::class);
     Route::put('admin/productRanks/{product_rank_id}', \App\Http\Controllers\Admin\ProductRanks\Update::class);
     Route::delete('admin/productRanks/{product_rank_id}', \App\Http\Controllers\Admin\ProductRanks\Delete::class);
+
+    /**
+     * 商品レビュー
+     * ProductReviews
+     */
+    Route::get('admin/productReviews', \App\Http\Controllers\Admin\ProductReviews\index::class);
+    Route::get('admin/productReviews/{product_review_id}', \App\Http\Controllers\Admin\ProductReviews\Show::class);
+    Route::post('admin/productReviews', \App\Http\Controllers\Admin\ProductReviews\Store::class);
+    Route::put('admin/productReviews/{product_review_id}', \App\Http\Controllers\Admin\ProductReviews\Update::class);
+    Route::delete('admin/productReviews/{product_review_id}', \App\Http\Controllers\Admin\ProductReviews\Delete::class);
+
     /**
      * 配達情報
      * delivers
