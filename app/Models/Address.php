@@ -3,11 +3,18 @@
 namespace App\Models;
 
 use App\Models\domains\Addresses\AddressEntity;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 
 class Address extends BaseModel
 {
     use HasFactory;
+
+
+    protected $searches = [
+        'user_id' => 'eq',
+    ];
 
     protected $fillable = [
         'user_id',
@@ -28,6 +35,17 @@ class Address extends BaseModel
     protected $casts = [
         'is_default' => 'boolean',
     ];
+
+    public function scopeSearchIndex(Builder $query, Request $request): Builder
+    {
+        $query->searchByDefined($request);
+        return $query;
+    }
+
+    public static function findForShow(int $id){
+        return self::find($id);
+    }
+
     public static function create(AddressEntity $address): Address
     {
         $is_default = false;

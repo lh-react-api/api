@@ -161,6 +161,16 @@ Route::group(['middleware' => [
     Route::get('my/admin/adminAuthorities', \App\Http\Controllers\My\Admin\AdminAuthorities\Index::class);
 
     /**
+     * 住所
+     * Addresses
+     */
+    Route::get('admin/addresses', \App\Http\Controllers\Admin\Addresses\index::class);
+    Route::get('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Show::class);
+    Route::post('admin/addresses', \App\Http\Controllers\Admin\Addresses\Store::class);
+    Route::put('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Update::class);
+    Route::delete('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Delete::class);
+
+    /**
      * メーカー
      * Makers
      */
