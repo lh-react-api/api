@@ -69,8 +69,28 @@ class Order extends BaseModel
         ];
     }
 
+    public static function findForShow(int $id){
+        return self::find($id);
+    }
+
     public static function create(OrderEntity $orderEntity) {
         $entity = (new Order())->fill([
+            'product_id' => $orderEntity->getProductId(),
+            'user_id' => $orderEntity->getUserId(),
+            'credit_id' => $orderEntity->getCreditId(),
+            'progress' => $orderEntity->getProgress(),
+            'sent_tracking_number' => $orderEntity->getSentTrackingNumber(),
+            'return_tracking_number' => $orderEntity->getReturnTrackingNumber(),
+            'settlement_state' => $orderEntity->getSettlementState(),
+            'subscription_id' => $orderEntity->getSubscriptionId(),
+        ]);
+        $entity->save();
+
+        return $entity;
+    }
+
+    public function put(OrderEntity $orderEntity) {
+        $entity = $this->fill([
             'product_id' => $orderEntity->getProductId(),
             'user_id' => $orderEntity->getUserId(),
             'credit_id' => $orderEntity->getCreditId(),

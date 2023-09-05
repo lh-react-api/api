@@ -13,8 +13,8 @@ class OrderEntity extends BaseDomain
         protected int $userId,
         protected int $creditId,
         protected OrdersProgress|string $progress,
-        protected string $sentTrackingNumber,
-        protected string $returnTrackingNumber,
+        protected string|null $sentTrackingNumber,
+        protected string|null $returnTrackingNumber,
         protected OrdersSettlementState|string $settlementState,
         protected string $subscriptionId,
     ) {
@@ -35,22 +35,22 @@ class OrderEntity extends BaseDomain
         return $this->creditId;
     }
 
-    public function getProgress(): OrdersProgress
+    public function getProgress(): OrdersProgress|string
     {
         return $this->progress;
     }
 
-    public function getSentTrackingNumber(): string
+    public function getSentTrackingNumber(): string|null
     {
         return $this->sentTrackingNumber;
     }
 
-    public function getReturnTrackingNumber(): string
+    public function getReturnTrackingNumber(): string|null
     {
         return $this->returnTrackingNumber;
     }
 
-    public function getSettlementState(): OrdersSettlementState
+    public function getSettlementState(): OrdersSettlementState|string
     {
         return $this->settlementState;
     }
