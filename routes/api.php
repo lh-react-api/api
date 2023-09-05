@@ -211,6 +211,16 @@ Route::group(['middleware' => [
     Route::delete('admin/productReviews/{product_review_id}', \App\Http\Controllers\Admin\ProductReviews\Delete::class);
 
     /**
+     * おすすめ商品
+     * RecommendProducts
+     */
+    Route::get('admin/recommendProducts', \App\Http\Controllers\Admin\RecommendProducts\index::class);
+    Route::get('admin/recommendProducts/{recommend_product_id}', \App\Http\Controllers\Admin\RecommendProducts\Show::class);
+    Route::post('admin/recommendProducts', \App\Http\Controllers\Admin\RecommendProducts\Store::class);
+    Route::put('admin/recommendProducts/{recommend_product_id}', \App\Http\Controllers\Admin\RecommendProducts\Update::class);
+    Route::delete('admin/recommendProducts/{recommend_product_id}', \App\Http\Controllers\Admin\RecommendProducts\Delete::class);
+
+    /**
      * 配達情報
      * delivers
      */
