@@ -61,7 +61,7 @@ class Demand extends BaseModel
         return $entity;
     }
 
-    public function updateEntity(DemandEntity $demand)
+    public function put(DemandEntity $demand)
     {
         $entity = $this->fill([
             'order_id' => $demand->getOrderId(),

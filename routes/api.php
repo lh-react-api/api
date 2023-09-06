@@ -229,6 +229,17 @@ Route::group(['middleware' => [
     Route::post('admin/delivers', \App\Http\Controllers\Admin\Delivers\Store::class);
     Route::put('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Update::class);
     Route::delete('admin/delivers/{deliver_id}', \App\Http\Controllers\Admin\Delivers\Delete::class);
+
+    /**
+     * 請求情報
+     * Demands
+     */
+    Route::get('admin/demands', \App\Http\Controllers\Admin\Demands\index::class);
+    Route::get('admin/demands/{demand_id}', \App\Http\Controllers\Admin\Demands\Show::class);
+    Route::post('admin/demands', \App\Http\Controllers\Admin\Demands\Store::class);
+    Route::put('admin/demands/{demand_id}', \App\Http\Controllers\Admin\Demands\Update::class);
+    Route::delete('admin/demands/{demand_id}', \App\Http\Controllers\Admin\Demands\Delete::class);
+
     /**
      * 配達情報マスタ
      * DeliverTimes
