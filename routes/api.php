@@ -259,6 +259,16 @@ Route::group(['middleware' => [
     Route::delete('admin/inquiryTypes/{inquiry_type_id}', \App\Http\Controllers\Admin\InquiryTypes\Delete::class);
 
     /**
+     * 注文情報
+     * Orders
+     */
+    Route::get('admin/orders', \App\Http\Controllers\Admin\Orders\index::class);
+    Route::get('admin/orders/{order_id}', \App\Http\Controllers\Admin\Orders\Show::class);
+    Route::post('admin/orders', \App\Http\Controllers\Admin\Orders\Store::class);
+    Route::put('admin/orders/{order_id}', \App\Http\Controllers\Admin\Orders\Update::class);
+    Route::delete('admin/orders/{order_id}', \App\Http\Controllers\Admin\Orders\Delete::class);
+
+    /**
      * 管理者権限
      * AdminAuthority
      */
