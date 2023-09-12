@@ -27,6 +27,7 @@ class Store extends BaseController
 
         $role = Role::create(new RoleEntity(
             $input->get('name'),
+            $input->get('ja_name'),
         ));
 
         $this->authorize('adminCreate', $role);

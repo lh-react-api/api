@@ -8,6 +8,7 @@ class RoleEntity extends BaseDomain
 {
     public function __construct(
         protected string      $name,
+        protected string      $ja_name,
     )
     {
     }
@@ -15,5 +16,10 @@ class RoleEntity extends BaseDomain
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getJaName(): string
+    {
+        return $this->ja_name;
     }
 }
