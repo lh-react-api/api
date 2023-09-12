@@ -27,6 +27,7 @@ class Update extends BaseController
         $role->put(
             new RoleEntity(
                 $input->get('name'),
+                $input->get('ja_name'),
             )
         );
         return ResponseUtils::success($role);

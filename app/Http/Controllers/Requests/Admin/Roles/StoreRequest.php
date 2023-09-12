@@ -17,6 +17,7 @@ class StoreRequest extends BaseFormRequest
     {
         return [
             'name' => ['required', 'max:255'],
+            'ja_name' => ['required', 'max:255'],
         ];
     }
 }
