@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Requests\My\User;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 /**
@@ -28,6 +30,11 @@ class UpdateStatusWithdrawalRequest extends BaseFormRequest
     public function rules()
     {
         return [
+            'password' => ['required', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->getAuthPassword())){
+                    $fail("パスワードが正しくありません。");
+                }
+            }],
         ];
     }
 
