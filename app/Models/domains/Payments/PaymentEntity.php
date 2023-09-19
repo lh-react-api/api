@@ -24,7 +24,7 @@ class PaymentEntity extends BaseDomain
         return $this->creditId;
     }
 
-    public function getSettlementState(): PaymentsSettlementState
+    public function getSettlementState(): PaymentsSettlementState|string
     {
         return $this->settlementState;
     }
