@@ -185,6 +185,14 @@ class RolesSeeder extends Seeder
                     'updated_at' => Carbon::now(),
                     'updated_by' => 1,
                 ],
+                [
+                    'name' => 'payments',
+                    'ja_name' => '決済情報管理権限',
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'updated_at' => Carbon::now(),
+                    'updated_by' => 1,
+                ],
             ]);
     }
 }

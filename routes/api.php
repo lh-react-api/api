@@ -280,6 +280,16 @@ Route::group(['middleware' => [
     Route::delete('admin/orders/{order_id}', \App\Http\Controllers\Admin\Orders\Delete::class);
 
     /**
+     * 決済情報
+     * Orders
+     */
+    Route::get('admin/payments', \App\Http\Controllers\Admin\Payments\index::class);
+    Route::get('admin/payments/{payment_id}', \App\Http\Controllers\Admin\Payments\Show::class);
+    Route::post('admin/payments', \App\Http\Controllers\Admin\Payments\Store::class);
+    Route::put('admin/payments/{payment_id}', \App\Http\Controllers\Admin\Payments\Update::class);
+    Route::delete('admin/payments/{payment_id}', \App\Http\Controllers\Admin\Payments\Delete::class);
+
+    /**
      * 管理者権限
      * AdminAuthority
      */
