@@ -53,14 +53,6 @@ Route::group(['middleware' => [
     Route::patch('my/user/password', \App\Http\Controllers\My\User\UpdatePassword::class);
     Route::delete('my/user/withdrawal', \App\Http\Controllers\My\User\UpdateStatusWithdrawal::class);
 
-    /**
-     * 住所
-     * Addresses
-     */
-    Route::get('my/addresses', \App\Http\Controllers\My\Addresses\Index::class);
-    Route::get('my/address/default', \App\Http\Controllers\My\Address\_Default::class);
-    Route::patch('/my/address/isDefault', \App\Http\Controllers\My\Address\UpdateIsDefault::class);
-
 
     /** 一般API群 **/
 
@@ -73,31 +65,4 @@ Route::group(['middleware' => [
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
 
-
-    /**　管理系API群 **/
-
-    /**
-     * 自身の管理者情報を取得
-     */
-    Route::get('my/admin/adminAuthorities', \App\Http\Controllers\My\Admin\AdminAuthorities\Index::class);
-
-    /**
-     * 住所
-     * Addresses
-     */
-    Route::get('admin/addresses', \App\Http\Controllers\Admin\Addresses\index::class);
-    Route::get('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Show::class);
-    Route::post('admin/addresses', \App\Http\Controllers\Admin\Addresses\Store::class);
-    Route::put('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Update::class);
-    Route::delete('admin/addresses/{address_id}', \App\Http\Controllers\Admin\Addresses\Delete::class);
-
-    /**
-     * メーカー
-     * Makers
-     */
-    Route::get('admin/makers', \App\Http\Controllers\Admin\Makers\index::class);
-    Route::get('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Show::class);
-    Route::post('admin/makers', \App\Http\Controllers\Admin\Makers\Store::class);
-    Route::put('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Update::class);
-    Route::delete('admin/makers/{maker_id}', \App\Http\Controllers\Admin\Makers\Delete::class);
 });
