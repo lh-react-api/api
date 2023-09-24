@@ -21,8 +21,8 @@ class Show extends BaseController
     public function __invoke(Request $request)
     {
         $user = Auth::user();
-        $this->authorize('view', $user);
 
+        $this->authorize('viewByUser', $user);
         return ResponseUtils::success(
             $user
         );

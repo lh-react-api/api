@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
 Route::post('auth/signup', \App\Http\Controllers\Auth\Signup::class);
+Route::post('auth/admin/signin', \App\Http\Controllers\Auth\Admin\Signin::class);
 
 /**
  * ミドルウェア適用
@@ -48,7 +49,6 @@ Route::group(['middleware' => [
      * ユーザー
      * Users
      */
-    Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);

@@ -25,4 +25,14 @@ class BasePolicy
         }
         return true;
     }
+
+    protected function adminOnly() {
+
+        if (!Auth::user()->is_admin) {
+            throw new PolicyException("", Response::HTTP_FORBIDDEN,
+                [__('auth.policy.byAuthUser')]
+            );
+        }
+        return true;
+    }
 }

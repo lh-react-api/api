@@ -24,12 +24,14 @@ class Store extends BaseController
 
         $input = new Collection($request->input());
 
-        $makers = Item::create(
+        $item = Item::create(
             $input->get('name'),
             $input->get('price'),
             $input->get('content')
         );
 
-        return ResponseUtils::success($makers);
+        $this->authorize('create', $item);
+
+        return ResponseUtils::success($item);
     }
 }

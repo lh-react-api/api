@@ -40,13 +40,9 @@ class User extends BaseModel implements
         'social' => 'in',
     ];
 
-    protected $appends = [
-        'statusLabel',
+    protected $casts = [
+        'is_admin' => 'boolean',
     ];
-
-
-
-
 
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
@@ -54,7 +50,6 @@ class User extends BaseModel implements
         $query->orderBy('created_at', 'desc');
         return $query;
     }
-
 
     public static function create(Credential $credential) {
 
