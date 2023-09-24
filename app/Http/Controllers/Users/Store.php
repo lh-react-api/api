@@ -24,13 +24,14 @@ class Store extends BaseController
         $input = new Collection($request->input());
 
         $entity = (new User)->fill([
-            'name' => $input->get('name'),
             'email' => $input->get('email'),
             'password' => $input->get('password'),
         ]);
 
+        $this->authorize('create', $entity);
+
         $entity->save();
 
-        return ResponseUtils::success();
+        return ResponseUtils::success(User::find($entity->id));
     }
 }

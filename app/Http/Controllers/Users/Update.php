@@ -21,19 +21,17 @@ class Update extends BaseController
      */
     public function __invoke(UpdateRequest $request, int $id)
     {
-        $input = new Collection($request->only(['name', 'email', 'password']));
+        $input = new Collection($request->only(['email', 'password']));
 
         $user = User::find($id);
 
-        $input->map(function ($val, $key) use ($user) {
-            if (!isset($user->$key)) {
-                throw new UpdateResourceException("更新しようとした${key}がモデルに存在しませんでした。");
-            }
-            $user->$key = $val;
-        });
+        $this->authorize('update', $user);
+
+        $user->email = $input->get('email');
+        $user->password = $input->get('password');
 
         $user->save();
 
-        return ResponseUtils::success();
+        return ResponseUtils::success($user);
     }
 }

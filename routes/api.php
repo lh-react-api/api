@@ -58,9 +58,9 @@ Route::group(['middleware' => [
      * Item
      */
     Route::get('items', \App\Http\Controllers\Items\Index::class);
-    Route::get('items/{id}', \App\Http\Controllers\Items\Show::class);
+    Route::get('items/{item_id}', \App\Http\Controllers\Items\Show::class);
     Route::post('items', \App\Http\Controllers\Items\Store::class);
-    Route::put('items/{id}', \App\Http\Controllers\Items\Update::class);
-    Route::delete('items/{id}', \App\Http\Controllers\Items\Delete::class);
+    Route::put('items/{item_id}', \App\Http\Controllers\Items\Update::class);
+    Route::delete('items/{item_id}', \App\Http\Controllers\Items\Delete::class);
 
 });

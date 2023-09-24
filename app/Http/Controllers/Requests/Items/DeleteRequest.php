@@ -15,6 +15,7 @@ class DeleteRequest extends BaseFormRequest
 
     public function authorize()
     {
+
         $this->existsRecordById((new Item()), (int)$this->route('item_id'));
 
         return true;

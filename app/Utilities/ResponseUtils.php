@@ -21,10 +21,7 @@ class ResponseUtils
      */
     public static function success($content=null)
     {
-        if (is_null($content)) {
-            return null;
-        }
-        return response()->json(['data' => $content]);
+        return response()->json($content);
     }
 
     /**
