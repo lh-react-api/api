@@ -3,14 +3,10 @@
 namespace App\Policies;
 
 use App\Exceptions\PolicyException;
-use App\Enums\AdminAuthorities\AdminAuthoritiesAction;
-use App\Models\AdminAuthority;
-use App\Models\Role;
-use App\Utilities\AdminAuthorityUtils;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Str;
+
 
 class BasePolicy
 {
@@ -30,7 +26,7 @@ class BasePolicy
 
         if (!Auth::user()->is_admin) {
             throw new PolicyException("", Response::HTTP_FORBIDDEN,
-                [__('auth.policy.byAuthUser')]
+                ['管理者以外触れない権限です']
             );
         }
         return true;

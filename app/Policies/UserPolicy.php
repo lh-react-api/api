@@ -44,7 +44,7 @@ class UserPolicy extends BasePolicy
      */
     public function viewByUser(User $user, User $model)
     {
-        $this->byAuthUser($user->id);
+        $this->adminOnly();
         return true;
     }
 
@@ -57,6 +57,7 @@ class UserPolicy extends BasePolicy
     public function create(User $user)
     {
         $this->adminOnly();
+        return true;
     }
 
     /**

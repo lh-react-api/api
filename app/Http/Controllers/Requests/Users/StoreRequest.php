@@ -20,16 +20,8 @@ class StoreRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
             'email' => ['required', 'max:255', 'email', Rule::unique((new User)->getTable())],
             'password' => ['required', 'max:255'],
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'name' => self::DEFAULT_NAME. "名",
         ];
     }
 }

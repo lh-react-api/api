@@ -31,8 +31,9 @@ class UpdateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'max:255', 'email', Rule::unique((new User)->getTable())->ignore((int)$this->route(self::ROUTE_KEY))],
+            'email' => ['required', 'max:255', 'email',
+                Rule::unique((new User)->getTable())->ignore((int)$this->route(self::ROUTE_KEY))
+            ],
             'password' => ['required', 'max:255'],
         ];
     }
