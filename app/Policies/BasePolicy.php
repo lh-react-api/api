@@ -25,21 +25,4 @@ class BasePolicy
         }
         return true;
     }
-
-    /**
-     * 管理者権限チェック
-     *
-     * @param AdminAuthoritiesAction $authority
-     * @return boolean 権限有無
-     */
-    protected function byAdminAuthUser(AdminAuthoritiesAction $authority) {
-        $role = Role::findNameForId(Str::of(AdminAuthorityUtils::getContorolerName())->snake());
-        $adminAuthority = AdminAuthority::findAdminAuthority(Auth::id(), $role[0]->id);
-        if (count($adminAuthority) == 0 || !AdminAuthorityUtils::checkAuthority($adminAuthority[0]->action, $authority)) {
-            throw new PolicyException("", Response::HTTP_FORBIDDEN,
-                [__('操作権限がありません')]
-            );
-        }
-        return true;        
-    }
 }
