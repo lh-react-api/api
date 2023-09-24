@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\My\User;
+namespace App\Http\Controllers\Items;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Item;
 use App\Utilities\ResponseUtils;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class Show extends BaseController
 {
@@ -15,16 +14,13 @@ class Show extends BaseController
      * Handle the incoming request.
      *
      * @param Request $request
+     * @param int $makerId
      * @return JsonResponse
-     * @throws AuthorizationException
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, int $makerId)
     {
-        $user = Auth::user();
-        $this->authorize('view', $user);
-
         return ResponseUtils::success(
-            $user
+            Item::findForShow($makerId)
         );
     }
 }

@@ -16,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('名前')->unique();
-            $table->string('price')->comment('料金')->unique();
-            $table->string('content')->comment('説明')->unique();
+            $table->string('name')->comment('名前');
+            $table->integer('price')->comment('料金');
+            $table->text('content')->comment('説明');
             MigrateUtils::timestamps($table);
         });
     }
