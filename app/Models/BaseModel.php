@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Users\UsersStatus;
 use App\Exceptions\DatabaseErrorException;
 use App\Models\traits\common\SearchTrait;
 use App\Models\traits\common\WhereHasTrait;

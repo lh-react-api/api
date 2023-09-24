@@ -18,12 +18,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::post('auth/signin', \App\Http\Controllers\Auth\Signin::class);
 Route::post('auth/signup', \App\Http\Controllers\Auth\Signup::class);
-
-/**
- * パスワード変更関連
- */
-Route::get('users/{email}/password/reissue', \App\Http\Controllers\Users\ReissuePassword::class);
-Route::patch('users/{email_reissue_token}/password/reissue', \App\Http\Controllers\Users\UpdateByReissuePassword::class);
+Route::post('auth/admin/signin', \App\Http\Controllers\Auth\Admin\Signin::class);
 
 /**
  * ミドルウェア適用
@@ -49,20 +44,23 @@ Route::group(['middleware' => [
      * Users
      */
     Route::get('my/user', \App\Http\Controllers\My\User\Show::class);
-    Route::patch('my/user/email', \App\Http\Controllers\My\User\UpdateEmail::class);
-    Route::patch('my/user/password', \App\Http\Controllers\My\User\UpdatePassword::class);
-    Route::delete('my/user/withdrawal', \App\Http\Controllers\My\User\UpdateStatusWithdrawal::class);
-
-
-    /** 一般API群 **/
 
     /**
      * ユーザー
      * Users
      */
-    Route::get('users/authed', \App\Http\Controllers\Users\Authed::class);
     Route::post('users', \App\Http\Controllers\Users\Store::class);
     Route::put('users/{user_id}', \App\Http\Controllers\Users\Update::class);
     Route::delete('users/{user_id}', \App\Http\Controllers\Users\Delete::class);
+
+    /**
+     * 商品
+     * Item
+     */
+    Route::get('items', \App\Http\Controllers\Items\Index::class);
+    Route::get('items/{id}', \App\Http\Controllers\Items\Show::class);
+    Route::post('items', \App\Http\Controllers\Items\Store::class);
+    Route::put('items/{id}', \App\Http\Controllers\Items\Update::class);
+    Route::delete('items/{id}', \App\Http\Controllers\Items\Delete::class);
 
 });

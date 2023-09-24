@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Orders\OrdersProgress;
-use App\Enums\Users\UsersStatus;
 use App\Models\domains\Users\Credential;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,9 +27,6 @@ class User extends BaseModel implements
 
     protected $fillable = [
         'email',
-        'password',
-        'stripe_customer_id',
-        'social',
     ];
 
     protected $hidden = [
@@ -40,59 +35,14 @@ class User extends BaseModel implements
         'emailReissueToken',
     ];
 
-    protected $casts = [
-        'is_admin' => 'boolean',
-    ];
-
     protected $searches = [
         'email' => 'like',
         'social' => 'in',
     ];
 
-    protected $appends = [
-        'statusLabel',
+    protected $casts = [
+        'is_admin' => 'boolean',
     ];
-
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
-    }
-
-    public function defaultAddresses()
-    {
-        return $this->hasOne(Address::class)->where('is_default', true);
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-
-    public function productReviews()
-    {
-        return $this->hasMany(ProductReview::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function activeOrders()
-    {
-        return $this->hasMany(Order::class)
-            ->where('orders.progress', '!=', OrdersProgress::CLOSE);
-    }
-
-    public function credits()
-    {
-        return $this->hasMany(Credit::class);
-    }
-
-    public function adminAuthorities()
-    {
-        return $this->hasMany(AdminAuthority::class);
-    }
 
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
@@ -101,20 +51,11 @@ class User extends BaseModel implements
         return $query;
     }
 
-    public static function findForShow(int $id){
-        return self::with([
-            'addresses',
-            'defaultAddresses',
-            'credits',
-        ])->find($id);
-    }
-
     public static function create(Credential $credential) {
 
         $entity = (new User)->fill([
             'email' => $credential->getEmail(),
             'password' => Hash::make($credential->getPassword()),
-            'stripe_customer_id' => $credential->getStripeCustomerId()
         ]);
         $entity->save();
     }
@@ -125,19 +66,8 @@ class User extends BaseModel implements
         $this->save();
     }
 
-
     public static function findByEmail($email){
         return self::query()->where('email', $email)->first();
-    }
-
-    public static function findByStripeCustomerId($customerId){
-        return self::query()->where('stripe_customer_id', $customerId)->first();
-    }
-
-    public function getStatusLabelAttribute($value)
-    {
-        return $this->enumLabel($this->status, "App\Enums\Users\UsersStatus");
-
     }
 
     public static function findByEmailReissueToken($emailReissueToken){
