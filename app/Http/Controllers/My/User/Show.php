@@ -22,7 +22,7 @@ class Show extends BaseController
     {
         $user = Auth::user();
 
-        $this->authorize('viewByUser', $user);
+//        $this->authorize('viewByUser', $user);
         return ResponseUtils::success(
             $user
         );
