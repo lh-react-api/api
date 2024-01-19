@@ -21,6 +21,13 @@ Route::post('auth/signup', \App\Http\Controllers\Auth\Signup::class);
 Route::post('auth/admin/signin', \App\Http\Controllers\Auth\Admin\Signin::class);
 
 /**
+ * 商品
+ * Item
+ */
+Route::get('items', \App\Http\Controllers\Items\Index::class);
+Route::get('items/{item_id}', \App\Http\Controllers\Items\Show::class);
+
+/**
  * ミドルウェア適用
  * auth:sanctum → Laravel Sanctumパッケージを利用するAPI認証ミドルウェア
  * transaction → DBトランザクション処理用のミドルウェア
@@ -57,8 +64,6 @@ Route::group(['middleware' => [
      * 商品
      * Item
      */
-    Route::get('items', \App\Http\Controllers\Items\Index::class);
-    Route::get('items/{item_id}', \App\Http\Controllers\Items\Show::class);
     Route::post('items', \App\Http\Controllers\Items\Store::class);
     Route::put('items/{item_id}', \App\Http\Controllers\Items\Update::class);
     Route::delete('items/{item_id}', \App\Http\Controllers\Items\Delete::class);
