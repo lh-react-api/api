@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name')->comment('名前');
             $table->integer('price')->comment('料金');
             $table->text('content')->comment('説明');
+            $table->string('image')->nullable()->comment('画像');
+
             MigrateUtils::timestamps($table);
         });
     }
