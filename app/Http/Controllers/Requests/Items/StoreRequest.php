@@ -19,6 +19,9 @@ class StoreRequest extends BaseFormRequest
             'name' => ['required', 'max:255'],
             'price' => ['required', 'integer', 'min:1'],
             'content' => ['required'],
+            'base64' => ['required'],
+            'extension' => ['required'],
+
         ];
     }
 }
