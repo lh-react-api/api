@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\DatabaseErrorException;
+use App\Exceptions\NotUploadException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -30,7 +32,11 @@ class Item extends BaseModel
     public static function findForShow(int $id){
         return self::find($id);
     }
-    
+
+    /**
+     * @throws DatabaseErrorException
+     * @throws NotUploadException
+     */
     public static function create($name, $price, $content, $base64, $extension) {
 
         $entity = (new Item())->fill([
@@ -52,11 +58,11 @@ class Item extends BaseModel
             self::base64toBin($base64)
         );
 
-        if (!Storage::disk('public')->put(
+        if (Storage::disk('public')->put(
             $path,
             self::base64toBin($base64)
         )) {
-            throw new \Exception();
+            throw new NotUploadException(null,null,'画像登録エラー');
         }
 
         $entity->image = $path;
