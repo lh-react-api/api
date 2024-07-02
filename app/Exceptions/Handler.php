@@ -60,7 +60,8 @@ class Handler extends ExceptionHandler
             $exception instanceof DatabaseErrorException ||
             $exception instanceof PolicyException ||
             $exception instanceof BadRequestException ||
-            $exception instanceof UpdateResourceException
+            $exception instanceof UpdateResourceException ||
+            $exception instanceof NotUploadException
         ) {
             return ResponseUtils::error($exception->getErrors(), $exception->errorCode());
         }
