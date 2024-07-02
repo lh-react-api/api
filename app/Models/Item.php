@@ -14,7 +14,10 @@ class Item extends BaseModel
     use HasFactory;
     protected $searches = [
         'name' => 'like',
+        'price' => 'lt|gt|lte|gte',
     ];
+
+
 
     protected $fillable = [
         'name',
@@ -58,7 +61,7 @@ class Item extends BaseModel
             self::base64toBin($base64)
         );
 
-        if (Storage::disk('public')->put(
+        if (!Storage::disk('public')->put(
             $path,
             self::base64toBin($base64)
         )) {
