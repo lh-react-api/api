@@ -68,4 +68,10 @@ Route::group(['middleware' => [
     Route::put('items/{item_id}', \App\Http\Controllers\Items\Update::class);
     Route::delete('items/{item_id}', \App\Http\Controllers\Items\Delete::class);
 
+    /**
+     * 商品
+     * Item
+     */
+    Route::get('carts', \App\Http\Controllers\carts\Index::class);
+    Route::post('carts', \App\Http\Controllers\carts\Update::class);
 });
