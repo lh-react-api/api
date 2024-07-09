@@ -6,6 +6,8 @@ use App\Exceptions\DatabaseErrorException;
 use App\Exceptions\NotUploadException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,10 +20,14 @@ class Cart extends BaseModel
         'quantity',
     ];
 
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class);
+    }
+
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
-        
         return $query;
     }
 
@@ -30,7 +36,7 @@ class Cart extends BaseModel
     }
 
     public static function findByUserId(int $userId){
-        return self::where('user_id',$userId)->get();
+        return self::where('user_id',$userId)->with('item')->get();
     }
 
 

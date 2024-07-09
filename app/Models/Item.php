@@ -6,6 +6,7 @@ use App\Exceptions\DatabaseErrorException;
 use App\Exceptions\NotUploadException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,6 @@ class Item extends BaseModel
     public function scopeSearchIndex(Builder $query, Request $request): Builder
     {
         $query->searchByDefined($request);
-        
         return $query;
     }
 
