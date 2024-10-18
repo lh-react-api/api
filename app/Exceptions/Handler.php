@@ -67,12 +67,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof AuthenticationException) {
-            return ResponseUtils::error(['auth error...'], 401);
+            return response()->json(['error' => $exception->getMessage()], 401);
         }
         if ($exception instanceof UpdateEmailUserException) {
             return ResponseUtils::error($exception->getErrors(), 403);
         }
-
 
         return $this->PHPError($exception);
     }
