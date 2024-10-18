@@ -72,6 +72,6 @@ Route::group(['middleware' => [
      * 商品
      * Item
      */
-    Route::get('carts', \App\Http\Controllers\carts\Index::class);
-    Route::post('carts', \App\Http\Controllers\carts\Update::class);
+    Route::get('carts', \App\Http\Controllers\Carts\Index::class);
+    Route::post('carts', \App\Http\Controllers\Carts\Update::class);
 });
